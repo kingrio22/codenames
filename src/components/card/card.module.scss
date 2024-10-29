@@ -1,5 +1,4 @@
 .CardWrapper {
-  width: 100%;
   justify-content: center;
   display: flex;
   padding: 1rem;
@@ -10,16 +9,16 @@
   justify-content: center;
   align-items: center;
   vertical-align: middle;
-  width: 7.5rem;
+  width: 10rem;
   height: 10rem;
   color: #ddd;
   background-color: #222;
   cursor: pointer;
 
-  &.A {
-    background-color: aqua;
+  &.true {
+    background-color: green;
   }
-  &.B {
-    background-color: brown;
+  &.false {
+    background-color: red;
   }
 }

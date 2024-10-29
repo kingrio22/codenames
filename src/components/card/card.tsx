@@ -1,30 +1,27 @@
-import React, { useState } from "react";
-import styles from "./card.module.scss";
+import React, { useState } from 'react';
+import styles from './card.module.scss';
 
-import ReactCardFlip from "react-card-flip";
+import ReactCardFlip from 'react-card-flip';
+import { Card } from '../levels/levels.const';
 
-export const Card = (props: Card) => {
-  const { value, team, open } = props;
+export const CardComponent = (props: Card) => {
+  const { word, isCorrect } = props;
 
-  const [isFlipped, setIsFlipped] = useState<boolean>(open);
+  const [isFlipped, setIsFlipped] = useState<boolean>(false);
   return (
     <div className={styles.CardWrapper}>
       <div className={styles.Flipper} onClick={() => setIsFlipped(!isFlipped)}>
-        <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
+        <ReactCardFlip isFlipped={isFlipped} flipDirection='horizontal'>
           <div className={styles.Card}>
-            <div className={styles.Title}>{value}</div>
+            <div className={styles.Title}>{word}</div>
           </div>
-          <div className={[styles.Card, styles[team]].join(" ")}>
-            <div className={styles.Title}>{value}</div>
+          <div
+            className={[styles.Card, styles[isCorrect.toString()]].join(' ')}
+          >
+            <div className={styles.Title}>{word}</div>
           </div>
         </ReactCardFlip>
       </div>
     </div>
   );
 };
-
-export interface Card {
-  value: string;
-  team: "A" | "B";
-  open: boolean;
-}

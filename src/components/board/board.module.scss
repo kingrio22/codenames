@@ -1,7 +1,20 @@
+.BoardWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.HintRow {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  font-size: 48px;
+  margin-bottom: 2rem;
+}
+
 .Board {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
   position: relative;
 }
