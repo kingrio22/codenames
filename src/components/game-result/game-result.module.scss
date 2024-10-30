@@ -1,0 +1,18 @@
+.GameResult {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+  background-color: rgba(0, 0, 0, 0.2);
+  .Modal {
+    color: black;
+    width: 30%;
+    height: 30%;
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+}
