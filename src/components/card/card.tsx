@@ -1,27 +1,38 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import styles from './card.module.scss';
 
 import ReactCardFlip from 'react-card-flip';
 import { Card } from '../levels/levels.const';
 
 interface CardProps {
+  hideCardColor: boolean;
   card: Card;
   isChosen: boolean;
+  levelFinished: boolean;
   setChosens: Dispatch<SetStateAction<Card[]>>;
 }
 export const CardComponent = (props: CardProps) => {
   const {
+    hideCardColor,
+    levelFinished,
     setChosens,
     isChosen,
     card,
     card: { word, isCorrect },
   } = props;
 
+  const cardStyles = hideCardColor
+    ? [styles.Card]
+    : [styles.Card, styles[isCorrect.toString()]];
+
   return (
     <div className={styles.CardWrapper}>
       <div
         className={styles.Flipper}
         onClick={() => {
+          if (levelFinished) {
+            return;
+          }
           setChosens((chosens) => {
             if (isChosen) {
               return chosens;
@@ -35,9 +46,7 @@ export const CardComponent = (props: CardProps) => {
           <div className={styles.Card}>
             <div className={styles.Title}>{word}</div>
           </div>
-          <div
-            className={[styles.Card, styles[isCorrect.toString()]].join(' ')}
-          >
+          <div className={cardStyles.join(' ')}>
             <div className={styles.Title}>{word}</div>
           </div>
         </ReactCardFlip>

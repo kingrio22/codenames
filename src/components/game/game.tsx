@@ -1,9 +1,4 @@
-import React, {
-  Dispatch,
-  PropsWithChildren,
-  SetStateAction,
-  useState,
-} from 'react';
+import React, { useState } from 'react';
 import styles from './game.module.scss';
 import { Board } from '../board/board';
 import { LEVELS, Level } from '../levels/levels.const';
@@ -11,6 +6,7 @@ import Countdown, { CountdownRenderProps } from 'react-countdown';
 import { Timer } from '../timer/timer';
 import { StartButton } from '../start-button/start-button';
 import { GameResult } from '../game-result/game-result';
+import { shuffle } from '../../utils/functions/array-shuffle';
 export interface GameProgress {
   solved: number;
   failed: number;
@@ -37,12 +33,14 @@ export const Game = () => {
             ...game,
             levelsPlayed: [...game?.levelsPlayed, level.id],
             solved: game.solved + 1,
+            highscore: game.highscore + 1,
           };
         } else {
           return {
             ...game,
             levelsPlayed: [...game?.levelsPlayed, level.id],
             failed: game.failed + 1,
+            highscore: game.highscore - 2,
           };
         }
       }
@@ -72,16 +70,29 @@ export const Game = () => {
   return (
     <div className={styles.GameWrapper}>
       <div className={styles.TopBar}>
-        <div className={styles.CurrentLevel}></div>
+        <div className={styles.BoardPart}>
+          <div className={styles.CurrentLevel}>
+            Level: {(game?.failed ?? 0) + (game?.solved ?? 0) + 1}
+          </div>
 
-        <div className={styles.CurrentScore}></div>
+          <div className={styles.CurrentScore}>
+            Score: {game?.highscore ?? 0}
+          </div>
+        </div>
+        <div className={styles.HighscorePart}>Highscore</div>
       </div>
       <div className={styles.Content}>
         <div className={styles.BoardWrapper}>
-          {level && <Board level={level} nextLevel={nextLevel} />}
+          {level && isRunning && (
+            <Board
+              hint={level.hint}
+              cards={shuffle(level.cards)}
+              nextLevel={nextLevel}
+            />
+          )}
 
           {isRunning === false && (
-            <GameResult>
+            <GameResult game={game}>
               <StartButton
                 setGame={setGame}
                 setIsRunning={setIsRunning}
