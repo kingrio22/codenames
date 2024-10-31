@@ -7,6 +7,7 @@ import { Timer } from '../timer/timer';
 import { StartButton } from '../start-button/start-button';
 import { GameResult } from '../game-result/game-result';
 import { shuffle } from '../../utils/functions/array-shuffle';
+import { CreateLevel } from '../levels/create-level';
 
 export type GameMode = 'INTERHYP' | 'CHATGPT';
 export type Complexity = 'LOW' | 'MIDDLE' | 'HARD';
@@ -24,12 +25,12 @@ export const Game = () => {
 
   const [level, setLevel] = useState<Level | undefined>();
 
+  const [showCreate, setShowCreate] = useState<boolean>(false);
+
   const nextLevel = (solved: boolean) => {
     const nextLevel = LEVELS.filter(
       (next) => !game?.levelsPlayed.includes(next.id) && next.id !== level?.id
     )[0];
-
-    console.log('next level: ', nextLevel);
 
     setGame((game) => {
       if (game && level) {
@@ -71,8 +72,7 @@ export const Game = () => {
       </span>
     );
   };
-  console.log('level: ', level);
-  console.log('is running: ', isRunning);
+
   return (
     <div className={styles.GameWrapper}>
       <div className={styles.TopBar}>
@@ -104,6 +104,7 @@ export const Game = () => {
               setIsRunning={setIsRunning}
               setLevel={setLevel}
               countdown={countdown}
+              setShowCreate={setShowCreate}
             />
           )}
         </div>
@@ -136,6 +137,13 @@ export const Game = () => {
           </div>
         </div>
       </div>
+      {showCreate && (
+        <div className={styles.CreateWrapper}>
+          <div className={styles.CreateModal}>
+            <CreateLevel showCreateLevelModal={setShowCreate} />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

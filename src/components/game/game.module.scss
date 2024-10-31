@@ -72,3 +72,30 @@
   width: 7.5rem;
   height: 7.5rem;
 }
+
+.CreateWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+  background-color: rgba(0, 0, 0, 0.25);
+  .CreateModal {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    color: black;
+    width: 50%;
+
+    background-color: rgba(255, 255, 255);
+    padding: 2rem;
+  }
+  .Button {
+    width: 100%;
+    text-align: center;
+  }
+}

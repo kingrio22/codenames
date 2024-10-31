@@ -19,6 +19,7 @@
   }
   .ModalWrapper {
     padding: 2rem;
+    position: relative;
   }
   .Button {
     width: 100%;
@@ -30,4 +31,16 @@
   display: flex;
   justify-content: space-around;
   flex-direction: row;
+}
+
+.createButton {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  padding: 0.5rem 2rem;
+  background-color: rgba(0, 0, 0);
+  border: 0px solid rgba(0, 0, 0, 0);
+  color: #ddd;
+  border-radius: 5px;
+  cursor: pointer;
 }

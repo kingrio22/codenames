@@ -1,0 +1,58 @@
+.CreateWrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.BaseInfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  vertical-align: middle;
+  align-items: center;
+}
+.Hint {
+  font-size: 18px;
+}
+.CardsCluster {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  position: relative;
+}
+.CardTitle {
+  width: 100%;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+.CardHint {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.Title {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 28px;
+  font-weight: bold;
+}
+.ButtonWrapper {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+}
+.Button {
+  padding: 1rem 3rem;
+  background-color: rgba(0, 0, 0);
+  border: 0px solid rgba(0, 0, 0, 0);
+  color: #fff;
+  font-size: 22px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+}
