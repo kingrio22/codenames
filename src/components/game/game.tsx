@@ -7,9 +7,14 @@ import { Timer } from '../timer/timer';
 import { StartButton } from '../start-button/start-button';
 import { GameResult } from '../game-result/game-result';
 import { shuffle } from '../../utils/functions/array-shuffle';
+
+export type GameMode = 'INTERHYP' | 'CHATGPT';
+export type Complexity = 'LOW' | 'MIDDLE' | 'HARD';
 export interface GameProgress {
   solved: number;
   failed: number;
+  mode: GameMode;
+  complexity: Complexity;
   highscore: number;
   levelsPlayed: number[];
   startedAt: number;
@@ -17,14 +22,14 @@ export interface GameProgress {
 export const Game = () => {
   const [game, setGame] = useState<GameProgress | undefined>();
 
-  const [level, setLevel] = useState<Level | undefined>(LEVELS[0]);
+  const [level, setLevel] = useState<Level | undefined>();
 
   const nextLevel = (solved: boolean) => {
     const nextLevel = LEVELS.filter(
       (next) => !game?.levelsPlayed.includes(next.id) && next.id !== level?.id
     )[0];
 
-    console.log(nextLevel);
+    console.log('next level: ', nextLevel);
 
     setGame((game) => {
       if (game && level) {
@@ -66,13 +71,14 @@ export const Game = () => {
       </span>
     );
   };
-
+  console.log('level: ', level);
+  console.log('is running: ', isRunning);
   return (
     <div className={styles.GameWrapper}>
       <div className={styles.TopBar}>
         <div className={styles.BoardPart}>
           <div className={styles.CurrentLevel}>
-            Level: {(game?.failed ?? 0) + (game?.solved ?? 0) + 1}
+            Level: {(game?.levelsPlayed.length ?? 0) + 1}
           </div>
 
           <div className={styles.CurrentScore}>
@@ -92,13 +98,13 @@ export const Game = () => {
           )}
 
           {isRunning === false && (
-            <GameResult game={game}>
-              <StartButton
-                setGame={setGame}
-                setIsRunning={setIsRunning}
-                countdown={countdown}
-              />
-            </GameResult>
+            <GameResult
+              game={game}
+              setGame={setGame}
+              setIsRunning={setIsRunning}
+              setLevel={setLevel}
+              countdown={countdown}
+            />
           )}
         </div>
         <div className={styles.SideBar}>
@@ -126,11 +132,6 @@ export const Game = () => {
           </div>
 
           <div className={styles.NewGameButtonWrapper}>
-            <StartButton
-              setGame={setGame}
-              setIsRunning={setIsRunning}
-              countdown={countdown}
-            />
             <Timer setCountdown={setCountdown} />
           </div>
         </div>
