@@ -1,16 +1,15 @@
-import React, { useState } from 'react';
-import styles from './game.module.scss';
-import { Board } from '../board/board';
-import { LEVELS, Level } from '../levels/levels.const';
-import Countdown, { CountdownRenderProps } from 'react-countdown';
-import { Timer } from '../timer/timer';
-import { StartButton } from '../start-button/start-button';
-import { GameResult } from '../game-result/game-result';
-import { shuffle } from '../../utils/functions/array-shuffle';
-import { CreateLevel } from '../levels/create-level';
+import React, { useState } from "react";
+import styles from "./game.module.scss";
+import { Board } from "../board/board";
+import { LEVELS, Level } from "../levels/levels.const";
+import Countdown, { CountdownRenderProps } from "react-countdown";
+import { Timer } from "../timer/timer";
+import { GameResult } from "../game-result/game-result";
+import { shuffle } from "../../utils/functions/array-shuffle";
+import { CreateLevelComponent } from "../levels/create-level";
 
-export type GameMode = 'INTERHYP' | 'CHATGPT';
-export type Complexity = 'LOW' | 'MIDDLE' | 'HARD';
+export type GameMode = "INTERHYP" | "CHATGPT";
+export type Complexity = "LOW" | "MIDDLE" | "HARD";
 export interface GameProgress {
   solved: number;
   failed: number;
@@ -140,7 +139,7 @@ export const Game = () => {
       {showCreate && (
         <div className={styles.CreateWrapper}>
           <div className={styles.CreateModal}>
-            <CreateLevel showCreateLevelModal={setShowCreate} />
+            <CreateLevelComponent showCreateLevelModal={setShowCreate} />
           </div>
         </div>
       )}

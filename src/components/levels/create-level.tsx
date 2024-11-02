@@ -1,27 +1,34 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import styles from './create-level.module.scss';
-import { v1 } from 'uuid';
-import { Card, Level } from './levels.const';
-import { ComplexityInput } from '../inputs/complexity-input';
-import { Complexity, GameMode } from '../game/game';
-import { GameModeInput } from '../inputs/game-mode.input';
-import { CardInput } from '../inputs/card-input';
-import { createLevel } from '../../api/create-level';
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import styles from "./create-level.module.scss";
+import { v1 } from "uuid";
+import { Card, Level } from "./levels.const";
+import { ComplexityInput } from "../inputs/complexity-input";
+import { Complexity, GameMode } from "../game/game";
+import { GameModeInput } from "../inputs/game-mode.input";
+import { CardInput } from "../inputs/card-input";
+import { createLevel } from "../../api/create-level.api";
 
 interface CreateLevelProps {
   showCreateLevelModal: Dispatch<SetStateAction<boolean>>;
 }
 
-export const CreateLevel = (props: CreateLevelProps) => {
+export type CreateLevelDto = Omit<Level, "id">;
+
+export const CreateLevelComponent = (props: CreateLevelProps) => {
   const { showCreateLevelModal } = props;
-  const [newLevel, setNewLevel] = useState<Level>({} as Level);
+  const [newLevel, setNewLevel] = useState<CreateLevelDto>({
+    hint: "",
+    mode: "INTERHYP",
+    complexity: "LOW",
+    cards: [],
+  });
   const [newCards, setNewCards] = useState<Card[]>(
     new Array(9)
       .fill({})
-      .map((_card) => ({ id: v1(), word: '', isCorrect: false }))
+      .map((_card) => ({ id: v1(), word: "", isCorrect: false }))
   );
 
-  const setProps = (prop: keyof Level, value: string) => {
+  const setProps = (prop: keyof CreateLevelDto, value: string) => {
     setNewLevel((level) => {
       return {
         ...level,
@@ -35,32 +42,33 @@ export const CreateLevel = (props: CreateLevelProps) => {
       <div className={styles.Title}>Neues Level erstellen</div>
       <form
         onSubmit={() => {
-          createLevel(newLevel);
+          console.log("level: ", newLevel);
+          createLevel({ ...newLevel, cards: newCards });
           showCreateLevelModal(false);
         }}
         className={styles.CreateWrapper}
       >
         <div className={styles.BaseInfo}>
           <div className={styles.Hint}>
-            <label htmlFor='hint'>Hinweis Wort: </label>
+            <label htmlFor="hint">Hinweis Wort: </label>
             <input
-              type='text'
-              id='hint'
-              onChange={(e) => setProps('hint', e.currentTarget.value)}
-              value={newLevel['hint'] ?? ''}
+              type="text"
+              id="hint"
+              onChange={(e) => setProps("hint", e.currentTarget.value)}
+              value={newLevel["hint"] ?? ""}
             />
           </div>
           <div className={styles.Complexity}>
             <ComplexityInput
-              complexity={(newLevel['complexity'] as Complexity) ?? 'LOW'}
-              setComplexity={(value) => setProps('complexity', value)}
+              complexity={(newLevel["complexity"] as Complexity) ?? "LOW"}
+              setComplexity={(value) => setProps("complexity", value)}
             />
           </div>
 
           <div className={styles.Mode}>
             <GameModeInput
-              mode={(newLevel['mode'] as GameMode) ?? 'INTERHYP'}
-              setMode={(value) => setProps('complexity', value)}
+              mode={(newLevel["mode"] as GameMode) ?? "INTERHYP"}
+              setMode={(value) => setProps("complexity", value)}
             />
           </div>
         </div>
@@ -101,7 +109,7 @@ export const CreateLevel = (props: CreateLevelProps) => {
           </div>
         </div>
         <div className={styles.ButtonWrapper}>
-          <button className={styles.Button} type='submit'>
+          <button className={styles.Button} type="submit">
             Level erstellen
           </button>
           <button
