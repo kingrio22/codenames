@@ -1,14 +1,12 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { CreateLevelDto } from "../components/levels/create-level";
+import { BASE_URL, BASE_HEADERS } from "../config/api.config";
 export async function createLevel(level: CreateLevelDto): Promise<void> {
   try {
     const options: AxiosRequestConfig = {
-      url: "http://localhost:4000/levels",
+      url: `${BASE_URL}/levels`,
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "true",
-      },
+      headers: BASE_HEADERS,
       data: level,
     };
 
