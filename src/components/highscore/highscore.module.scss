@@ -14,7 +14,7 @@
   width: 10%;
 }
 .Name {
-  width: 60%;
+  width: 70%;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -24,7 +24,5 @@
   width: 15%;
   color: greenyellow;
   font-size: 28px;
-}
-.LevelsPlayed {
-  width: 10%;
+  align-self: flex-end;
 }

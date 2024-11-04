@@ -20,9 +20,6 @@ export const Highscore = (props: HighscoreProps) => {
           <div className={styles.Rank}>{index + 1}.</div>
           <div className={styles.Name}>{player.name}</div>
           <div className={styles.Score}>{player.highscore}</div>
-          <div className={styles.LevelsPlayed}>
-            {player.levelsPlayed.length}
-          </div>
         </div>
       ))}
     </div>
