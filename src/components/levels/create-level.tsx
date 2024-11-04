@@ -56,6 +56,7 @@ export const CreateLevel = (props: CreateLevelProps) => {
       setErrorMessage(`Level erstellt mit ID: ${levelId}`);
       setTimeout(() => {
         showCreateLevelModal(false);
+        setErrorMessage(undefined);
       }, 1000);
     }
   };
