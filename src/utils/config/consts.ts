@@ -1,1 +1,1 @@
-export const BASE_URL = 'https://mgraetz.de';
+export const BASE_URL = 'https://api.mgraetz.de';

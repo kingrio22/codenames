@@ -12,11 +12,18 @@ interface CreateLevelProps {
   showCreateLevelModal: Dispatch<SetStateAction<boolean | undefined>>;
 }
 
+export type CreateLevelDto = Omit<Level, 'id'>;
+
 export const CreateLevel = (props: CreateLevelProps) => {
   const { showCreateLevelModal } = props;
 
   const [errorMessage, setErrorMessage] = useState<string | undefined>();
-  const [newLevel, setNewLevel] = useState<Level>({} as Level);
+  const [newLevel, setNewLevel] = useState<CreateLevelDto>({
+    hint: '',
+    cards: [],
+    complexity: 'LOW',
+    mode: 'INTERHYP',
+  });
   const [newCards, setNewCards] = useState<Card[]>(
     new Array(9)
       .fill({})
@@ -33,23 +40,23 @@ export const CreateLevel = (props: CreateLevelProps) => {
   };
 
   const handleCreate = async () => {
-    try {
-      setErrorMessage(undefined);
-      if (newCards.filter((c) => c.isCorrect === true).length !== 3) {
-        setErrorMessage('Es müssen 3 Karten richtig sein');
-        return;
-      }
-      if (newCards.filter((c) => c.word.length < 1).length > 0) {
-        setErrorMessage('Es sind nicht alle Karten befüllt');
-        return;
-      }
-      const level = await createLevel(newLevel);
-      if (!level) {
-        setErrorMessage('Etwas ist schief gelaufen');
-      }
-      showCreateLevelModal(false);
-    } catch (err) {
-      console.log(err);
+    setErrorMessage(undefined);
+    if (newCards.filter((c) => c.isCorrect === true).length !== 3) {
+      setErrorMessage('Es müssen 3 Karten richtig sein');
+      return;
+    }
+    if (newCards.filter((c) => c.word.length < 1).length > 0) {
+      setErrorMessage('Es sind nicht alle Karten befüllt');
+      return;
+    }
+    const levelId = await createLevel({ ...newLevel, cards: newCards });
+    if (!levelId) {
+      setErrorMessage('Etwas ist schief gelaufen');
+    } else {
+      setErrorMessage(`Level erstellt mit ID: ${levelId}`);
+      setTimeout(() => {
+        showCreateLevelModal(false);
+      }, 1000);
     }
   };
 

@@ -1,8 +1,10 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import { Level } from '../components/levels/levels.const';
 import { BASE_URL } from '../utils/config/consts';
+import { CreateLevelDto } from '../components/levels/create-level';
 
-export async function createLevel(level: Level): Promise<undefined | void> {
+export async function createLevel(
+  level: CreateLevelDto
+): Promise<undefined | void> {
   try {
     const options: AxiosRequestConfig = {
       url: `${BASE_URL}/levels`,
@@ -13,7 +15,10 @@ export async function createLevel(level: Level): Promise<undefined | void> {
       data: level,
     };
 
-    return await axios.request(options).then();
+    const {
+      data: { id },
+    } = await axios.request(options);
+    return id;
   } catch (err) {
     console.log(err);
     return undefined;
