@@ -33,14 +33,21 @@
   flex-direction: row;
 }
 
-.createButton {
+.ButtonRow {
   position: absolute;
   top: 2rem;
   right: 2rem;
-  padding: 0.5rem 2rem;
-  background-color: rgba(0, 0, 0);
-  border: 0px solid rgba(0, 0, 0, 0);
-  color: #ddd;
-  border-radius: 5px;
-  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  button {
+    margin: 0rem 1rem;
+    padding: 0.5rem 2rem;
+    background-color: rgba(0, 0, 0);
+    border: 0px solid rgba(0, 0, 0, 0);
+    color: #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+  }
 }

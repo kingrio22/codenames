@@ -17,6 +17,7 @@ interface GameResultProps {
   game: GameProgress | undefined;
   setIsRunning: Dispatch<SetStateAction<boolean>>;
   setShowCreate: Dispatch<SetStateAction<boolean | undefined>>;
+  setShowNewPlayer: Dispatch<SetStateAction<boolean>>;
   setGame: Dispatch<SetStateAction<GameProgress | undefined>>;
   setLevel: Dispatch<SetStateAction<Level | undefined>>;
   countdown: number;
@@ -26,18 +27,33 @@ export const GameResult = (props: GameResultProps) => {
   const [complexity, setComplexity] = useState<Complexity>('LOW');
   const [mode, setMode] = useState<GameMode>('INTERHYP');
   const [name, setName] = useState<string>('');
-  const { game, setGame, setIsRunning, setLevel, countdown, setShowCreate } =
-    props;
+  const {
+    game,
+    setGame,
+    setIsRunning,
+    setLevel,
+    countdown,
+    setShowCreate,
+    setShowNewPlayer,
+  } = props;
   return (
     <div className={styles.GameResult}>
       <div className={styles.Modal}>
         <div className={styles.ModalWrapper}>
-          <button
-            onClick={() => setShowCreate(true)}
-            className={styles.createButton}
-          >
-            Create
-          </button>
+          <div className={styles.ButtonRow}>
+            <button
+              className={styles.createButton}
+              onClick={() => setShowNewPlayer(true)}
+            >
+              New Player
+            </button>
+            <button
+              onClick={() => setShowCreate(true)}
+              className={styles.createButton}
+            >
+              Create Level
+            </button>
+          </div>
           <span style={{ fontSize: '28px', fontWeight: 'bold' }}>
             Game Over
           </span>

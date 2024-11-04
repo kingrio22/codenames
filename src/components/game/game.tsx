@@ -4,10 +4,10 @@ import { Board } from '../board/board';
 import { LEVELS, Level } from '../levels/levels.const';
 import Countdown, { CountdownRenderProps } from 'react-countdown';
 import { Timer } from '../timer/timer';
-import { StartButton } from '../start-button/start-button';
 import { GameResult } from '../game-result/game-result';
 import { shuffle } from '../../utils/functions/array-shuffle';
 import { CreateLevel } from '../levels/create-level';
+import { NewPlayer } from '../player/create-player';
 
 export type GameMode = 'INTERHYP' | 'CHATGPT';
 export type Complexity = 'LOW' | 'MIDDLE' | 'HARD';
@@ -27,6 +27,7 @@ interface GameProps {
 export const Game = (props: GameProps) => {
   const { setShowCreateModal, showCreate } = props;
   const [game, setGame] = useState<GameProgress | undefined>();
+  const [showNewPlayer, setShowNewPlayer] = useState<boolean>(false);
 
   const [level, setLevel] = useState<Level | undefined>();
 
@@ -108,6 +109,7 @@ export const Game = (props: GameProps) => {
               setLevel={setLevel}
               countdown={countdown}
               setShowCreate={setShowCreateModal}
+              setShowNewPlayer={setShowNewPlayer}
             />
           )}
         </div>
@@ -144,6 +146,13 @@ export const Game = (props: GameProps) => {
         <div className={styles.CreateWrapper}>
           <div className={styles.CreateModal}>
             <CreateLevel showCreateLevelModal={setShowCreateModal} />
+          </div>
+        </div>
+      )}
+      {showNewPlayer && (
+        <div className={styles.CreateWrapper}>
+          <div className={styles.CreateModal}>
+            <NewPlayer setShowNewPlayer={setShowNewPlayer} />
           </div>
         </div>
       )}
