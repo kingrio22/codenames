@@ -16,7 +16,7 @@ import { GameModeInput } from '../inputs/game-mode.input';
 interface GameResultProps {
   game: GameProgress | undefined;
   setIsRunning: Dispatch<SetStateAction<boolean>>;
-  setShowCreate: Dispatch<SetStateAction<boolean>>;
+  setShowCreate: Dispatch<SetStateAction<boolean | undefined>>;
   setGame: Dispatch<SetStateAction<GameProgress | undefined>>;
   setLevel: Dispatch<SetStateAction<Level | undefined>>;
   countdown: number;

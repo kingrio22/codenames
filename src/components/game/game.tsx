@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import styles from './game.module.scss';
 import { Board } from '../board/board';
 import { LEVELS, Level } from '../levels/levels.const';
@@ -20,12 +20,15 @@ export interface GameProgress {
   levelsPlayed: number[];
   startedAt: number;
 }
-export const Game = () => {
+interface GameProps {
+  showCreate: boolean | undefined;
+  setShowCreateModal: Dispatch<SetStateAction<boolean | undefined>>;
+}
+export const Game = (props: GameProps) => {
+  const { setShowCreateModal, showCreate } = props;
   const [game, setGame] = useState<GameProgress | undefined>();
 
   const [level, setLevel] = useState<Level | undefined>();
-
-  const [showCreate, setShowCreate] = useState<boolean>(false);
 
   const nextLevel = (solved: boolean) => {
     const nextLevel = LEVELS.filter(
@@ -104,7 +107,7 @@ export const Game = () => {
               setIsRunning={setIsRunning}
               setLevel={setLevel}
               countdown={countdown}
-              setShowCreate={setShowCreate}
+              setShowCreate={setShowCreateModal}
             />
           )}
         </div>
@@ -140,7 +143,7 @@ export const Game = () => {
       {showCreate && (
         <div className={styles.CreateWrapper}>
           <div className={styles.CreateModal}>
-            <CreateLevel showCreateLevelModal={setShowCreate} />
+            <CreateLevel showCreateLevelModal={setShowCreateModal} />
           </div>
         </div>
       )}

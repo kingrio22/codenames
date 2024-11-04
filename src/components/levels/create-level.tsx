@@ -9,11 +9,13 @@ import { CardInput } from '../inputs/card-input';
 import { createLevel } from '../../api/create-level';
 
 interface CreateLevelProps {
-  showCreateLevelModal: Dispatch<SetStateAction<boolean>>;
+  showCreateLevelModal: Dispatch<SetStateAction<boolean | undefined>>;
 }
 
 export const CreateLevel = (props: CreateLevelProps) => {
   const { showCreateLevelModal } = props;
+
+  const [errorMessage, setErrorMessage] = useState<string | undefined>();
   const [newLevel, setNewLevel] = useState<Level>({} as Level);
   const [newCards, setNewCards] = useState<Card[]>(
     new Array(9)
@@ -30,16 +32,31 @@ export const CreateLevel = (props: CreateLevelProps) => {
     });
   };
 
+  const handleCreate = async () => {
+    try {
+      setErrorMessage(undefined);
+      if (newCards.filter((c) => c.isCorrect === true).length !== 3) {
+        setErrorMessage('Es müssen 3 Karten richtig sein');
+        return;
+      }
+      if (newCards.filter((c) => c.word.length < 1).length > 0) {
+        setErrorMessage('Es sind nicht alle Karten befüllt');
+        return;
+      }
+      const level = await createLevel(newLevel);
+      if (!level) {
+        setErrorMessage('Etwas ist schief gelaufen');
+      }
+      showCreateLevelModal(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div>
       <div className={styles.Title}>Neues Level erstellen</div>
-      <form
-        onSubmit={() => {
-          createLevel(newLevel);
-          showCreateLevelModal(false);
-        }}
-        className={styles.CreateWrapper}
-      >
+      <div className={styles.CreateWrapper}>
         <div className={styles.BaseInfo}>
           <div className={styles.Hint}>
             <label htmlFor='hint'>Hinweis Wort: </label>
@@ -73,6 +90,7 @@ export const CreateLevel = (props: CreateLevelProps) => {
             {newCards.map((card) => {
               return (
                 <CardInput
+                  key={card.id}
                   card={card}
                   setValue={(value) =>
                     setNewCards((cards) => {
@@ -101,7 +119,11 @@ export const CreateLevel = (props: CreateLevelProps) => {
           </div>
         </div>
         <div className={styles.ButtonWrapper}>
-          <button className={styles.Button} type='submit'>
+          <button
+            className={styles.Button}
+            type='button'
+            onClick={handleCreate}
+          >
             Level erstellen
           </button>
           <button
@@ -111,7 +133,10 @@ export const CreateLevel = (props: CreateLevelProps) => {
             Abbrechen
           </button>
         </div>
-      </form>
+        {errorMessage && (
+          <div className={styles.ErrorMessage}>{errorMessage}</div>
+        )}
+      </div>
     </div>
   );
 };
