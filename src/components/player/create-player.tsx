@@ -27,45 +27,46 @@ export const NewPlayer = (props: NewPlayerProps) => {
       showError(undefined);
     }
   };
-  const handleCrate = async () => {
-    const { status } = await createPlayer(player);
-    if (status === 201) {
-      setShowNewPlayer(false);
-      showError(undefined);
+  const handleCreate = async () => {
+    try {
+      const { status } = await createPlayer(player);
+      if (status === 201) {
+        setShowNewPlayer(false);
+        showError(undefined);
+      }
+    } catch (err) {
+      showError('Etwas ist schief gelaufen');
     }
   };
 
   useEffect(() => {
     if (player.length < 5) {
+      showError('Mindestens 5 Zeichen');
       return;
     }
+    showError(undefined);
     validatePlayerName(player, showError);
   }, [player]);
-
-  console.log('error; ', error);
-  console.log('!: ', !error);
-  console.log('!!: ', !!error);
-  console.log('!!!: ', !!!error);
 
   return (
     <div className={styles.NewPlayer}>
       <div className={styles.Title}>Neuen Spieler erstellen</div>
       <div className={styles.Inputs}>
         <label htmlFor='player'>Nickname: </label>
-        <input onChange={(e) => setPlayer(e.currentTarget.value)} type='text' />
+        <input
+          onChange={(e) => setPlayer(e.currentTarget.value)}
+          type='text'
+          value={player}
+        />
       </div>
       <button
-        onClick={handleCrate}
+        onClick={handleCreate}
         className={styles.Button}
         disabled={!!error}
       >
         Speichern
       </button>
-      <button
-        onClick={() => setShowNewPlayer(false)}
-        className={styles.Button}
-        disabled={!!error}
-      >
+      <button onClick={() => setShowNewPlayer(false)} className={styles.Button}>
         Abbrechen
       </button>
       {error && <div className={styles.ErrorMessage}> {error}</div>}
