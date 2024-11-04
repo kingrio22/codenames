@@ -132,7 +132,7 @@ export const Game = (props: GameProps) => {
           )}
         </div>
         <div className={styles.SideBar}>
-          <Highscore />
+          <Highscore game={game} isRunning={isRunning} />
 
           <div className={styles.Countdown}>
             {isRunning && (

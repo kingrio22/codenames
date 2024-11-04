@@ -6,12 +6,25 @@
 .Player {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
   align-items: center;
   vertical-align: middle;
 }
 
+.Rank {
+  width: 10%;
+}
+.Name {
+  width: 60%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  padding-right: 5%;
+}
 .Score {
+  width: 15%;
   color: greenyellow;
   font-size: 28px;
+}
+.LevelsPlayed {
+  width: 10%;
 }
