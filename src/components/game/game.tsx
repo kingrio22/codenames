@@ -9,6 +9,8 @@ import { shuffle } from '../../utils/functions/array-shuffle';
 import { CreateLevel } from '../levels/create-level';
 import { NewPlayer } from '../player/create-player';
 import { Highscore } from '../highscore/highscore';
+import { Player } from '../../api/create-player';
+import { updatePlayer } from '../../api/update-player';
 
 export type GameMode = 'INTERHYP' | 'CHATGPT';
 export type Complexity = 'LOW' | 'MIDDLE' | 'HARD';
@@ -29,6 +31,8 @@ export const Game = (props: GameProps) => {
   const { setShowCreateModal, showCreate } = props;
   const [game, setGame] = useState<GameProgress | undefined>();
   const [showNewPlayer, setShowNewPlayer] = useState<boolean>(false);
+
+  const [player, setPlayer] = useState<Player | undefined>();
 
   const [level, setLevel] = useState<Level | undefined>();
 
@@ -66,6 +70,15 @@ export const Game = (props: GameProps) => {
     }
   };
 
+  const finishGame = async () => {
+    if (!player || !game) {
+      return;
+    }
+    const updatePromise = updatePlayer(game, player);
+    setIsRunning(false);
+    await updatePromise;
+  };
+
   const [countdown, setCountdown] = useState<number>(60000);
 
   const [isRunning, setIsRunning] = useState<boolean>(false);
@@ -77,6 +90,8 @@ export const Game = (props: GameProps) => {
       </span>
     );
   };
+
+  console.log('is running: ', isRunning);
 
   return (
     <div className={styles.GameWrapper}>
@@ -111,6 +126,8 @@ export const Game = (props: GameProps) => {
               countdown={countdown}
               setShowCreate={setShowCreateModal}
               setShowNewPlayer={setShowNewPlayer}
+              setPlayer={setPlayer}
+              player={player}
             />
           )}
         </div>
@@ -122,7 +139,7 @@ export const Game = (props: GameProps) => {
               <Countdown
                 renderer={renderer}
                 date={game?.startedAt}
-                onComplete={() => setIsRunning(false)}
+                onComplete={finishGame}
               />
             )}
           </div>

@@ -24,10 +24,10 @@ export const StartButton = (props: StartButtonProps) => {
     complexity,
     player,
   } = props;
-
+  const buttonDisabled = !player;
   return (
     <button
-      disabled={!!player}
+      disabled={buttonDisabled}
       onClick={() => {
         setIsRunning(true);
         setLevel(LEVELS[0]);

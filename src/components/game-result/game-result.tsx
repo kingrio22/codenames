@@ -1,15 +1,9 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import styles from './game-result.module.scss';
 import { Complexity, GameMode, GameProgress } from '../game/game';
-import Radio from '@mui/material/Radio';
 import { StartButton } from '../start-button/start-button';
 import { Level } from '../levels/levels.const';
-import {
-  FormControlLabel,
-  FormLabel,
-  RadioGroup,
-  TextField,
-} from '@mui/material';
+import { TextField } from '@mui/material';
 
 import { ComplexityInput } from '../inputs/complexity-input';
 import { GameModeInput } from '../inputs/game-mode.input';
@@ -22,31 +16,12 @@ interface GameResultProps {
   setShowNewPlayer: Dispatch<SetStateAction<boolean>>;
   setGame: Dispatch<SetStateAction<GameProgress | undefined>>;
   setLevel: Dispatch<SetStateAction<Level | undefined>>;
+  player: Player | undefined;
+  setPlayer: Dispatch<SetStateAction<Player | undefined>>;
   countdown: number;
 }
 
 export const GameResult = (props: GameResultProps) => {
-  const [complexity, setComplexity] = useState<Complexity>('LOW');
-  const [mode, setMode] = useState<GameMode>('INTERHYP');
-  const [name, setName] = useState<string>('');
-
-  const [player, setPlayer] = useState<Player | undefined>();
-
-  const [errorMessage, showError] = useState<string | undefined>();
-
-  async function validateNameInput(name: string | undefined) {
-    if (!name) {
-      return;
-    }
-    const player = await getPlayerByName(name);
-    if (player) {
-      setPlayer(player);
-      showError(undefined);
-    } else {
-      showError('Spieler existiert nicht!');
-    }
-  }
-
   const {
     game,
     setGame,
@@ -55,7 +30,28 @@ export const GameResult = (props: GameResultProps) => {
     countdown,
     setShowCreate,
     setShowNewPlayer,
+    setPlayer,
+    player,
   } = props;
+
+  const [complexity, setComplexity] = useState<Complexity>('LOW');
+  const [mode, setMode] = useState<GameMode>('INTERHYP');
+  const [name, setName] = useState<string>('');
+  const [errorMessage, showError] = useState<string | undefined>();
+
+  async function validateNameInput(name: string | undefined) {
+    if (!name) {
+      return;
+    }
+    const playerExists = await getPlayerByName(name);
+    if (playerExists) {
+      setPlayer(playerExists);
+      showError(undefined);
+    } else {
+      showError('Spieler existiert nicht!');
+    }
+  }
+
   return (
     <div className={styles.GameResult}>
       <div className={styles.Modal}>
