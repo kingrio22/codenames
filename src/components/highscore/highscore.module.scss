@@ -1,0 +1,17 @@
+.HighscoreWrapper {
+  height: 50%;
+  font-size: 20px;
+}
+
+.Player {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  vertical-align: middle;
+}
+
+.Score {
+  color: greenyellow;
+  font-size: 28px;
+}

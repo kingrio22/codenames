@@ -8,6 +8,7 @@ import { GameResult } from '../game-result/game-result';
 import { shuffle } from '../../utils/functions/array-shuffle';
 import { CreateLevel } from '../levels/create-level';
 import { NewPlayer } from '../player/create-player';
+import { Highscore } from '../highscore/highscore';
 
 export type GameMode = 'INTERHYP' | 'CHATGPT';
 export type Complexity = 'LOW' | 'MIDDLE' | 'HARD';
@@ -50,7 +51,7 @@ export const Game = (props: GameProps) => {
             ...game,
             levelsPlayed: [...game?.levelsPlayed, level.id],
             failed: game.failed + 1,
-            highscore: game.highscore - 2,
+            highscore: game.highscore - 1,
           };
         }
       }
@@ -114,18 +115,7 @@ export const Game = (props: GameProps) => {
           )}
         </div>
         <div className={styles.SideBar}>
-          <div className={styles.HighscoreWrapper}>
-            <ol>
-              <li>Saige Fuentes</li>
-              <li>Bowen Higgins</li>
-              <li>Leighton Kramer</li>
-              <li>Kylan Gentry</li>
-              <li>Amelie Griffith</li>
-              <li>Franklin Sierra</li>
-              <li>Marceline Avila</li>
-              <li>Jaylen Blackwell</li>
-            </ol>
-          </div>
+          <Highscore />
 
           <div className={styles.Countdown}>
             {isRunning && (

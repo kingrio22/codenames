@@ -1,24 +1,15 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { BASE_URL } from '../utils/config/consts';
+import { Player } from './create-player';
 
-export interface Player {
-  levelsPlayed: number[];
-  highscore: number;
-  name: string;
-  id: number;
-}
-
-export async function createPlayer(
-  name: string
-): Promise<AxiosResponse<Player>> {
+export async function fetchAllPlayers(): Promise<AxiosResponse<Player[]>> {
   try {
     const options: AxiosRequestConfig = {
-      url: `${BASE_URL}/player`,
-      method: 'POST',
+      url: `${BASE_URL}/player/all`,
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
-      data: { name },
     };
 
     return await axios.request(options);
