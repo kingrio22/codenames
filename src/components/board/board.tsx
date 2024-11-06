@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { CardComponent } from '../card/card';
 import styles from './board.module.scss';
 import { Card, Level } from '../levels/levels.const';
@@ -47,7 +47,9 @@ export const Board = (props: BoardProps) => {
 
   return (
     <div className={styles.BoardWrapper}>
+      {/* <Explanation result={} setResult={} showExplanation={showExplanation} nextLevel={nextLevel}/> */}
       <div className={styles.HintRow}>{hint}</div>
+
       <div className={styles.Board}>
         {cards.map((card) => (
           <CardComponent
