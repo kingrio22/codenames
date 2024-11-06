@@ -73,8 +73,8 @@ export const GameResult = (props: GameResultProps) => {
           <span style={{ fontSize: '28px', fontWeight: 'bold' }}>
             Game Over
           </span>
-          <h4>Dein spiel ist zu ende!</h4>
-          <p>Dein Spielstand: {game?.highscore}</p>
+          <h4>Your game is finished</h4>
+          <p>Your score: {game?.highscore}</p>
           <div className={styles.Inputs}>
             <ComplexityInput
               setComplexity={(value) => setComplexity(value as Complexity)}

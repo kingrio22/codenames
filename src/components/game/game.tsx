@@ -113,6 +113,7 @@ export const Game = (props: GameProps) => {
             <Board
               hint={level.hint}
               cards={shuffle(level.cards)}
+              correctWordsCount={level.correctWords}
               nextLevel={nextLevel}
             />
           )}

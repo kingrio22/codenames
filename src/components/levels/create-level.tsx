@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import styles from './create-level.module.scss';
 import { v1 } from 'uuid';
 import { Card, Level } from './levels.const';
@@ -22,6 +22,7 @@ export const CreateLevel = (props: CreateLevelProps) => {
     hint: '',
     cards: [],
     complexity: 'LOW',
+    correctWords: 0,
     mode: 'INTERHYP',
   });
   const [newCards, setNewCards] = useState<Card[]>(
@@ -41,19 +42,28 @@ export const CreateLevel = (props: CreateLevelProps) => {
 
   const handleCreate = async () => {
     setErrorMessage(undefined);
-    if (newCards.filter((c) => c.isCorrect === true).length !== 3) {
-      setErrorMessage('Es müssen 3 Karten richtig sein');
+    if (newCards.filter((c) => c.isCorrect === true).length < 1) {
+      setErrorMessage('At least one card have to be a correct one');
+      return;
+    }
+    if (
+      newCards.filter((c) => c.isCorrect === true).length !==
+      newLevel.correctWords
+    ) {
+      setErrorMessage(
+        `At least ${newLevel.correctWords} cards have to be a correct one`
+      );
       return;
     }
     if (newCards.filter((c) => c.word.length < 1).length > 0) {
-      setErrorMessage('Es sind nicht alle Karten befüllt');
+      setErrorMessage('Fill all cards');
       return;
     }
     const levelId = await createLevel({ ...newLevel, cards: newCards });
     if (!levelId) {
-      setErrorMessage('Etwas ist schief gelaufen');
+      setErrorMessage('Sth went wrong');
     } else {
-      setErrorMessage(`Level erstellt mit ID: ${levelId}`);
+      setErrorMessage(`Level created with ID: ${levelId}`);
       setTimeout(() => {
         showCreateLevelModal(false);
         setErrorMessage(undefined);
@@ -63,16 +73,25 @@ export const CreateLevel = (props: CreateLevelProps) => {
 
   return (
     <div>
-      <div className={styles.Title}>Neues Level erstellen</div>
+      <div className={styles.Title}>Create new level</div>
       <div className={styles.CreateWrapper}>
         <div className={styles.BaseInfo}>
           <div className={styles.Hint}>
-            <label htmlFor='hint'>Hinweis Wort: </label>
+            <label htmlFor='hint'>Hint: </label>
             <input
               type='text'
               id='hint'
               onChange={(e) => setProps('hint', e.currentTarget.value)}
               value={newLevel['hint'] ?? ''}
+            />
+          </div>
+          <div className={styles.CorrectWords}>
+            <label htmlFor='correct-words'>Correct words count: </label>
+            <input
+              type='number'
+              id='correct-words'
+              onChange={(e) => setProps('correctWords', e.currentTarget.value)}
+              value={newLevel['correctWords']}
             />
           </div>
           <div className={styles.Complexity}>
@@ -90,10 +109,8 @@ export const CreateLevel = (props: CreateLevelProps) => {
           </div>
         </div>
         <div className={styles.CardsWrapper}>
-          <div className={styles.CardTitle}>Karten erstellen</div>
-          <div className={styles.CardHint}>
-            Es können maximal 3 Karten richtig sein
-          </div>
+          <div className={styles.CardTitle}>Cards</div>
+
           <div className={styles.CardsCluster}>
             {newCards.map((card) => {
               return (
@@ -102,12 +119,6 @@ export const CreateLevel = (props: CreateLevelProps) => {
                   card={card}
                   setValue={(value) =>
                     setNewCards((cards) => {
-                      if (
-                        cards.filter((c) => c.isCorrect).length === 3 &&
-                        value.isCorrect === true
-                      ) {
-                        return cards;
-                      }
                       const relatedIndex = cards.findIndex(
                         (c) => c.id === value.id
                       );
@@ -132,13 +143,13 @@ export const CreateLevel = (props: CreateLevelProps) => {
             type='button'
             onClick={handleCreate}
           >
-            Level erstellen
+            Create
           </button>
           <button
             className={styles.Button}
             onClick={() => showCreateLevelModal(false)}
           >
-            Abbrechen
+            Cancel
           </button>
         </div>
         {errorMessage && (

@@ -22,7 +22,7 @@ export const CardInput = (props: CardInputProps): JSX.Element => {
         placeholder='word'
       />
       <label htmlFor='isCorrect-input' style={{ marginLeft: '0.5rem' }}>
-        Richtig
+        correct?
       </label>
       <input
         type={'checkbox'}

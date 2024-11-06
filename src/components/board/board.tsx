@@ -7,12 +7,13 @@ interface BoardProps {
   cards: Level['cards'];
   hint: string;
   nextLevel: (solved: boolean) => void;
+  correctWordsCount: number;
 }
 
 const KEEP_CARDS_VISIBLE = 1000;
 
 export const Board = (props: BoardProps) => {
-  const { nextLevel, cards, hint } = props;
+  const { nextLevel, cards, hint, correctWordsCount } = props;
   const [chosens, setChosens] = useState<Card[]>([]);
 
   const [levelFinished, setLevelFinished] = useState<boolean>(false);
@@ -32,7 +33,7 @@ export const Board = (props: BoardProps) => {
       }, KEEP_CARDS_VISIBLE + 600);
     }
 
-    if (chosens.filter((card) => card.isCorrect).length === 3) {
+    if (chosens.filter((card) => card.isCorrect).length === correctWordsCount) {
       setLevelFinished(true);
       setTimeout(() => {
         setChosens([]);
@@ -42,9 +43,7 @@ export const Board = (props: BoardProps) => {
         setLevelFinished(false);
       }, KEEP_CARDS_VISIBLE + 600);
     }
-  }, [chosens, nextLevel]);
-
-  console.log('chosens: ', chosens);
+  }, [chosens, nextLevel, correctWordsCount]);
 
   return (
     <div className={styles.BoardWrapper}>
