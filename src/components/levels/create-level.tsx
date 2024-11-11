@@ -35,7 +35,7 @@ export const CreateLevel = (props: CreateLevelProps) => {
       .map((_card) => ({ id: v1(), word: '', isCorrect: false }))
   );
 
-  const setProps = (prop: keyof Level, value: string) => {
+  const setProps = (prop: keyof CreateLevelDto, value: string) => {
     setNewLevel((level) => {
       return {
         ...level,

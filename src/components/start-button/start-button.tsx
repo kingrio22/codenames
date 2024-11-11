@@ -1,9 +1,10 @@
-import React from 'react';
-import styles from './start-button.module.scss';
-import { Dispatch, SetStateAction } from 'react';
-import { Complexity, GameMode, GameProgress } from '../game/game';
-import { LEVELS, Level } from '../levels/levels.const';
-import { Player } from '../../api/create-player';
+import React from "react";
+import styles from "./start-button.module.scss";
+import { Dispatch, SetStateAction } from "react";
+import { Complexity, GameMode, GameProgress } from "../game/game";
+import { Level } from "../levels/levels.const";
+import { Player } from "../../api/create-player";
+import { getLevel } from "../../api/get-random-level.api";
 
 interface StartButtonProps {
   setIsRunning: Dispatch<SetStateAction<boolean>>;
@@ -24,13 +25,19 @@ export const StartButton = (props: StartButtonProps) => {
     complexity,
     player,
   } = props;
+  const getInitialLevel = async () => {
+    if (!player) {
+      return;
+    }
+    return await getLevel(mode, complexity, player.id);
+  };
   const buttonDisabled = !player;
   return (
     <button
       disabled={buttonDisabled}
-      onClick={() => {
+      onClick={async () => {
         setIsRunning(true);
-        setLevel(LEVELS[0]);
+        setLevel(await getInitialLevel());
         setGame({
           solved: 0,
           failed: 0,

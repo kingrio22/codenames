@@ -1,19 +1,20 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
-import styles from './game.module.scss';
-import { Board } from '../board/board';
-import { LEVELS, Level } from '../levels/levels.const';
-import Countdown, { CountdownRenderProps } from 'react-countdown';
-import { Timer } from '../timer/timer';
-import { GameResult } from '../game-result/game-result';
-import { shuffle } from '../../utils/functions/array-shuffle';
-import { CreateLevel } from '../levels/create-level';
-import { NewPlayer } from '../player/create-player';
-import { Highscore } from '../highscore/highscore';
-import { Player } from '../../api/create-player';
-import { updatePlayer } from '../../api/update-player';
+import React, { Dispatch, SetStateAction, useState } from "react";
+import styles from "./game.module.scss";
+import { Board } from "../board/board";
+import { Level } from "../levels/levels.const";
+import Countdown, { CountdownRenderProps } from "react-countdown";
+import { Timer } from "../timer/timer";
+import { GameResult } from "../game-result/game-result";
+import { shuffle } from "../../utils/functions/array-shuffle";
+import { CreateLevel } from "../levels/create-level";
+import { NewPlayer } from "../player/create-player";
+import { Highscore } from "../highscore/highscore";
+import { Player } from "../../api/create-player";
+import { updatePlayer } from "../../api/update-player";
+import { getLevel } from "../../api/get-random-level.api";
 
-export type GameMode = 'INTERHYP' | 'CHATGPT';
-export type Complexity = 'LOW' | 'MIDDLE' | 'HARD';
+export type GameMode = "INTERHYP" | "CHATGPT";
+export type Complexity = "LOW" | "MIDDLE" | "HARD";
 export interface GameProgress {
   solved: number;
   failed: number;
@@ -36,12 +37,14 @@ export const Game = (props: GameProps) => {
 
   const [level, setLevel] = useState<Level | undefined>();
 
-  const nextLevel = (solved: boolean) => {
-    const nextLevel = LEVELS.filter(
-      (next) => !game?.levelsPlayed.includes(next.id) && next.id !== level?.id
-    )[0];
+  const nextLevel = async (solved: boolean) => {
+    if (!game || !player) {
+      return;
+    }
 
-    setGame((game) => {
+    const newLevel = await getLevel(game?.mode, game?.complexity, player?.id);
+
+    await setGame((game) => {
       if (game && level) {
         if (solved) {
           return {
@@ -63,8 +66,8 @@ export const Game = (props: GameProps) => {
     });
     setLevel(undefined);
 
-    if (nextLevel) {
-      setLevel(nextLevel);
+    if (newLevel) {
+      setLevel(newLevel);
     } else {
       setIsRunning(false);
     }
@@ -91,7 +94,7 @@ export const Game = (props: GameProps) => {
     );
   };
 
-  console.log('is running: ', isRunning);
+  console.log("is running: ", isRunning);
 
   return (
     <div className={styles.GameWrapper}>
