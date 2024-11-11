@@ -1,34 +1,38 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
-import styles from "./create-level.module.scss";
-import { v1 } from "uuid";
-import { Card, Level } from "./levels.const";
-import { ComplexityInput } from "../inputs/complexity-input";
-import { Complexity, GameMode } from "../game/game";
-import { GameModeInput } from "../inputs/game-mode.input";
-import { CardInput } from "../inputs/card-input";
-import { createLevel } from "../../api/create-level";
+import React, { Dispatch, SetStateAction, useState } from 'react';
+import styles from './create-level.module.scss';
+import { v1 } from 'uuid';
+import { Card, Level } from './levels.const';
+import { ComplexityInput } from '../inputs/complexity-input';
+import { Complexity, GameMode } from '../game/game';
+import { GameModeInput } from '../inputs/game-mode.input';
+import { CardInput } from '../inputs/card-input';
+import { createLevel } from '../../api/create-level';
+import { getRandomWords } from '../../api/get-random-words';
+import { shuffle } from '../../utils/functions/array-shuffle';
 
 interface CreateLevelProps {
   showCreateLevelModal: Dispatch<SetStateAction<boolean | undefined>>;
+  setLoading: Dispatch<SetStateAction<boolean>>;
 }
 
-export type CreateLevelDto = Omit<Level, "id">;
+export type CreateLevelDto = Omit<Level, 'id'>;
 
 export const CreateLevel = (props: CreateLevelProps) => {
-  const { showCreateLevelModal } = props;
+  const { showCreateLevelModal, setLoading } = props;
 
   const [errorMessage, setErrorMessage] = useState<string | undefined>();
   const [newLevel, setNewLevel] = useState<CreateLevelDto>({
-    hint: "",
+    hint: '',
     cards: [],
-    complexity: "LOW",
+    complexity: 'LOW',
     correctWords: 0,
-    mode: "INTERHYP",
+    mode: 'INTERHYP',
   });
+
   const [newCards, setNewCards] = useState<Card[]>(
     new Array(9)
       .fill({})
-      .map((_card) => ({ id: v1(), word: "", isCorrect: false }))
+      .map((_card) => ({ id: v1(), word: '', isCorrect: false }))
   );
 
   const setProps = (prop: keyof CreateLevelDto, value: string) => {
@@ -43,7 +47,7 @@ export const CreateLevel = (props: CreateLevelProps) => {
   const handleCreate = async () => {
     setErrorMessage(undefined);
     if (newCards.filter((c) => c.isCorrect === true).length < 1) {
-      setErrorMessage("At least one card have to be a correct one");
+      setErrorMessage('At least one card has to be a correct one');
       return;
     }
     if (
@@ -56,12 +60,12 @@ export const CreateLevel = (props: CreateLevelProps) => {
       return;
     }
     if (newCards.filter((c) => c.word.length < 1).length > 0) {
-      setErrorMessage("Fill all cards");
+      setErrorMessage('Fill all cards');
       return;
     }
     const levelId = await createLevel({ ...newLevel, cards: newCards });
     if (!levelId) {
-      setErrorMessage("Sth went wrong");
+      setErrorMessage('Sth went wrong');
     } else {
       setErrorMessage(`Level created with ID: ${levelId}`);
       setTimeout(() => {
@@ -71,40 +75,55 @@ export const CreateLevel = (props: CreateLevelProps) => {
     }
   };
 
+  const shuffleCards = async () => {
+    const {
+      data: { generatedWords },
+    } = await getRandomWords(setLoading);
+
+    const selectedWords = shuffle(generatedWords).splice(0, 9);
+
+    const newCards = selectedWords.map((word) => ({
+      id: v1(),
+      word,
+      isCorrect: false,
+    }));
+    setNewCards(newCards);
+  };
+
   return (
     <div>
       <div className={styles.Title}>Create new level</div>
       <div className={styles.CreateWrapper}>
         <div className={styles.BaseInfo}>
           <div className={styles.Hint}>
-            <label htmlFor="hint">Hint: </label>
+            <label htmlFor='hint'>Hint: </label>
             <input
-              type="text"
-              id="hint"
-              onChange={(e) => setProps("hint", e.currentTarget.value)}
-              value={newLevel["hint"] ?? ""}
+              type='text'
+              id='hint'
+              onChange={(e) => setProps('hint', e.currentTarget.value)}
+              value={newLevel['hint'] ?? ''}
             />
           </div>
           <div className={styles.CorrectWords}>
-            <label htmlFor="correct-words">Correct words count: </label>
+            <label htmlFor='correct-words'>Correct words count: </label>
             <input
-              type="number"
-              id="correct-words"
-              onChange={(e) => setProps("correctWords", e.currentTarget.value)}
-              value={newLevel["correctWords"]}
+              type='number'
+              id='correct-words'
+              onChange={(e) => setProps('correctWords', e.currentTarget.value)}
+              value={newLevel['correctWords']}
             />
           </div>
           <div className={styles.Complexity}>
             <ComplexityInput
-              complexity={(newLevel["complexity"] as Complexity) ?? "LOW"}
-              setComplexity={(value) => setProps("complexity", value)}
+              complexity={(newLevel['complexity'] as Complexity) ?? 'LOW'}
+              setComplexity={(value) => setProps('complexity', value)}
             />
           </div>
 
           <div className={styles.Mode}>
             <GameModeInput
-              mode={(newLevel["mode"] as GameMode) ?? "INTERHYP"}
-              setMode={(value) => setProps("complexity", value)}
+              mode={(newLevel['mode'] as GameMode) ?? 'INTERHYP'}
+              setMode={(value) => setProps('complexity', value)}
             />
           </div>
         </div>
@@ -136,11 +155,16 @@ export const CreateLevel = (props: CreateLevelProps) => {
               );
             })}
           </div>
+          <div className={styles.ShuffleWrapper}>
+            <button className={styles.Button} onClick={() => shuffleCards()}>
+              Generate/Shuffle
+            </button>
+          </div>
         </div>
         <div className={styles.ButtonWrapper}>
           <button
             className={styles.Button}
-            type="button"
+            type='button'
             onClick={handleCreate}
           >
             Create

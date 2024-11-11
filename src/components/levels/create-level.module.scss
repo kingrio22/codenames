@@ -62,3 +62,12 @@
   color: #ff2222;
   font-weight: bold;
 }
+
+.ShuffleWrapper {
+  margin-top: 2rem;
+  text-align: center;
+  .Button {
+    font-size: 16px;
+    padding: 0.5rem 1.5rem;
+  }
+}
