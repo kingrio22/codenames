@@ -7,6 +7,9 @@ import { Complexity, GameMode } from '../game/game';
 import { GameModeInput } from '../inputs/game-mode.input';
 import { CardInput } from '../inputs/card-input';
 import { createLevel } from '../../api/create-level';
+import { getRandomWords } from '../../api/get-random-words';
+import { shuffle } from '../../utils/functions/array-shuffle';
+import { LoadingSpinner } from '../loading-spinner/loading-spinner';
 
 interface CreateLevelProps {
   showCreateLevelModal: Dispatch<SetStateAction<boolean | undefined>>;
@@ -25,6 +28,7 @@ export const CreateLevel = (props: CreateLevelProps) => {
     correctWords: 0,
     mode: 'INTERHYP',
   });
+  const [loading, setLoading] = useState<boolean>(false);
   const [newCards, setNewCards] = useState<Card[]>(
     new Array(9)
       .fill({})
@@ -70,6 +74,24 @@ export const CreateLevel = (props: CreateLevelProps) => {
       }, 1000);
     }
   };
+
+  const shuffleCards = async () => {
+    const {
+      data: { generatedWords },
+    } = await getRandomWords(setLoading);
+
+    const selectedWords = shuffle(generatedWords).splice(0, 9);
+
+    const newCards = selectedWords.map((word) => ({
+      id: v1(),
+      word,
+      isCorrect: false,
+    }));
+    setNewCards(newCards);
+  };
+  if (loading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <div>
@@ -135,6 +157,11 @@ export const CreateLevel = (props: CreateLevelProps) => {
                 />
               );
             })}
+          </div>
+          <div className={styles.ShuffleWrapper}>
+            <button className={styles.Button} onClick={() => shuffleCards()}>
+              Generate/Shuffle
+            </button>
           </div>
         </div>
         <div className={styles.ButtonWrapper}>
