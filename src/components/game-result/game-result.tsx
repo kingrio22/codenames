@@ -1,14 +1,14 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
-import styles from "./game-result.module.scss";
-import { Complexity, GameMode, GameProgress } from "../game/game";
-import { StartButton } from "../start-button/start-button";
-import { Level } from "../levels/levels.const";
-import { TextField } from "@mui/material";
+import React, { Dispatch, SetStateAction, useState } from 'react';
+import styles from './game-result.module.scss';
+import { Complexity, GameMode, GameProgress } from '../game/game';
+import { StartButton } from '../start-button/start-button';
+import { Level } from '../levels/levels.const';
+import { TextField } from '@mui/material';
 
-import { ComplexityInput } from "../inputs/complexity-input";
-import { GameModeInput } from "../inputs/game-mode.input";
-import { Player } from "../../api/create-player";
-import { getPlayerByName } from "../../api/get-player-by-name";
+import { ComplexityInput } from '../inputs/complexity-input';
+import { GameModeInput } from '../inputs/game-mode.input';
+import { Player } from '../../api/create-player';
+import { getPlayerByName } from '../../api/get-player-by-name';
 interface GameResultProps {
   game: GameProgress | undefined;
   setIsRunning: Dispatch<SetStateAction<boolean>>;
@@ -19,6 +19,7 @@ interface GameResultProps {
   player: Player | undefined;
   setPlayer: Dispatch<SetStateAction<Player | undefined>>;
   countdown: number;
+  setLoading: Dispatch<SetStateAction<boolean>>;
 }
 
 export const GameResult = (props: GameResultProps) => {
@@ -32,11 +33,12 @@ export const GameResult = (props: GameResultProps) => {
     setShowNewPlayer,
     setPlayer,
     player,
+    setLoading,
   } = props;
 
-  const [complexity, setComplexity] = useState<Complexity>("LOW");
-  const [mode, setMode] = useState<GameMode>("INTERHYP");
-  const [name, setName] = useState<string>("");
+  const [complexity, setComplexity] = useState<Complexity>('LOW');
+  const [mode, setMode] = useState<GameMode>('INTERHYP');
+  const [name, setName] = useState<string>('');
   const [errorMessage, showError] = useState<string | undefined>();
 
   async function validateNameInput(name: string | undefined) {
@@ -48,7 +50,7 @@ export const GameResult = (props: GameResultProps) => {
       setPlayer(playerExists);
       showError(undefined);
     } else {
-      showError("Spieler existiert nicht!");
+      showError('Spieler existiert nicht!');
     }
   }
 
@@ -70,7 +72,7 @@ export const GameResult = (props: GameResultProps) => {
               Create Level
             </button>
           </div>
-          <span style={{ fontSize: "28px", fontWeight: "bold" }}>
+          <span style={{ fontSize: '28px', fontWeight: 'bold' }}>
             Game Over
           </span>
           <h4>Your game is finished</h4>
@@ -86,7 +88,7 @@ export const GameResult = (props: GameResultProps) => {
             />
             <div className={styles.PlayerNameInput}>
               <TextField
-                label="Name"
+                label='Name'
                 onChange={(e) => setName(e.currentTarget.value)}
                 required={true}
                 value={name}
@@ -108,6 +110,7 @@ export const GameResult = (props: GameResultProps) => {
               mode={mode}
               complexity={complexity}
               player={player}
+              setLoading={setLoading}
             />
           </div>
         </div>

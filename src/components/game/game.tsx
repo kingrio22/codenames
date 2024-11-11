@@ -1,20 +1,21 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
-import styles from "./game.module.scss";
-import { Board } from "../board/board";
-import { Level } from "../levels/levels.const";
-import Countdown, { CountdownRenderProps } from "react-countdown";
-import { Timer } from "../timer/timer";
-import { GameResult } from "../game-result/game-result";
-import { shuffle } from "../../utils/functions/array-shuffle";
-import { CreateLevel } from "../levels/create-level";
-import { NewPlayer } from "../player/create-player";
-import { Highscore } from "../highscore/highscore";
-import { Player } from "../../api/create-player";
-import { updatePlayer } from "../../api/update-player";
-import { getLevel } from "../../api/get-random-level.api";
+import React, { Dispatch, SetStateAction, useState } from 'react';
+import styles from './game.module.scss';
+import { Board } from '../board/board';
+import { Level } from '../levels/levels.const';
+import Countdown, { CountdownRenderProps } from 'react-countdown';
+import { Timer } from '../timer/timer';
+import { GameResult } from '../game-result/game-result';
+import { shuffle } from '../../utils/functions/array-shuffle';
+import { CreateLevel } from '../levels/create-level';
+import { NewPlayer } from '../player/create-player';
+import { Highscore } from '../highscore/highscore';
+import { Player } from '../../api/create-player';
+import { updatePlayer } from '../../api/update-player';
+import { getLevel } from '../../api/get-random-level.api';
+import { LoadingSpinner } from '../loading-spinner/loading-spinner';
 
-export type GameMode = "INTERHYP" | "CHATGPT";
-export type Complexity = "LOW" | "MIDDLE" | "HARD";
+export type GameMode = 'INTERHYP' | 'CHATGPT';
+export type Complexity = 'LOW' | 'MIDDLE' | 'HARD';
 export interface GameProgress {
   solved: number;
   failed: number;
@@ -33,6 +34,8 @@ export const Game = (props: GameProps) => {
   const [game, setGame] = useState<GameProgress | undefined>();
   const [showNewPlayer, setShowNewPlayer] = useState<boolean>(false);
 
+  const [loading, setLoading] = useState<boolean>(false);
+
   const [player, setPlayer] = useState<Player | undefined>();
 
   const [level, setLevel] = useState<Level | undefined>();
@@ -42,7 +45,12 @@ export const Game = (props: GameProps) => {
       return;
     }
 
-    const newLevel = await getLevel(game?.mode, game?.complexity, player?.id);
+    const newLevel = await getLevel(
+      game?.mode,
+      game?.complexity,
+      player?.id,
+      setLoading
+    );
 
     await setGame((game) => {
       if (game && level) {
@@ -94,8 +102,6 @@ export const Game = (props: GameProps) => {
     );
   };
 
-  console.log("is running: ", isRunning);
-
   return (
     <div className={styles.GameWrapper}>
       <div className={styles.TopBar}>
@@ -111,6 +117,7 @@ export const Game = (props: GameProps) => {
         <div className={styles.HighscorePart}>Highscore</div>
       </div>
       <div className={styles.Content}>
+        {loading && <LoadingSpinner />}
         <div className={styles.BoardWrapper}>
           {level && isRunning && (
             <Board
@@ -132,6 +139,7 @@ export const Game = (props: GameProps) => {
               setShowNewPlayer={setShowNewPlayer}
               setPlayer={setPlayer}
               player={player}
+              setLoading={setLoading}
             />
           )}
         </div>
@@ -156,7 +164,10 @@ export const Game = (props: GameProps) => {
       {showCreate && (
         <div className={styles.CreateWrapper}>
           <div className={styles.CreateModal}>
-            <CreateLevel showCreateLevelModal={setShowCreateModal} />
+            <CreateLevel
+              showCreateLevelModal={setShowCreateModal}
+              setLoading={setLoading}
+            />
           </div>
         </div>
       )}

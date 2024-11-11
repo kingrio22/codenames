@@ -9,16 +9,16 @@ import { CardInput } from '../inputs/card-input';
 import { createLevel } from '../../api/create-level';
 import { getRandomWords } from '../../api/get-random-words';
 import { shuffle } from '../../utils/functions/array-shuffle';
-import { LoadingSpinner } from '../loading-spinner/loading-spinner';
 
 interface CreateLevelProps {
   showCreateLevelModal: Dispatch<SetStateAction<boolean | undefined>>;
+  setLoading: Dispatch<SetStateAction<boolean>>;
 }
 
 export type CreateLevelDto = Omit<Level, 'id'>;
 
 export const CreateLevel = (props: CreateLevelProps) => {
-  const { showCreateLevelModal } = props;
+  const { showCreateLevelModal, setLoading } = props;
 
   const [errorMessage, setErrorMessage] = useState<string | undefined>();
   const [newLevel, setNewLevel] = useState<CreateLevelDto>({
@@ -28,7 +28,7 @@ export const CreateLevel = (props: CreateLevelProps) => {
     correctWords: 0,
     mode: 'INTERHYP',
   });
-  const [loading, setLoading] = useState<boolean>(false);
+
   const [newCards, setNewCards] = useState<Card[]>(
     new Array(9)
       .fill({})
@@ -47,7 +47,7 @@ export const CreateLevel = (props: CreateLevelProps) => {
   const handleCreate = async () => {
     setErrorMessage(undefined);
     if (newCards.filter((c) => c.isCorrect === true).length < 1) {
-      setErrorMessage('At least one card have to be a correct one');
+      setErrorMessage('At least one card has to be a correct one');
       return;
     }
     if (
@@ -89,9 +89,6 @@ export const CreateLevel = (props: CreateLevelProps) => {
     }));
     setNewCards(newCards);
   };
-  if (loading) {
-    return <LoadingSpinner />;
-  }
 
   return (
     <div>
