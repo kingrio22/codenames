@@ -1,12 +1,17 @@
 import axios, { AxiosRequestConfig } from "axios";
-import { CreateLevelDto } from "../components/levels/create-level";
+import { GameMode } from "../components/game/game";
+import { Complexity } from "../components/game/game";
 import { BASE_URL, BASE_HEADERS } from "../config/api.config";
 import { Level } from "../components/levels/levels.const";
 
-export async function createLevel(level: CreateLevelDto): Promise<Level> {
+export async function getLevel(
+  mode: GameMode,
+  complexity: Complexity,
+  playerId: number
+): Promise<Level> {
   try {
     const options: AxiosRequestConfig = {
-      url: `${BASE_URL}/levels/random`,
+      url: `${BASE_URL}/random-for-player/${mode}/${complexity}/${playerId}`,
       method: "GET",
       headers: BASE_HEADERS,
     };
