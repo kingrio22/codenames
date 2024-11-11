@@ -11,7 +11,7 @@ export async function getLevel(
 ): Promise<Level> {
   try {
     const options: AxiosRequestConfig = {
-      url: `${BASE_URL}/random-for-player/${mode}/${complexity}/${playerId}`,
+      url: `${BASE_URL}/levels/random-for-player/${mode}/${complexity}/${playerId}`,
       method: "GET",
       headers: BASE_HEADERS,
     };
