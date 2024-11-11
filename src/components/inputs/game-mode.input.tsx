@@ -12,7 +12,7 @@ export const GameModeInput = (props: GameModeInputProps): JSX.Element => {
   const { mode, setMode } = props;
   return (
     <div className={styles.GameModeInput}>
-      <FormLabel id='select-mode'>Gegner</FormLabel>
+      <FormLabel id='select-mode'>Mode</FormLabel>
       <RadioGroup>
         <FormControlLabel
           value='Interhyp'

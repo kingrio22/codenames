@@ -14,7 +14,7 @@ export const ComplexityInput = (props: ComplexityInputProps): JSX.Element => {
   return (
     <div className={styles.ComplexityInput}>
       <RadioGroup>
-        <FormLabel id='select-complexity'>Schwierigkeitsgrad</FormLabel>
+        <FormLabel id='select-complexity'>Complexity</FormLabel>
 
         <FormControlLabel
           aria-labelledby='select-complexity'
@@ -27,7 +27,7 @@ export const ComplexityInput = (props: ComplexityInputProps): JSX.Element => {
               name='radio-buttons'
             />
           }
-          label='Leicht'
+          label='Low'
         />
         <FormControlLabel
           value='mittel'
@@ -39,7 +39,7 @@ export const ComplexityInput = (props: ComplexityInputProps): JSX.Element => {
               name='radio-buttons'
             />
           }
-          label='Mittel'
+          label='Medium'
         />
         <FormControlLabel
           value='schwer'
@@ -51,7 +51,7 @@ export const ComplexityInput = (props: ComplexityInputProps): JSX.Element => {
               name='radio-buttons'
             />
           }
-          label='Schwer'
+          label='Hard'
         />
       </RadioGroup>
     </div>

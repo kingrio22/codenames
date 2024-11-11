@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import styles from "./game.module.scss";
 import { Board } from "../board/board";
 import { LEVELS, Level } from "../levels/levels.const";
@@ -6,7 +6,11 @@ import Countdown, { CountdownRenderProps } from "react-countdown";
 import { Timer } from "../timer/timer";
 import { GameResult } from "../game-result/game-result";
 import { shuffle } from "../../utils/functions/array-shuffle";
-import { CreateLevelComponent } from "../levels/create-level";
+import { CreateLevel } from "../levels/create-level";
+import { NewPlayer } from "../player/create-player";
+import { Highscore } from "../highscore/highscore";
+import { Player } from "../../api/create-player";
+import { updatePlayer } from "../../api/update-player";
 
 export type GameMode = "INTERHYP" | "CHATGPT";
 export type Complexity = "LOW" | "MIDDLE" | "HARD";
@@ -19,12 +23,18 @@ export interface GameProgress {
   levelsPlayed: number[];
   startedAt: number;
 }
-export const Game = () => {
+interface GameProps {
+  showCreate: boolean | undefined;
+  setShowCreateModal: Dispatch<SetStateAction<boolean | undefined>>;
+}
+export const Game = (props: GameProps) => {
+  const { setShowCreateModal, showCreate } = props;
   const [game, setGame] = useState<GameProgress | undefined>();
+  const [showNewPlayer, setShowNewPlayer] = useState<boolean>(false);
+
+  const [player, setPlayer] = useState<Player | undefined>();
 
   const [level, setLevel] = useState<Level | undefined>();
-
-  const [showCreate, setShowCreate] = useState<boolean>(false);
 
   const nextLevel = (solved: boolean) => {
     const nextLevel = LEVELS.filter(
@@ -45,7 +55,7 @@ export const Game = () => {
             ...game,
             levelsPlayed: [...game?.levelsPlayed, level.id],
             failed: game.failed + 1,
-            highscore: game.highscore - 2,
+            highscore: game.highscore - 1,
           };
         }
       }
@@ -60,6 +70,15 @@ export const Game = () => {
     }
   };
 
+  const finishGame = async () => {
+    if (!player || !game) {
+      return;
+    }
+    const updatePromise = updatePlayer(game, player);
+    setIsRunning(false);
+    await updatePromise;
+  };
+
   const [countdown, setCountdown] = useState<number>(60000);
 
   const [isRunning, setIsRunning] = useState<boolean>(false);
@@ -71,6 +90,8 @@ export const Game = () => {
       </span>
     );
   };
+
+  console.log("is running: ", isRunning);
 
   return (
     <div className={styles.GameWrapper}>
@@ -92,6 +113,7 @@ export const Game = () => {
             <Board
               hint={level.hint}
               cards={shuffle(level.cards)}
+              correctWordsCount={level.correctWords}
               nextLevel={nextLevel}
             />
           )}
@@ -103,30 +125,22 @@ export const Game = () => {
               setIsRunning={setIsRunning}
               setLevel={setLevel}
               countdown={countdown}
-              setShowCreate={setShowCreate}
+              setShowCreate={setShowCreateModal}
+              setShowNewPlayer={setShowNewPlayer}
+              setPlayer={setPlayer}
+              player={player}
             />
           )}
         </div>
         <div className={styles.SideBar}>
-          <div className={styles.HighscoreWrapper}>
-            <ol>
-              <li>Saige Fuentes</li>
-              <li>Bowen Higgins</li>
-              <li>Leighton Kramer</li>
-              <li>Kylan Gentry</li>
-              <li>Amelie Griffith</li>
-              <li>Franklin Sierra</li>
-              <li>Marceline Avila</li>
-              <li>Jaylen Blackwell</li>
-            </ol>
-          </div>
+          <Highscore game={game} isRunning={isRunning} />
 
           <div className={styles.Countdown}>
             {isRunning && (
               <Countdown
                 renderer={renderer}
                 date={game?.startedAt}
-                onComplete={() => setIsRunning(false)}
+                onComplete={finishGame}
               />
             )}
           </div>
@@ -139,7 +153,14 @@ export const Game = () => {
       {showCreate && (
         <div className={styles.CreateWrapper}>
           <div className={styles.CreateModal}>
-            <CreateLevelComponent showCreateLevelModal={setShowCreate} />
+            <CreateLevel showCreateLevelModal={setShowCreateModal} />
+          </div>
+        </div>
+      )}
+      {showNewPlayer && (
+        <div className={styles.CreateWrapper}>
+          <div className={styles.CreateModal}>
+            <NewPlayer setShowNewPlayer={setShowNewPlayer} />
           </div>
         </div>
       )}

@@ -1,0 +1,28 @@
+.HighscoreWrapper {
+  height: 50%;
+  font-size: 20px;
+}
+
+.Player {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  vertical-align: middle;
+}
+
+.Rank {
+  width: 10%;
+}
+.Name {
+  width: 70%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  padding-right: 5%;
+}
+.Score {
+  width: 15%;
+  color: greenyellow;
+  font-size: 28px;
+  align-self: flex-end;
+}
