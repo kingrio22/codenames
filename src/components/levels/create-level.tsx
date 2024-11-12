@@ -35,7 +35,7 @@ export const CreateLevel = (props: CreateLevelProps) => {
       .map((_card) => ({ id: v1(), word: '', isCorrect: false }))
   );
 
-  const setProps = (prop: keyof CreateLevelDto, value: string) => {
+  const setProps = (prop: keyof CreateLevelDto, value: string | number) => {
     setNewLevel((level) => {
       return {
         ...level,
@@ -55,7 +55,7 @@ export const CreateLevel = (props: CreateLevelProps) => {
       newLevel.correctWords
     ) {
       setErrorMessage(
-        `At least ${newLevel.correctWords} cards have to be a correct one`
+        `The amount of correct cards do not match the correct words count`
       );
       return;
     }
@@ -63,6 +63,11 @@ export const CreateLevel = (props: CreateLevelProps) => {
       setErrorMessage('Fill all cards');
       return;
     }
+    if (newLevel.hint.length < 1) {
+      setErrorMessage('Hint word is missing');
+      return;
+    }
+
     const levelId = await createLevel({ ...newLevel, cards: newCards });
     if (!levelId) {
       setErrorMessage('Sth went wrong');
@@ -109,7 +114,12 @@ export const CreateLevel = (props: CreateLevelProps) => {
             <input
               type='number'
               id='correct-words'
-              onChange={(e) => setProps('correctWords', e.currentTarget.value)}
+              onChange={(e) =>
+                setProps(
+                  'correctWords',
+                  parseInt(e.currentTarget.value.toString())
+                )
+              }
               value={newLevel['correctWords']}
             />
           </div>
