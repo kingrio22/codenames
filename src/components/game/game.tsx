@@ -52,7 +52,7 @@ export const Game = (props: GameProps) => {
       setLoading
     );
 
-    await setGame((game) => {
+    setGame((game) => {
       if (game && level) {
         if (solved) {
           return {
@@ -122,7 +122,7 @@ export const Game = (props: GameProps) => {
           {level && isRunning && (
             <Board
               hint={level.hint}
-              cards={shuffle(level.cards)}
+              cards={shuffle(level?.cards)}
               correctWordsCount={level.correctWords}
               nextLevel={nextLevel}
             />
