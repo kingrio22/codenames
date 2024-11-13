@@ -106,6 +106,7 @@ export const GameResult = (props: GameResultProps) => {
               mode={mode}
               complexity={complexity}
               player={player}
+              setLoading={setLoading}
             />
           </div>
         </div>
