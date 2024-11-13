@@ -1,10 +1,10 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { CardComponent } from "../card/card";
-import styles from "./board.module.scss";
-import { Card, Level } from "../levels/levels.const";
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { CardComponent } from '../card/card';
+import styles from './board.module.scss';
+import { Card, Level } from '../levels/levels.const';
 
 interface BoardProps {
-  cards: Level["cards"];
+  cards: Level['cards'];
   hint: string;
   nextLevel: (solved: boolean) => void;
   correctWordsCount: number;
@@ -44,6 +44,9 @@ export const Board = (props: BoardProps) => {
       }, KEEP_CARDS_VISIBLE + 600);
     }
   }, [chosens, nextLevel, correctWordsCount]);
+
+  console.log('cards: ', cards);
+  console.log('chosens: ', chosens);
 
   return (
     <div className={styles.BoardWrapper}>

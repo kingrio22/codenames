@@ -8,6 +8,7 @@ import { getLevel } from '../../api/get-random-level.api';
 
 interface StartButtonProps {
   setIsRunning: Dispatch<SetStateAction<boolean>>;
+  setLoading: Dispatch<SetStateAction<boolean>>;
   setGame: Dispatch<SetStateAction<GameProgress | undefined>>;
   setLevel: Dispatch<SetStateAction<Level | undefined>>;
   mode: GameMode;
@@ -24,6 +25,7 @@ export const StartButton = (props: StartButtonProps) => {
     mode,
     complexity,
     player,
+    setLoading,
   } = props;
 
   const buttonDisabled = !player;
@@ -33,7 +35,7 @@ export const StartButton = (props: StartButtonProps) => {
       onClick={async () => {
         setIsRunning(true);
         fetchInitialLevel(
-          () => getLevel(mode, complexity, player?.id, () => null),
+          () => getLevel(mode, complexity, player?.id, setLoading),
           (level) => setLevel(level)
         );
         setGame({
