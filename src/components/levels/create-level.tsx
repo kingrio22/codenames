@@ -29,6 +29,7 @@ export const CreateLevel = (props: CreateLevelProps) => {
     mode: 'INTERHYP',
   });
 
+  const [specification, setSpecification] = useState<string>('');
   const [suggestions, setSuggestions] = useState<string[] | undefined>();
 
   const [newCards, setNewCards] = useState<Card[]>(
@@ -99,7 +100,7 @@ export const CreateLevel = (props: CreateLevelProps) => {
   const generateAndShuffle = async () => {
     const {
       data: { generatedWords },
-    } = await getRandomWords(setLoading);
+    } = await getRandomWords(setLoading, specification);
 
     setSuggestions(generatedWords);
     shuflleSuggestions();
@@ -123,6 +124,18 @@ export const CreateLevel = (props: CreateLevelProps) => {
             >
               Shuffle
             </button>
+          </div>
+          <div
+            className={styles.SpecificationWrapper}
+            title='Use this to specify the generation with custom words'
+          >
+            <label htmlFor='specificationInput'>Specify word:</label>
+            <input
+              id={'specificationInput'}
+              type='text'
+              value={specification}
+              onChange={(e) => setSpecification(e.currentTarget.value)}
+            />
           </div>
 
           <span className={styles.SubTitle}>Suggestions</span>
