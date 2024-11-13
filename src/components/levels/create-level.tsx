@@ -29,6 +29,8 @@ export const CreateLevel = (props: CreateLevelProps) => {
     mode: 'INTERHYP',
   });
 
+  const [suggestions, setSuggestions] = useState<string[] | undefined>();
+
   const [newCards, setNewCards] = useState<Card[]>(
     new Array(9)
       .fill({})
@@ -80,12 +82,11 @@ export const CreateLevel = (props: CreateLevelProps) => {
     }
   };
 
-  const shuffleCards = async () => {
-    const {
-      data: { generatedWords },
-    } = await getRandomWords(setLoading);
-
-    const selectedWords = shuffle(generatedWords).splice(0, 9);
+  const shuflleSuggestions = () => {
+    if (!suggestions) {
+      return;
+    }
+    const selectedWords = shuffle(suggestions).splice(0, 9);
 
     const newCards = selectedWords.map((word) => ({
       id: v1(),
@@ -95,100 +96,133 @@ export const CreateLevel = (props: CreateLevelProps) => {
     setNewCards(newCards);
   };
 
+  const generateAndShuffle = async () => {
+    const {
+      data: { generatedWords },
+    } = await getRandomWords(setLoading);
+
+    setSuggestions(generatedWords);
+    shuflleSuggestions();
+  };
+
   return (
     <div>
       <div className={styles.Title}>Create new level</div>
-      <div className={styles.CreateWrapper}>
-        <div className={styles.BaseInfo}>
-          <div className={styles.Hint}>
-            <label htmlFor='hint'>Hint: </label>
-            <input
-              type='text'
-              id='hint'
-              onChange={(e) => setProps('hint', e.currentTarget.value)}
-              value={newLevel['hint'] ?? ''}
-            />
-          </div>
-          <div className={styles.CorrectWords}>
-            <label htmlFor='correct-words'>Correct words count: </label>
-            <input
-              type='number'
-              id='correct-words'
-              onChange={(e) =>
-                setProps(
-                  'correctWords',
-                  parseInt(e.currentTarget.value.toString())
-                )
-              }
-              value={newLevel['correctWords']}
-            />
-          </div>
-          <div className={styles.Complexity}>
-            <ComplexityInput
-              complexity={(newLevel['complexity'] as Complexity) ?? 'LOW'}
-              setComplexity={(value) => setProps('complexity', value)}
-            />
-          </div>
-
-          <div className={styles.Mode}>
-            <GameModeInput
-              mode={(newLevel['mode'] as GameMode) ?? 'INTERHYP'}
-              setMode={(value) => setProps('complexity', value)}
-            />
-          </div>
-        </div>
-        <div className={styles.CardsWrapper}>
-          <div className={styles.CardTitle}>Cards</div>
-
-          <div className={styles.CardsCluster}>
-            {newCards.map((card) => {
-              return (
-                <CardInput
-                  key={card.id}
-                  card={card}
-                  setValue={(value) =>
-                    setNewCards((cards) => {
-                      const relatedIndex = cards.findIndex(
-                        (c) => c.id === value.id
-                      );
-                      const udpatedCard = {
-                        id: value.id,
-                        isCorrect: value.isCorrect,
-                        word: value.word,
-                      };
-                      const updatedCards = [...cards];
-                      updatedCards[relatedIndex] = udpatedCard;
-                      return updatedCards;
-                    })
-                  }
-                />
-              );
-            })}
-          </div>
+      <div className={styles.ModalWrapper}>
+        <div className={styles.WordsTable}>
           <div className={styles.ShuffleWrapper}>
-            <button className={styles.Button} onClick={() => shuffleCards()}>
-              Generate/Shuffle
+            <button
+              className={styles.Button}
+              onClick={() => generateAndShuffle()}
+            >
+              Generate
+            </button>
+            <button
+              className={styles.Button}
+              onClick={() => shuflleSuggestions()}
+            >
+              Shuffle
             </button>
           </div>
+
+          <span className={styles.SubTitle}>Suggestions</span>
+          {suggestions && (
+            <div className={styles.WordsList}>
+              <ul>
+                {suggestions.map((word) => (
+                  <li>{word}</li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
-        <div className={styles.ButtonWrapper}>
-          <button
-            className={styles.Button}
-            type='button'
-            onClick={handleCreate}
-          >
-            Create
-          </button>
-          <button
-            className={styles.Button}
-            onClick={() => showCreateLevelModal(false)}
-          >
-            Cancel
-          </button>
+        <div className={styles.CreateWrapper}>
+          <div className={styles.BaseInfo}>
+            <div className={styles.Hint}>
+              <label htmlFor='hint'>Hint: </label>
+              <input
+                type='text'
+                id='hint'
+                onChange={(e) => setProps('hint', e.currentTarget.value)}
+                value={newLevel['hint'] ?? ''}
+              />
+            </div>
+            <div className={styles.CorrectWords}>
+              <label htmlFor='correct-words'>Correct words count: </label>
+              <input
+                type='number'
+                id='correct-words'
+                onChange={(e) =>
+                  setProps(
+                    'correctWords',
+                    parseInt(e.currentTarget.value.toString())
+                  )
+                }
+                value={newLevel['correctWords']}
+              />
+            </div>
+            <div className={styles.Complexity}>
+              <ComplexityInput
+                complexity={(newLevel['complexity'] as Complexity) ?? 'LOW'}
+                setComplexity={(value) => setProps('complexity', value)}
+              />
+            </div>
+
+            <div className={styles.Mode}>
+              <GameModeInput
+                mode={(newLevel['mode'] as GameMode) ?? 'INTERHYP'}
+                setMode={(value) => setProps('complexity', value)}
+              />
+            </div>
+          </div>
+          <div className={styles.CardsWrapper}>
+            <div className={styles.CardTitle}>Cards</div>
+
+            <div className={styles.CardsCluster}>
+              {newCards.map((card) => {
+                return (
+                  <CardInput
+                    key={card.id}
+                    card={card}
+                    setValue={(value) =>
+                      setNewCards((cards) => {
+                        const relatedIndex = cards.findIndex(
+                          (c) => c.id === value.id
+                        );
+                        const udpatedCard = {
+                          id: value.id,
+                          isCorrect: value.isCorrect,
+                          word: value.word,
+                        };
+                        const updatedCards = [...cards];
+                        updatedCards[relatedIndex] = udpatedCard;
+                        return updatedCards;
+                      })
+                    }
+                  />
+                );
+              })}
+            </div>
+          </div>
+          <div className={styles.ButtonWrapper}>
+            <button
+              className={styles.Button}
+              type='button'
+              onClick={handleCreate}
+            >
+              Create
+            </button>
+            <button
+              className={styles.Button}
+              onClick={() => showCreateLevelModal(false)}
+            >
+              Cancel
+            </button>
+          </div>
+          {errorMessage && (
+            <div className={styles.ErrorMessage}>{errorMessage}</div>
+          )}
         </div>
-        {errorMessage && (
-          <div className={styles.ErrorMessage}>{errorMessage}</div>
-        )}
       </div>
     </div>
   );

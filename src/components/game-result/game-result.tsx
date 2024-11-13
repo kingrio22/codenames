@@ -72,11 +72,7 @@ export const GameResult = (props: GameResultProps) => {
               Create Level
             </button>
           </div>
-          <span style={{ fontSize: '28px', fontWeight: 'bold' }}>
-            Game Over
-          </span>
-          <h4>Your game is finished</h4>
-          <p>Your score: {game?.highscore}</p>
+          <div className={styles.GameOver}>Game Over</div>
           <div className={styles.Inputs}>
             <ComplexityInput
               setComplexity={(value) => setComplexity(value as Complexity)}
@@ -110,7 +106,6 @@ export const GameResult = (props: GameResultProps) => {
               mode={mode}
               complexity={complexity}
               player={player}
-              setLoading={setLoading}
             />
           </div>
         </div>

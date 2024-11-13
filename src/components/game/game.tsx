@@ -75,7 +75,8 @@ export const Game = (props: GameProps) => {
     setLevel(undefined);
 
     if (newLevel) {
-      setLevel(newLevel);
+      const shuffledCards = shuffle(newLevel.cards);
+      setLevel({ ...newLevel, cards: shuffledCards });
     } else {
       setIsRunning(false);
     }
@@ -87,10 +88,13 @@ export const Game = (props: GameProps) => {
     }
     const updatePromise = updatePlayer(game, player);
     setIsRunning(false);
+    setPlayer(undefined);
+    setLevel(undefined);
+    setGame(undefined);
     await updatePromise;
   };
 
-  const [countdown, setCountdown] = useState<number>(60000);
+  const [countdown, setCountdown] = useState<number>(600000);
 
   const [isRunning, setIsRunning] = useState<boolean>(false);
 
@@ -122,7 +126,7 @@ export const Game = (props: GameProps) => {
           {level && isRunning && (
             <Board
               hint={level.hint}
-              cards={shuffle(level?.cards)}
+              cards={level.cards}
               correctWordsCount={level.correctWords}
               nextLevel={nextLevel}
             />

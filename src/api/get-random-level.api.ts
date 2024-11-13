@@ -8,8 +8,8 @@ import { Dispatch, SetStateAction } from 'react';
 export async function getLevel(
   mode: GameMode,
   complexity: Complexity,
-  playerId: number,
-  setLoading: Dispatch<SetStateAction<boolean>>
+  playerId?: number,
+  setLoading: Dispatch<SetStateAction<boolean>> = () => null
 ): Promise<Level> {
   try {
     const options: AxiosRequestConfig = {
