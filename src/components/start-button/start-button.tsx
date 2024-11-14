@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
-import styles from "./start-button.module.scss";
-import { Dispatch, SetStateAction } from "react";
-import { Complexity, GameMode, GameProgress } from "../game/game";
-import { Level } from "../levels/levels.const";
-import { Player } from "../../api/create-player";
-import { getLevel } from "../../api/get-random-level.api";
+import React, { useEffect } from 'react';
+import styles from './start-button.module.scss';
+import { Dispatch, SetStateAction } from 'react';
+import { Complexity, GameMode, GameProgress } from '../game/game';
+import { Level } from '../levels/levels.const';
+import { Player } from '../../api/create-player';
+import { getLevel } from '../../api/get-random-level.api';
 
 interface StartButtonProps {
   setIsRunning: Dispatch<SetStateAction<boolean>>;
@@ -12,7 +12,7 @@ interface StartButtonProps {
   setGame: Dispatch<SetStateAction<GameProgress | undefined>>;
   setLevel: Dispatch<SetStateAction<Level | undefined>>;
   mode: GameMode;
-  complexity: Complexity;
+  complexity: Complexity | undefined;
   countdown: number;
   player: Player | undefined;
 }
@@ -33,7 +33,7 @@ export const StartButton = (props: StartButtonProps) => {
     <button
       disabled={buttonDisabled}
       onClick={async () => {
-        if (!player) {
+        if (!player || !complexity) {
           return;
         }
         setIsRunning(true);
@@ -65,6 +65,6 @@ async function fetchInitialLevel(
   if (level) {
     setLevel(level);
   } else {
-    alert("No level available");
+    alert('No level available');
   }
 }

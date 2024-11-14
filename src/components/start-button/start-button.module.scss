@@ -5,4 +5,7 @@
   color: #ddd;
   border-radius: 5px;
   cursor: pointer;
+  &:hover {
+    transform: scale(1.05);
+  }
 }

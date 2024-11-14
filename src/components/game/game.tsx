@@ -7,7 +7,6 @@ import { Timer } from '../timer/timer';
 import { GameResult } from '../game-result/game-result';
 import { shuffle } from '../../utils/functions/array-shuffle';
 import { CreateLevel } from '../levels/create-level';
-import { NewPlayer } from '../player/create-player';
 import { Highscore } from '../highscore/highscore';
 import { Player } from '../../api/create-player';
 import { updatePlayer } from '../../api/update-player';
@@ -32,7 +31,6 @@ interface GameProps {
 export const Game = (props: GameProps) => {
   const { setShowCreateModal, showCreate } = props;
   const [game, setGame] = useState<GameProgress | undefined>();
-  const [showNewPlayer, setShowNewPlayer] = useState<boolean>(false);
 
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -132,7 +130,6 @@ export const Game = (props: GameProps) => {
               setLevel={setLevel}
               countdown={countdown}
               setShowCreate={setShowCreateModal}
-              setShowNewPlayer={setShowNewPlayer}
               setPlayer={setPlayer}
               player={player}
               setLoading={setLoading}
@@ -164,13 +161,6 @@ export const Game = (props: GameProps) => {
               showCreateLevelModal={setShowCreateModal}
               setLoading={setLoading}
             />
-          </div>
-        </div>
-      )}
-      {showNewPlayer && (
-        <div className={styles.CreateWrapper}>
-          <div className={styles.CreateModal}>
-            <NewPlayer setShowNewPlayer={setShowNewPlayer} />
           </div>
         </div>
       )}

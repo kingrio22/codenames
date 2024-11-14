@@ -2,17 +2,13 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import styles from './create-player.module.scss';
 import { validatePlayer } from '../../api/validate-player';
 import { createPlayer } from '../../api/create-player';
+import { TextField } from '@mui/material';
 
-interface NewPlayerProps {
-  setShowNewPlayer: Dispatch<SetStateAction<boolean>>;
-}
 export const ALREADY_EXISTS = 'ALREADY_EXISTS';
 export const NAME_OK = 'NAME_OK';
 
-export const NewPlayer = (props: NewPlayerProps) => {
-  const { setShowNewPlayer } = props;
-
-  const [player, setPlayer] = useState<string>('');
+export const NewPlayer = () => {
+  const [player, setPlayer] = useState<string | undefined>();
   const [error, showError] = useState<string | undefined>();
 
   const validatePlayerName = async (
@@ -29,9 +25,11 @@ export const NewPlayer = (props: NewPlayerProps) => {
   };
   const handleCreate = async () => {
     try {
+      if (!player) {
+        return;
+      }
       const { status } = await createPlayer(player);
       if (status === 201) {
-        setShowNewPlayer(false);
         showError(undefined);
       }
     } catch (err) {
@@ -40,6 +38,9 @@ export const NewPlayer = (props: NewPlayerProps) => {
   };
 
   useEffect(() => {
+    if (!player) {
+      return;
+    }
     if (player.length < 5) {
       showError('Mindestens 5 Zeichen');
       return;
@@ -49,26 +50,23 @@ export const NewPlayer = (props: NewPlayerProps) => {
   }, [player]);
 
   return (
-    <div className={styles.NewPlayer}>
-      <div className={styles.Title}>Neuen Spieler erstellen</div>
+    <div className={styles.NewPlayerWrapper}>
       <div className={styles.Inputs}>
-        <label htmlFor='player'>Nickname: </label>
-        <input
+        <TextField
+          label='Name'
           onChange={(e) => setPlayer(e.currentTarget.value)}
-          type='text'
           value={player}
-        />
+          className={styles.TextInputCustom}
+        ></TextField>
+
+        <button
+          onClick={handleCreate}
+          className={styles.Button}
+          disabled={!!error}
+        >
+          Speichern
+        </button>
       </div>
-      <button
-        onClick={handleCreate}
-        className={styles.Button}
-        disabled={!!error}
-      >
-        Speichern
-      </button>
-      <button onClick={() => setShowNewPlayer(false)} className={styles.Button}>
-        Abbrechen
-      </button>
       {error && <div className={styles.ErrorMessage}> {error}</div>}
     </div>
   );

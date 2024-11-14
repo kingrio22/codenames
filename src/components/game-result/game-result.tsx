@@ -4,16 +4,14 @@ import { Complexity, GameMode, GameProgress } from '../game/game';
 import { StartButton } from '../start-button/start-button';
 import { Level } from '../levels/levels.const';
 import { TextField } from '@mui/material';
-
 import { ComplexityInput } from '../inputs/complexity-input';
-import { GameModeInput } from '../inputs/game-mode.input';
 import { Player } from '../../api/create-player';
 import { getPlayerByName } from '../../api/get-player-by-name';
+import { NewPlayer } from '../player/create-player';
 interface GameResultProps {
   game: GameProgress | undefined;
   setIsRunning: Dispatch<SetStateAction<boolean>>;
   setShowCreate: Dispatch<SetStateAction<boolean | undefined>>;
-  setShowNewPlayer: Dispatch<SetStateAction<boolean>>;
   setGame: Dispatch<SetStateAction<GameProgress | undefined>>;
   setLevel: Dispatch<SetStateAction<Level | undefined>>;
   player: Player | undefined;
@@ -30,13 +28,12 @@ export const GameResult = (props: GameResultProps) => {
     setLevel,
     countdown,
     setShowCreate,
-    setShowNewPlayer,
     setPlayer,
     player,
     setLoading,
   } = props;
 
-  const [complexity, setComplexity] = useState<Complexity>('LOW');
+  const [complexity, setComplexity] = useState<Complexity>();
   const [mode, setMode] = useState<GameMode>('CHATGPT');
   const [name, setName] = useState<string>('');
   const [errorMessage, showError] = useState<string | undefined>();
@@ -60,12 +57,6 @@ export const GameResult = (props: GameResultProps) => {
         <div className={styles.ModalWrapper}>
           <div className={styles.ButtonRow}>
             <button
-              className={styles.createButton}
-              onClick={() => setShowNewPlayer(true)}
-            >
-              New Player
-            </button>
-            <button
               onClick={() => setShowCreate(true)}
               className={styles.createButton}
             >
@@ -75,17 +66,23 @@ export const GameResult = (props: GameResultProps) => {
           <div className={styles.GameOver}>Game Over</div>
           <div className={styles.PlayerWrapper}>
             <div className={styles.PlayerNameInput}>
+              <div className={styles.InputTitle}>Spieler auswählen</div>
               <TextField
                 label='Name'
                 onChange={(e) => setName(e.currentTarget.value)}
                 required={true}
                 value={name}
                 onBlur={() => validateNameInput(name)}
+                className={styles.TextInputCustom}
               ></TextField>
 
               {errorMessage && (
                 <div className={styles.NameError}>{errorMessage}</div>
               )}
+            </div>
+            <div className={styles.NewPlayerWrapper}>
+              <div className={styles.InputTitle}>Neuen Spieler erstellen</div>
+              <NewPlayer />
             </div>
           </div>
           <div className={styles.Complexity}>

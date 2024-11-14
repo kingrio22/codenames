@@ -9,7 +9,7 @@ import {
 } from '../complexities/low';
 
 interface ComplexityInputProps {
-  complexity: Complexity;
+  complexity: Complexity | undefined;
   setComplexity: (value: string) => void;
 }
 
