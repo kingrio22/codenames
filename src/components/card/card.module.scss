@@ -10,11 +10,15 @@
   vertical-align: middle;
   height: 130px;
   width: 202px;
-  font-size: 20px;
-  background-color: #ffffff;
-  color: #000;
+  font-size: 24px;
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(3.2px);
+  -webkit-backdrop-filter: blur(3.2px);
+  border: 1px solid rgba(255, 255, 255, 1);
+  color: #fff;
   border-radius: 20px;
-  box-shadow: #ddd;
   cursor: pointer;
 
   &.true {

@@ -26,7 +26,7 @@ export const CreateLevel = (props: CreateLevelProps) => {
     cards: [],
     complexity: 'LOW',
     correctWords: 0,
-    mode: 'INTERHYP',
+    mode: 'CHATGPT',
   });
 
   const [specification, setSpecification] = useState<string>('');
@@ -178,13 +178,6 @@ export const CreateLevel = (props: CreateLevelProps) => {
               <ComplexityInput
                 complexity={(newLevel['complexity'] as Complexity) ?? 'LOW'}
                 setComplexity={(value) => setProps('complexity', value)}
-              />
-            </div>
-
-            <div className={styles.Mode}>
-              <GameModeInput
-                mode={(newLevel['mode'] as GameMode) ?? 'INTERHYP'}
-                setMode={(value) => setProps('complexity', value)}
               />
             </div>
           </div>

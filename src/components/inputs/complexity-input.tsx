@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import styles from './complexity-input.module.scss';
 import { FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material';
 import { Complexity } from '../game/game';
+import {
+  HardComplexity,
+  LowComplexity,
+  MiddleComplexity,
+} from '../complexities/low';
 
 interface ComplexityInputProps {
   complexity: Complexity;
@@ -12,48 +17,38 @@ export const ComplexityInput = (props: ComplexityInputProps): JSX.Element => {
   const { complexity, setComplexity } = props;
 
   return (
-    <div className={styles.ComplexityInput}>
-      <RadioGroup>
-        <FormLabel id='select-complexity'>Complexity</FormLabel>
-
-        <FormControlLabel
-          aria-labelledby='select-complexity'
-          value='leicht'
-          control={
-            <Radio
-              checked={complexity === 'LOW'}
-              onChange={() => setComplexity('LOW')}
-              value='LOW'
-              name='radio-buttons'
-            />
-          }
-          label='Low'
-        />
-        <FormControlLabel
-          value='mittel'
-          control={
-            <Radio
-              checked={complexity === 'MIDDLE'}
-              onChange={() => setComplexity('MIDDLE')}
-              value='MIDDLE'
-              name='radio-buttons'
-            />
-          }
-          label='Medium'
-        />
-        <FormControlLabel
-          value='schwer'
-          control={
-            <Radio
-              checked={complexity === 'HARD'}
-              onChange={() => setComplexity('HARD')}
-              value='HARD'
-              name='radio-buttons'
-            />
-          }
-          label='Hard'
-        />
-      </RadioGroup>
-    </div>
+    <RadioGroup className={styles.RadioGroupCustomized} row={true}>
+      <FormControlLabel
+        aria-labelledby='select-complexity'
+        value=''
+        control={
+          <LowComplexity
+            checked={complexity === 'LOW'}
+            setComplexity={setComplexity}
+          />
+        }
+        label=''
+      />
+      <FormControlLabel
+        value=''
+        control={
+          <MiddleComplexity
+            checked={complexity === 'MIDDLE'}
+            setComplexity={setComplexity}
+          />
+        }
+        label=''
+      />
+      <FormControlLabel
+        value=''
+        control={
+          <HardComplexity
+            checked={complexity === 'HARD'}
+            setComplexity={setComplexity}
+          />
+        }
+        label=''
+      />
+    </RadioGroup>
   );
 };

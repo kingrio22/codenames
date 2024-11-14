@@ -14,17 +14,21 @@
   width: 688px;
   font-size: 40px;
   border-radius: 10px;
-  background-color: #3b738a;
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(3.2px);
+  -webkit-backdrop-filter: blur(3.2px);
+  border: 1px solid rgba(255, 255, 255, 1);
   justify-content: center;
   align-items: center;
   vertical-align: middle;
   position: relative;
   .correctWords {
     position: absolute;
-    top: -50px;
+    top: -60px;
     font-size: 51px;
-    right: 10%;
-    background-color: #ff00ff;
+    right: 5%;
     border-radius: 50px;
     height: 100px;
     width: 100px;
@@ -32,6 +36,11 @@
     align-items: center;
     display: flex;
     justify-content: center;
+    background: rgba(255, 0, 255, 0.57);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(1.2px);
+    -webkit-backdrop-filter: blur(1.2px);
+    border: 1px solid rgba(255, 255, 255, 1);
   }
 }
 

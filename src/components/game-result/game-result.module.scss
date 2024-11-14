@@ -13,8 +13,13 @@
     flex-direction: column;
     justify-content: start;
     color: black;
-    width: 40%;
-    background-color: rgba(255, 255, 255, 0.8);
+    width: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(3.2px);
+    -webkit-backdrop-filter: blur(3.2px);
+    border: 1px solid rgba(255, 255, 255, 1);
   }
   .ModalWrapper {
     padding: 2rem;
@@ -30,10 +35,14 @@
   font-weight: bold;
   margin-bottom: 4rem;
 }
-.Inputs {
+.Complexity {
+  width: 100%;
   display: flex;
-  justify-content: space-around;
-  flex-direction: row;
+  justify-content: center;
+}
+
+.PlayerWrapper {
+  height: 100px;
 }
 
 .ButtonRow {
@@ -47,9 +56,13 @@
   button {
     margin: 0rem 1rem;
     padding: 0.5rem 2rem;
-    background-color: rgba(0, 0, 0);
-    border: 0px solid rgba(0, 0, 0, 0);
-    color: #ddd;
+
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(3.2px);
+    -webkit-backdrop-filter: blur(3.2px);
+    border: 1px solid rgba(255, 255, 255, 1);
     border-radius: 5px;
     cursor: pointer;
   }

@@ -37,7 +37,7 @@ export const GameResult = (props: GameResultProps) => {
   } = props;
 
   const [complexity, setComplexity] = useState<Complexity>('LOW');
-  const [mode, setMode] = useState<GameMode>('INTERHYP');
+  const [mode, setMode] = useState<GameMode>('CHATGPT');
   const [name, setName] = useState<string>('');
   const [errorMessage, showError] = useState<string | undefined>();
 
@@ -73,15 +73,7 @@ export const GameResult = (props: GameResultProps) => {
             </button>
           </div>
           <div className={styles.GameOver}>Game Over</div>
-          <div className={styles.Inputs}>
-            <ComplexityInput
-              setComplexity={(value) => setComplexity(value as Complexity)}
-              complexity={complexity}
-            />
-            <GameModeInput
-              setMode={(value: string) => setMode(value as GameMode)}
-              mode={mode}
-            />
+          <div className={styles.PlayerWrapper}>
             <div className={styles.PlayerNameInput}>
               <TextField
                 label='Name'
@@ -95,6 +87,12 @@ export const GameResult = (props: GameResultProps) => {
                 <div className={styles.NameError}>{errorMessage}</div>
               )}
             </div>
+          </div>
+          <div className={styles.Complexity}>
+            <ComplexityInput
+              setComplexity={(value) => setComplexity(value as Complexity)}
+              complexity={complexity}
+            />
           </div>
           <p>du bisch 1 loser</p>
           <div className={styles.Button}>
