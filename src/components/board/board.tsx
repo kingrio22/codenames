@@ -45,14 +45,11 @@ export const Board = (props: BoardProps) => {
     }
   }, [chosens, nextLevel, correctWordsCount]);
 
-  console.log('cards: ', cards);
-  console.log('chosens: ', chosens);
-
   return (
     <div className={styles.BoardWrapper}>
-      {/* <Explanation result={} setResult={} showExplanation={showExplanation} nextLevel={nextLevel}/> */}
       <div className={styles.HintRow}>
-        {hint} {correctWordsCount}
+        {hint}
+        <div className={styles.correctWords}>{correctWordsCount}</div>
       </div>
 
       <div className={styles.Board}>

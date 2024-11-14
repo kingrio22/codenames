@@ -1,21 +1,21 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
-import styles from "./game.module.scss";
-import { Board } from "../board/board";
-import { Level } from "../levels/levels.const";
-import Countdown, { CountdownRenderProps } from "react-countdown";
-import { Timer } from "../timer/timer";
-import { GameResult } from "../game-result/game-result";
-import { shuffle } from "../../utils/functions/array-shuffle";
-import { CreateLevel } from "../levels/create-level";
-import { NewPlayer } from "../player/create-player";
-import { Highscore } from "../highscore/highscore";
-import { Player } from "../../api/create-player";
-import { updatePlayer } from "../../api/update-player";
-import { getLevel } from "../../api/get-random-level.api";
-import { LoadingSpinner } from "../loading-spinner/loading-spinner";
+import React, { Dispatch, SetStateAction, useState } from 'react';
+import styles from './game.module.scss';
+import { Board } from '../board/board';
+import { Level } from '../levels/levels.const';
+import Countdown, { CountdownRenderProps } from 'react-countdown';
+import { Timer } from '../timer/timer';
+import { GameResult } from '../game-result/game-result';
+import { shuffle } from '../../utils/functions/array-shuffle';
+import { CreateLevel } from '../levels/create-level';
+import { NewPlayer } from '../player/create-player';
+import { Highscore } from '../highscore/highscore';
+import { Player } from '../../api/create-player';
+import { updatePlayer } from '../../api/update-player';
+import { getLevel } from '../../api/get-random-level.api';
+import { LoadingSpinner } from '../loading-spinner/loading-spinner';
 
-export type GameMode = "INTERHYP" | "CHATGPT";
-export type Complexity = "LOW" | "MIDDLE" | "HARD";
+export type GameMode = 'INTERHYP' | 'CHATGPT';
+export type Complexity = 'LOW' | 'MIDDLE' | 'HARD';
 export interface GameProgress {
   solved: number;
   failed: number;
@@ -110,16 +110,7 @@ export const Game = (props: GameProps) => {
   return (
     <div className={styles.GameWrapper}>
       <div className={styles.TopBar}>
-        <div className={styles.BoardPart}>
-          <div className={styles.CurrentLevel}>
-            Level: {(game?.levelsPlayed.length ?? 0) + 1}
-          </div>
-
-          <div className={styles.CurrentScore}>
-            Score: {game?.highscore ?? 0}
-          </div>
-        </div>
-        <div className={styles.HighscorePart}>Highscore</div>
+        <div className={styles.Title}>C0D3N4M35</div>
       </div>
       <div className={styles.Content}>
         {loading && <LoadingSpinner />}

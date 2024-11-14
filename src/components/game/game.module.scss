@@ -23,6 +23,20 @@
     vertical-align: middle;
     width: 80%;
   }
+  .Title {
+    font-family: 'Kode Mono', monospace;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 182px;
+    font-weight: 700;
+    line-height: 232.96px;
+    letter-spacing: -0.08em;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    position: relative;
+  }
   .HighscorePart {
     display: flex;
     justify-content: start;
