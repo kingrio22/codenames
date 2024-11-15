@@ -57,11 +57,11 @@ export const Board = (props: BoardProps) => {
           </div>
           <div className={styles.Column}>
             <div className={styles.ColumnTitle}>Level</div>
-            <div className={styles.ColumnValue}>{currentScore}</div>
+            <div className={styles.ColumnValue}>{0}</div>
           </div>
           <div className={styles.Column}>
             <div className={styles.ColumnTitle}>Timer</div>
-            <div className={styles.ColumnValue}>{currentScore}</div>
+            <div className={styles.ColumnValue}>{0}</div>
           </div>
         </div>
       </div>
