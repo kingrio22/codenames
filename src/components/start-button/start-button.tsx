@@ -28,10 +28,8 @@ export const StartButton = (props: StartButtonProps) => {
     setLoading,
   } = props;
 
-  const buttonDisabled = !player;
   return (
     <button
-      disabled={buttonDisabled}
       onClick={async () => {
         if (!player || !complexity) {
           return;

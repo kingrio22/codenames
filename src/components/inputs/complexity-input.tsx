@@ -1,12 +1,19 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import styles from './complexity-input.module.scss';
-import { FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material';
+import {
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Radio,
+  RadioGroup,
+} from '@mui/material';
 import { Complexity } from '../game/game';
 import {
   HardComplexity,
   LowComplexity,
   MiddleComplexity,
 } from '../complexities/low';
+import FormControlContext from '@mui/material/FormControl/FormControlContext';
 
 interface ComplexityInputProps {
   complexity: Complexity | undefined;
@@ -27,7 +34,8 @@ export const ComplexityInput = (props: ComplexityInputProps): JSX.Element => {
             setComplexity={setComplexity}
           />
         }
-        label=''
+        label={null}
+        style={{ margin: 0 }}
       />
       <FormControlLabel
         value=''
@@ -37,7 +45,8 @@ export const ComplexityInput = (props: ComplexityInputProps): JSX.Element => {
             setComplexity={setComplexity}
           />
         }
-        label=''
+        label={null}
+        style={{ margin: 0 }}
       />
       <FormControlLabel
         value=''
@@ -47,7 +56,8 @@ export const ComplexityInput = (props: ComplexityInputProps): JSX.Element => {
             setComplexity={setComplexity}
           />
         }
-        label=''
+        label={null}
+        style={{ margin: 0 }}
       />
     </RadioGroup>
   );

@@ -93,7 +93,7 @@ export const Game = (props: GameProps) => {
     await updatePromise;
   };
 
-  const [countdown, setCountdown] = useState<number>(600000);
+  const [countdown, setCountdown] = useState<number>(120000);
 
   const [isRunning, setIsRunning] = useState<boolean>(false);
 
@@ -104,6 +104,8 @@ export const Game = (props: GameProps) => {
       </span>
     );
   };
+
+  console.log('player: ', player);
 
   return (
     <div className={styles.GameWrapper}>

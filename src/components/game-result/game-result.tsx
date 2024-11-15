@@ -8,6 +8,7 @@ import { ComplexityInput } from '../inputs/complexity-input';
 import { Player } from '../../api/create-player';
 import { getPlayerByName } from '../../api/get-player-by-name';
 import { NewPlayer } from '../player/create-player';
+import { WelcomeAnimation } from '../welcome-animation/welcome-animation';
 interface GameResultProps {
   game: GameProgress | undefined;
   setIsRunning: Dispatch<SetStateAction<boolean>>;
@@ -63,10 +64,10 @@ export const GameResult = (props: GameResultProps) => {
               Create Level
             </button>
           </div>
-          <div className={styles.GameOver}>Game Over</div>
+          <div className={styles.GameOver}>New Game</div>
           <div className={styles.PlayerWrapper}>
             <div className={styles.PlayerNameInput}>
-              <div className={styles.InputTitle}>Spieler auswählen</div>
+              <div className={styles.InputTitle}>Choose existing player</div>
               <TextField
                 label='Name'
                 onChange={(e) => setName(e.currentTarget.value)}
@@ -81,17 +82,22 @@ export const GameResult = (props: GameResultProps) => {
               )}
             </div>
             <div className={styles.NewPlayerWrapper}>
-              <div className={styles.InputTitle}>Neuen Spieler erstellen</div>
-              <NewPlayer />
+              <div className={styles.InputTitle}>Create new player</div>
+              <NewPlayer setPlayer={setPlayer} />
             </div>
           </div>
+          <WelcomeAnimation player={player} />
+          <>
+            <div className={styles.ChooseComplexity}>
+              Choose a complexity level
+            </div>
+          </>
           <div className={styles.Complexity}>
             <ComplexityInput
               setComplexity={(value) => setComplexity(value as Complexity)}
               complexity={complexity}
             />
           </div>
-          <p>du bisch 1 loser</p>
           <div className={styles.Button}>
             <StartButton
               setGame={setGame}
