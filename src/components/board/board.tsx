@@ -8,12 +8,13 @@ interface BoardProps {
   hint: string;
   nextLevel: (solved: boolean) => void;
   correctWordsCount: number;
+  currentScore: number | undefined;
 }
 
 const KEEP_CARDS_VISIBLE = 1000;
 
 export const Board = (props: BoardProps) => {
-  const { nextLevel, cards, hint, correctWordsCount } = props;
+  const { nextLevel, cards, hint, correctWordsCount, currentScore = 0 } = props;
   const [chosens, setChosens] = useState<Card[]>([]);
 
   const [levelFinished, setLevelFinished] = useState<boolean>(false);
@@ -46,22 +47,49 @@ export const Board = (props: BoardProps) => {
   }, [chosens, nextLevel, correctWordsCount]);
 
   return (
-    <div className={styles.BoardWrapper}>
-      <div className={styles.HintRow}>
-        {hint}
-        <div className={styles.correctWords}>{correctWordsCount}</div>
+    <div className={styles.GameWrapper}>
+      <div className={styles.StatisticColumn}>
+        <div className={styles.HeaderSpacer}></div>
+        <div className={styles.ContentColumn}>
+          <div className={styles.Column}>
+            <div className={styles.ColumnTitle}>Score</div>
+            <div className={styles.ColumnValue}>{currentScore}</div>
+          </div>
+          <div className={styles.Column}>
+            <div className={styles.ColumnTitle}>Level</div>
+            <div className={styles.ColumnValue}>{currentScore}</div>
+          </div>
+          <div className={styles.Column}>
+            <div className={styles.ColumnTitle}>Timer</div>
+            <div className={styles.ColumnValue}>{currentScore}</div>
+          </div>
+        </div>
       </div>
+      <div className={styles.BoardWrapper}>
+        <div className={styles.HintRow}>
+          {hint}
+          <div className={styles.correctWords}>{correctWordsCount}</div>
+        </div>
 
-      <div className={styles.Board}>
-        {cards.map((card) => (
-          <CardComponent
-            card={card}
-            setChosens={setChosens}
-            isChosen={!!chosens.find((c) => c.id === card.id)}
-            hideCardColor={chosens.length === 0}
-            levelFinished={levelFinished}
-          />
-        ))}
+        <div className={styles.Board}>
+          {cards.map((card) => (
+            <CardComponent
+              card={card}
+              setChosens={setChosens}
+              isChosen={!!chosens.find((c) => c.id === card.id)}
+              hideCardColor={chosens.length === 0}
+              levelFinished={levelFinished}
+            />
+          ))}
+        </div>
+      </div>
+      <div className={styles.FakeColumn}>
+        <div className={styles.HeaderSpacer}></div>
+        <div className={styles.ContentColumn}>
+          <div className={styles.Column}></div>
+          <div className={styles.Column}></div>
+          <div className={styles.Column}></div>
+        </div>
       </div>
     </div>
   );

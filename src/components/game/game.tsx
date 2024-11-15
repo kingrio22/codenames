@@ -93,7 +93,7 @@ export const Game = (props: GameProps) => {
     await updatePromise;
   };
 
-  const [countdown, setCountdown] = useState<number>(120000);
+  const [countdown, setCountdown] = useState<number>(600000);
 
   const [isRunning, setIsRunning] = useState<boolean>(false);
 
@@ -121,6 +121,7 @@ export const Game = (props: GameProps) => {
               cards={level.cards}
               correctWordsCount={level.correctWords}
               nextLevel={nextLevel}
+              currentScore={game?.highscore}
             />
           )}
 
