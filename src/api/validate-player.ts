@@ -1,5 +1,5 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { BASE_URL } from '../utils/config/consts';
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import { BASE_URL } from "../config/api.config";
 
 export async function validatePlayer(
   name: string
@@ -7,9 +7,9 @@ export async function validatePlayer(
   try {
     const options: AxiosRequestConfig = {
       url: `${BASE_URL}/player/validate`,
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       data: { name },
     };

@@ -1,20 +1,29 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { CardComponent } from '../card/card';
-import styles from './board.module.scss';
-import { Card, Level } from '../levels/levels.const';
+import React, { useEffect, useState } from "react";
+import { CardComponent } from "../card/card";
+import styles from "./board.module.scss";
+import { Complexity } from "../game/game";
+import { Card, Level } from "../levels/levels.const";
 
 interface BoardProps {
-  cards: Level['cards'];
+  cards: Level["cards"];
   hint: string;
-  nextLevel: (solved: boolean) => void;
+  nextLevel: (solved: number) => void;
   correctWordsCount: number;
   currentScore: number | undefined;
+  complexity: Complexity | undefined;
 }
 
 const KEEP_CARDS_VISIBLE = 1000;
 
 export const Board = (props: BoardProps) => {
-  const { nextLevel, cards, hint, correctWordsCount, currentScore = 0 } = props;
+  const {
+    nextLevel,
+    complexity = "LOW",
+    cards,
+    hint,
+    correctWordsCount,
+    currentScore = 0,
+  } = props;
   const [chosens, setChosens] = useState<Card[]>([]);
 
   const [levelFinished, setLevelFinished] = useState<boolean>(false);
@@ -23,22 +32,26 @@ export const Board = (props: BoardProps) => {
     if (chosens.length === 0) {
       return;
     }
-    if (chosens.some((card) => card.isCorrect === false)) {
+    if (
+      complexity === "HARD" &&
+      chosens.some((card) => card.isCorrect === false)
+    ) {
       setLevelFinished(true);
       setTimeout(() => {
         setChosens([]);
-        nextLevel(false);
+        nextLevel(0);
       }, KEEP_CARDS_VISIBLE);
       setTimeout(() => {
         setLevelFinished(false);
       }, KEEP_CARDS_VISIBLE + 600);
     }
 
-    if (chosens.filter((card) => card.isCorrect).length === correctWordsCount) {
+    if (chosens.length === correctWordsCount) {
       setLevelFinished(true);
       setTimeout(() => {
+        const points = getPointsByComplexity(chosens, complexity);
+        nextLevel(points);
         setChosens([]);
-        nextLevel(true);
       }, KEEP_CARDS_VISIBLE);
       setTimeout(() => {
         setLevelFinished(false);
@@ -94,3 +107,21 @@ export const Board = (props: BoardProps) => {
     </div>
   );
 };
+function getPointsByComplexity(
+  chosens: Card[],
+  complexity: Complexity
+): number {
+  const correct = chosens.filter((card) => card.isCorrect === true).length;
+  const notCorrect = chosens.filter((card) => card.isCorrect === false).length;
+
+  switch (complexity) {
+    case "LOW":
+      return correct;
+
+    case "MIDDLE":
+      return correct < notCorrect ? 0 : (correct - notCorrect) * 2;
+
+    case "HARD":
+      return correct * 5;
+  }
+}

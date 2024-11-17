@@ -1,6 +1,6 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { BASE_URL } from '../utils/config/consts';
-import { Dispatch, SetStateAction } from 'react';
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import { BASE_URL } from "../config/api.config";
+import { Dispatch, SetStateAction } from "react";
 
 export async function getRandomWords(
   setLoading: Dispatch<SetStateAction<boolean>>,
@@ -10,9 +10,9 @@ export async function getRandomWords(
     setLoading(true);
     const options: AxiosRequestConfig = {
       url: `${BASE_URL}/chat-gpt/random-words`,
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       data: { specificationWords: specification },
     };

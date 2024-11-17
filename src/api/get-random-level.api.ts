@@ -12,6 +12,7 @@ export async function getLevel(
   levelIds: number[],
   setLoading: Dispatch<SetStateAction<boolean>> = () => null
 ): Promise<Level> {
+  console.log(levelIds);
   try {
     const options: AxiosRequestConfig = {
       url: `${BASE_URL}/levels/random-for-player/${mode}/${complexity}/${playerId}`,

@@ -1,18 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import styles from './highscore.module.scss';
-import { Player } from '../../api/create-player';
-import { usePlayers } from '../../hooks/usePlayers';
-import { GameProgress } from '../game/game';
+import React, { useState } from "react";
+import styles from "./highscore.module.scss";
+import { usePlayers } from "../../hooks/usePlayers";
+import { GameProgress } from "../game/game";
 
 interface HighscoreProps {
-  game: GameProgress | undefined;
   isRunning: boolean;
 }
 
 export const Highscore = (props: HighscoreProps) => {
-  const { game, isRunning } = props;
+  const { isRunning } = props;
   const [errorMessage, showError] = useState<string | undefined>();
-  const [players] = usePlayers(showError, game, isRunning);
+  const [players] = usePlayers(showError, isRunning);
   return (
     <div className={styles.HighscoreWrapper}>
       {players.map((player, index) => (

@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from "axios";
-import { BASE_URL } from "../utils/config/consts";
+import { BASE_URL } from "../config/api.config";
 import { Player } from "./create-player";
 import { GameProgress } from "../components/game/game";
 

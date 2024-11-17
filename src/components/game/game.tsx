@@ -1,23 +1,20 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
-import styles from './game.module.scss';
-import { Board } from '../board/board';
-import { Level } from '../levels/levels.const';
-import Countdown, { CountdownRenderProps } from 'react-countdown';
-import { Timer } from '../timer/timer';
-import { GameResult } from '../game-result/game-result';
-import { shuffle } from '../../utils/functions/array-shuffle';
-import { CreateLevel } from '../levels/create-level';
-import { Highscore } from '../highscore/highscore';
-import { Player } from '../../api/create-player';
-import { updatePlayer } from '../../api/update-player';
-import { getLevel } from '../../api/get-random-level.api';
-import { LoadingSpinner } from '../loading-spinner/loading-spinner';
+import React, { Dispatch, SetStateAction, useState } from "react";
+import styles from "./game.module.scss";
+import { Board } from "../board/board";
+import { Level } from "../levels/levels.const";
+import Countdown, { CountdownRenderProps } from "react-countdown";
+import { GameResult } from "../game-result/game-result";
+import { shuffle } from "../../utils/functions/array-shuffle";
+import { CreateLevel } from "../levels/create-level";
+import { Highscore } from "../highscore/highscore";
+import { Player } from "../../api/create-player";
+import { updatePlayer } from "../../api/update-player";
+import { getLevel } from "../../api/get-random-level.api";
+import { LoadingSpinner } from "../loading-spinner/loading-spinner";
 
-export type GameMode = 'INTERHYP' | 'CHATGPT';
-export type Complexity = 'LOW' | 'MIDDLE' | 'HARD';
+export type GameMode = "INTERHYP" | "CHATGPT";
+export type Complexity = "LOW" | "MIDDLE" | "HARD";
 export interface GameProgress {
-  solved: number;
-  failed: number;
   mode: GameMode;
   complexity: Complexity;
   highscore: number;
@@ -38,8 +35,8 @@ export const Game = (props: GameProps) => {
 
   const [level, setLevel] = useState<Level | undefined>();
 
-  const nextLevel = async (solved: boolean) => {
-    if (!game || !player) {
+  const nextLevel = async (solved: number) => {
+    if (!game || !player || !level) {
       return;
     }
 
@@ -47,27 +44,17 @@ export const Game = (props: GameProps) => {
       game.mode,
       game.complexity,
       player.id,
-      game.levelsPlayed,
+      [...game.levelsPlayed, level.id],
       setLoading
     );
 
     setGame((game) => {
       if (game && level) {
-        if (solved) {
-          return {
-            ...game,
-            levelsPlayed: [...game?.levelsPlayed, level.id],
-            solved: game.solved + 1,
-            highscore: game.highscore + 1,
-          };
-        } else {
-          return {
-            ...game,
-            levelsPlayed: [...game?.levelsPlayed, level.id],
-            failed: game.failed + 1,
-            highscore: game.highscore - 1,
-          };
-        }
+        return {
+          ...game,
+          levelsPlayed: [...game.levelsPlayed, level.id],
+          highscore: game.highscore + solved,
+        };
       }
       return game;
     });
@@ -105,8 +92,6 @@ export const Game = (props: GameProps) => {
     );
   };
 
-  console.log('player: ', player);
-
   return (
     <div className={styles.GameWrapper}>
       <div className={styles.TopBar}>
@@ -122,6 +107,7 @@ export const Game = (props: GameProps) => {
               correctWordsCount={level.correctWords}
               nextLevel={nextLevel}
               currentScore={game?.highscore}
+              complexity={game?.complexity}
             />
           )}
 
@@ -140,7 +126,7 @@ export const Game = (props: GameProps) => {
           )}
         </div>
         <div className={styles.SideBar}>
-          <Highscore game={game} isRunning={isRunning} />
+          <Highscore isRunning={isRunning} />
 
           <div className={styles.Countdown}>
             {isRunning && (
@@ -150,10 +136,6 @@ export const Game = (props: GameProps) => {
                 onComplete={finishGame}
               />
             )}
-          </div>
-
-          <div className={styles.NewGameButtonWrapper}>
-            <Timer setCountdown={setCountdown} />
           </div>
         </div>
       </div>
