@@ -15,11 +15,20 @@
   box-sizing: border-box;
   padding: 1rem 0rem;
 }
-.Title {
-  margin: 2rem 0rem;
-  font-size: 40px;
+.TitleWrapper {
+  position: relative;
   text-align: center;
+  font-size: 40px;
   color: #ffdc7f;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+.Cup {
+  position: absolute;
+  top: -80%;
+  left: 5%;
+}
+.CupImage {
 }
 .Player {
   color: #fff;

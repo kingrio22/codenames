@@ -3,10 +3,7 @@ import { CardComponent } from '../card/card';
 import styles from './board.module.scss';
 import { Complexity, GameProgress } from '../game/game';
 import { Card, Level } from '../levels/levels.const';
-import Countdown, {
-  CountdownRenderProps,
-  CountdownRendererFn,
-} from 'react-countdown';
+import { CountDownTimer } from '../countdown/countdown';
 
 interface BoardProps {
   cards: Level['cards'];
@@ -15,6 +12,9 @@ interface BoardProps {
   correctWordsCount: number;
   currentScore: number | undefined;
   complexity: Complexity | undefined;
+  finishGame: () => void;
+  game: GameProgress;
+  isRunning: boolean;
 }
 
 const KEEP_CARDS_VISIBLE = 1000;
@@ -27,6 +27,9 @@ export const Board = (props: BoardProps) => {
     hint,
     correctWordsCount,
     currentScore = 0,
+    finishGame,
+    isRunning,
+    game,
   } = props;
   const [chosens, setChosens] = useState<Card[]>([]);
 
@@ -78,7 +81,13 @@ export const Board = (props: BoardProps) => {
           </div>
           <div className={styles.Column}>
             <div className={styles.ColumnTitle}>Timer</div>
-            <div className={styles.ColumnValue}>{0}</div>
+            <div className={styles.ColumnValue}>
+              <CountDownTimer
+                finishGame={finishGame}
+                isRunning={isRunning}
+                game={game}
+              />
+            </div>
           </div>
         </div>
       </div>

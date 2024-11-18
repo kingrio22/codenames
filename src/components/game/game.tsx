@@ -71,14 +71,14 @@ export const Game = (props: GameProps) => {
       return;
     }
     const updatePromise = updatePlayer(game, player);
-    setIsRunning(false);
     setPlayer(undefined);
     setLevel(undefined);
     setGame(undefined);
     await updatePromise;
+    setIsRunning(false);
   };
 
-  const [countdown, setCountdown] = useState<number>(600000);
+  const [countdown, setCountdown] = useState<number>(60000);
 
   const [isRunning, setIsRunning] = useState<boolean>(false);
 
@@ -90,7 +90,7 @@ export const Game = (props: GameProps) => {
       <div className={styles.Content}>
         {loading && <LoadingSpinner />}
         <div className={styles.BoardWrapper}>
-          {level && isRunning && (
+          {level && isRunning && game && (
             <Board
               hint={level.hint}
               cards={level.cards}
@@ -98,6 +98,9 @@ export const Game = (props: GameProps) => {
               nextLevel={nextLevel}
               currentScore={game?.highscore}
               complexity={game?.complexity}
+              finishGame={finishGame}
+              game={game}
+              isRunning={isRunning}
             />
           )}
 

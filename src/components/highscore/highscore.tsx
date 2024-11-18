@@ -13,7 +13,13 @@ export const Highscore = (props: HighscoreProps) => {
   const [players] = usePlayers(showError, isRunning);
   return (
     <div className={styles.HighscoreWrapper}>
-      <div className={styles.Title}>Highscore</div>
+      <div className={styles.TitleWrapper}>
+        <div className={styles.Cup}>
+          <img src='../cup.png' className={styles.CupImage} />
+        </div>
+        <div className={styles.Title}>Highscore</div>
+      </div>
+
       {players ? (
         players.slice(0, 10).map((player, index) => (
           <div className={styles.Player}>
