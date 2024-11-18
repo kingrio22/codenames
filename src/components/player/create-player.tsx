@@ -54,19 +54,20 @@ export const NewPlayer = (props: NewPlayerProps) => {
     <div className={styles.NewPlayerWrapper}>
       <div className={styles.Inputs}>
         <TextField
-          label='Name'
+          label='Player Name'
           onChange={(e) => setPlayerName(e.currentTarget.value)}
           value={playerName}
           className={styles.TextInputCustom}
+          onBlur={handleCreate}
         ></TextField>
 
-        <button
+        {/* <button
           onClick={handleCreate}
           className={styles.Button}
           disabled={!!error}
         >
           Speichern
-        </button>
+        </button> */}
       </div>
       {error && <div className={styles.ErrorMessage}> {error}</div>}
     </div>

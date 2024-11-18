@@ -5,7 +5,15 @@
   display: flex;
   justify-content: center;
   vertical-align: middle;
-  background: linear-gradient(320deg, #f27121, #e94057, #8a2387);
+  background: linear-gradient(
+    114.25deg,
+    rgba(47, 16, 76, 0.4) 13.43%,
+    #16325b 37.7%,
+    #579eb0 59.95%,
+    #78b7d0 72.83%,
+    #ffdc7f 94.33%
+  );
+
   z-index: -1;
 }
 .RectangleWrapper {

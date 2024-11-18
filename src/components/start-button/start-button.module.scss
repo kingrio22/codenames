@@ -1,14 +1,14 @@
 .NewGameButton {
   margin: 0rem 1rem;
-  padding: 1rem 5rem;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(1px);
-  -webkit-backdrop-filter: blur(1px);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 5px;
-  color: #222;
+  padding: 2rem 4rem;
+  background: #ffdc7f;
+  border-color: rgba(0, 0, 0, 0);
+  border-radius: 15px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 40px;
+  font-family: Jaro;
+  transform: rotate(-10deg) translateY(80%);
   cursor: pointer;
   &:hover {
     transform: scale(1.05);

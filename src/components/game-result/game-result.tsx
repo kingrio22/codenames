@@ -56,18 +56,15 @@ export const GameResult = (props: GameResultProps) => {
     <div className={styles.GameResult}>
       <div className={styles.Modal}>
         <div className={styles.ModalWrapper}>
-          <div className={styles.ButtonRow}>
-            <button
-              onClick={() => setShowCreate(true)}
-              className={styles.createButton}
-            >
-              Create Level
-            </button>
-          </div>
-          <div className={styles.GameOver}>New Game</div>
+          <div className={styles.GameOver}>Start a new Game</div>
           <div className={styles.PlayerWrapper}>
-            <div className={styles.PlayerNameInput}>
-              <div className={styles.InputTitle}>Choose existing player</div>
+            <div
+              className={styles.PlayerNameInput}
+              style={{
+                transform: 'rotate(-2deg) translateX(3%) translateY(5%)',
+              }}
+            >
+              <div className={styles.InputTitle}>Select existing Player</div>
               <TextField
                 label='Name'
                 onChange={(e) => setName(e.currentTarget.value)}
@@ -81,7 +78,12 @@ export const GameResult = (props: GameResultProps) => {
                 <div className={styles.NameError}>{errorMessage}</div>
               )}
             </div>
-            <div className={styles.NewPlayerWrapper}>
+            <div
+              className={styles.PlayerNameInput}
+              style={{
+                transform: 'rotate(3deg) translateX(-3%) translateY(-5%)',
+              }}
+            >
               <div className={styles.InputTitle}>Create new player</div>
               <NewPlayer setPlayer={setPlayer} />
             </div>
@@ -89,7 +91,7 @@ export const GameResult = (props: GameResultProps) => {
           <WelcomeAnimation player={player} />
           <>
             <div className={styles.ChooseComplexity}>
-              Choose a complexity level
+              Select complexity level
             </div>
           </>
           <div className={styles.Complexity}>

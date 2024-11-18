@@ -12,7 +12,7 @@ import {
   HardComplexity,
   LowComplexity,
   MiddleComplexity,
-} from '../complexities/low';
+} from '../complexities/complexities';
 import FormControlContext from '@mui/material/FormControl/FormControlContext';
 
 interface ComplexityInputProps {
@@ -35,7 +35,11 @@ export const ComplexityInput = (props: ComplexityInputProps): JSX.Element => {
           />
         }
         label={null}
-        style={{ margin: 0 }}
+        style={{
+          margin: 0,
+          width: '25%',
+          transform: 'rotate(-3deg) translateX(10%) translateY(-5%)',
+        }}
       />
       <FormControlLabel
         value=''
@@ -46,7 +50,10 @@ export const ComplexityInput = (props: ComplexityInputProps): JSX.Element => {
           />
         }
         label={null}
-        style={{ margin: 0 }}
+        style={{
+          margin: 0,
+          width: '25%',
+        }}
       />
       <FormControlLabel
         value=''
@@ -57,7 +64,11 @@ export const ComplexityInput = (props: ComplexityInputProps): JSX.Element => {
           />
         }
         label={null}
-        style={{ margin: 0 }}
+        style={{
+          margin: 0,
+          width: '25%',
+          transform: 'rotate(3deg) translateX(-10%) translateY(-15%)',
+        }}
       />
     </RadioGroup>
   );
