@@ -1,11 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { CardComponent } from "../card/card";
-import styles from "./board.module.scss";
-import { Complexity } from "../game/game";
-import { Card, Level } from "../levels/levels.const";
+import React, { useEffect, useState } from 'react';
+import { CardComponent } from '../card/card';
+import styles from './board.module.scss';
+import { Complexity, GameProgress } from '../game/game';
+import { Card, Level } from '../levels/levels.const';
+import Countdown, {
+  CountdownRenderProps,
+  CountdownRendererFn,
+} from 'react-countdown';
 
 interface BoardProps {
-  cards: Level["cards"];
+  cards: Level['cards'];
   hint: string;
   nextLevel: (solved: number) => void;
   correctWordsCount: number;
@@ -18,7 +22,7 @@ const KEEP_CARDS_VISIBLE = 1000;
 export const Board = (props: BoardProps) => {
   const {
     nextLevel,
-    complexity = "LOW",
+    complexity = 'LOW',
     cards,
     hint,
     correctWordsCount,
@@ -33,7 +37,7 @@ export const Board = (props: BoardProps) => {
       return;
     }
     if (
-      complexity === "HARD" &&
+      complexity === 'HARD' &&
       chosens.some((card) => card.isCorrect === false)
     ) {
       setLevelFinished(true);
@@ -115,13 +119,13 @@ function getPointsByComplexity(
   const notCorrect = chosens.filter((card) => card.isCorrect === false).length;
 
   switch (complexity) {
-    case "LOW":
+    case 'LOW':
       return correct;
 
-    case "MIDDLE":
+    case 'MIDDLE':
       return correct < notCorrect ? 0 : (correct - notCorrect) * 2;
 
-    case "HARD":
+    case 'HARD':
       return correct * 5;
   }
 }

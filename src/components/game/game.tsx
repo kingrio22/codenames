@@ -1,19 +1,17 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
-import styles from "./game.module.scss";
-import { Board } from "../board/board";
-import { Level } from "../levels/levels.const";
-import Countdown, { CountdownRenderProps } from "react-countdown";
-import { GameResult } from "../game-result/game-result";
-import { shuffle } from "../../utils/functions/array-shuffle";
-import { CreateLevel } from "../levels/create-level";
-import { Highscore } from "../highscore/highscore";
-import { Player } from "../../api/create-player";
-import { updatePlayer } from "../../api/update-player";
-import { getLevel } from "../../api/get-random-level.api";
-import { LoadingSpinner } from "../loading-spinner/loading-spinner";
+import React, { Dispatch, SetStateAction, useState } from 'react';
+import styles from './game.module.scss';
+import { Board } from '../board/board';
+import { Level } from '../levels/levels.const';
+import { GameResult } from '../game-result/game-result';
+import { shuffle } from '../../utils/functions/array-shuffle';
+import { Highscore } from '../highscore/highscore';
+import { Player } from '../../api/create-player';
+import { updatePlayer } from '../../api/update-player';
+import { getLevel } from '../../api/get-random-level.api';
+import { LoadingSpinner } from '../loading-spinner/loading-spinner';
 
-export type GameMode = "INTERHYP" | "CHATGPT";
-export type Complexity = "LOW" | "MIDDLE" | "HARD";
+export type GameMode = 'INTERHYP' | 'CHATGPT';
+export type Complexity = 'LOW' | 'MIDDLE' | 'HARD';
 export interface GameProgress {
   mode: GameMode;
   complexity: Complexity;
@@ -84,14 +82,6 @@ export const Game = (props: GameProps) => {
 
   const [isRunning, setIsRunning] = useState<boolean>(false);
 
-  const renderer = ({ minutes, seconds }: CountdownRenderProps) => {
-    return (
-      <span>
-        {minutes}:{seconds}
-      </span>
-    );
-  };
-
   return (
     <div className={styles.GameWrapper}>
       <div className={styles.TopBar}>
@@ -127,28 +117,8 @@ export const Game = (props: GameProps) => {
         </div>
         <div className={styles.SideBar}>
           <Highscore isRunning={isRunning} />
-
-          <div className={styles.Countdown}>
-            {isRunning && (
-              <Countdown
-                renderer={renderer}
-                date={game?.startedAt}
-                onComplete={finishGame}
-              />
-            )}
-          </div>
         </div>
       </div>
-      {showCreate && (
-        <div className={styles.CreateWrapper}>
-          <div className={styles.CreateModal}>
-            <CreateLevel
-              showCreateLevelModal={setShowCreateModal}
-              setLoading={setLoading}
-            />
-          </div>
-        </div>
-      )}
     </div>
   );
 };
