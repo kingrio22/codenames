@@ -1,8 +1,8 @@
 import React from 'react';
 import { CSSProperties } from '@mui/material/styles/createMixins';
 import styles from './complexities.module.scss';
-import { Star } from '../star/star';
-
+import StarBorderRoundedIcon from '@mui/icons-material/StarBorderRounded';
+import StarRateRoundedIcon from '@mui/icons-material/StarRateRounded';
 interface ComplexityProps {
   setComplexity: (value: string) => void;
   checked: boolean;
@@ -15,20 +15,21 @@ export const LowComplexity = (props: ComplexityProps) => {
     '--color': color,
   };
   if (checked) {
+    stylings['zIndex'] = 5;
     stylings['border'] = `3px solid ${color}`;
   }
 
   return (
     <div
-      className={[styles.Low, styles.Box, styles[checked.toString()]].join(' ')}
+      className={[styles.Box, styles[checked.toString()]].join(' ')}
       onClick={() => setComplexity('LOW')}
       style={stylings}
     >
       <div className={styles.Title}>easy</div>
       <div className={styles.Wrapper}>
-        <Star filled={false} color={color} />
-        <Star filled={true} color={color} />
-        <Star filled={true} color={color} />
+        <StarRateRoundedIcon style={{ color }} />
+        <StarBorderRoundedIcon style={{ color }} />
+        <StarBorderRoundedIcon style={{ color }} />
       </div>
     </div>
   );
@@ -42,6 +43,7 @@ export const MiddleComplexity = (props: ComplexityProps) => {
     '--color': color,
   };
   if (checked) {
+    stylings['zIndex'] = 5;
     stylings['border'] = `3px solid ${color}`;
   }
 
@@ -55,9 +57,9 @@ export const MiddleComplexity = (props: ComplexityProps) => {
     >
       <div className={styles.Title}>medium</div>
       <div className={styles.Wrapper}>
-        <Star filled={false} color={color} />
-        <Star filled={false} color={color} />
-        <Star filled={true} color={color} />
+        <StarRateRoundedIcon style={{ color }} />
+        <StarRateRoundedIcon style={{ color }} />
+        <StarBorderRoundedIcon style={{ color }} />
       </div>
     </div>
   );
@@ -71,6 +73,7 @@ export const HardComplexity = (props: ComplexityProps) => {
     '--color': color,
   };
   if (checked) {
+    stylings['zIndex'] = 5;
     stylings['border'] = `3px solid ${color}`;
   }
   return (
@@ -81,9 +84,9 @@ export const HardComplexity = (props: ComplexityProps) => {
     >
       <div className={styles.Title}>hard</div>
       <div className={styles.Wrapper}>
-        <Star filled={false} color={color} />
-        <Star filled={false} color={color} />
-        <Star filled={false} color={color} />
+        <StarRateRoundedIcon style={{ color }} />
+        <StarRateRoundedIcon style={{ color }} />
+        <StarRateRoundedIcon style={{ color }} />
       </div>
     </div>
   );

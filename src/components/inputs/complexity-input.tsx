@@ -38,7 +38,7 @@ export const ComplexityInput = (props: ComplexityInputProps): JSX.Element => {
         style={{
           margin: 0,
           width: '25%',
-          transform: 'rotate(-3deg) translateX(10%) translateY(-5%)',
+          transform: 'rotate(-3deg) translateX(15%) translateY(-10%)',
         }}
       />
       <FormControlLabel
@@ -67,7 +67,7 @@ export const ComplexityInput = (props: ComplexityInputProps): JSX.Element => {
         style={{
           margin: 0,
           width: '25%',
-          transform: 'rotate(3deg) translateX(-10%) translateY(-15%)',
+          transform: 'rotate(3deg) translateX(-15%) translateY(-10%)',
         }}
       />
     </RadioGroup>

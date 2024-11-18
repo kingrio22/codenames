@@ -88,12 +88,8 @@ export const GameResult = (props: GameResultProps) => {
               <NewPlayer setPlayer={setPlayer} />
             </div>
           </div>
-          <WelcomeAnimation player={player} />
-          <>
-            <div className={styles.ChooseComplexity}>
-              Select complexity level
-            </div>
-          </>
+
+          <div className={styles.ChooseComplexity}>Select complexity level</div>
           <div className={styles.Complexity}>
             <ComplexityInput
               setComplexity={(value) => setComplexity(value as Complexity)}
@@ -113,6 +109,7 @@ export const GameResult = (props: GameResultProps) => {
             />
           </div>
         </div>
+        <WelcomeAnimation player={player} />
       </div>
     </div>
   );
