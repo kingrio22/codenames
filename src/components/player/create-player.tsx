@@ -62,6 +62,12 @@ export const NewPlayer = (props: NewPlayerProps) => {
           error={!!error}
           aria-errormessage={error}
           onError={() => <span>{error}</span>}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              handleCreate();
+            }
+          }}
           sx={{
             '& .MuiOutlinedInput-root': {
               color: '#ffffff',

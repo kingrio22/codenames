@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { CardComponent } from "../card/card";
-import styles from "./board.module.scss";
-import { Complexity, GameProgress } from "../game/game";
-import { Card, Level } from "../levels/levels.const";
-import { CountDownTimer } from "../countdown/countdown";
-import { Player } from "../../api/create-player";
+import React, { useEffect, useState } from 'react';
+import { CardComponent } from '../card/card';
+import styles from './board.module.scss';
+import { Complexity, GameProgress } from '../game/game';
+import { Card, Level } from '../levels/levels.const';
+import { CountDownTimer } from '../countdown/countdown';
+import { Player } from '../../api/create-player';
 
 interface BoardProps {
-  cards: Level["cards"];
+  cards: Level['cards'];
   hint: string;
   nextLevel: (solved: number) => void;
   correctWordsCount: number;
@@ -24,7 +24,7 @@ const KEEP_CARDS_VISIBLE = 1000;
 export const Board = (props: BoardProps) => {
   const {
     nextLevel,
-    complexity = "LOW",
+    complexity = 'LOW',
     cards,
     hint,
     correctWordsCount,
@@ -43,7 +43,7 @@ export const Board = (props: BoardProps) => {
       return;
     }
     if (
-      complexity === "HARD" &&
+      complexity === 'HARD' &&
       chosens.some((card) => card.isCorrect === false)
     ) {
       setLevelFinished(true);
@@ -71,13 +71,13 @@ export const Board = (props: BoardProps) => {
     <div className={styles.GameWrapper}>
       <div className={styles.StatisticColumn}>
         <div className={styles.Header}>
-          <img src="../stewart.png" alt="" />
+          <img src='../stewart.png' alt='' />
         </div>
         <div className={styles.PlayerName}>{player.name}</div>
         <div className={styles.ColumnRow}>
           <div className={styles.Column}>
             <div className={styles.Icon}>
-              <img src="../score.svg" alt="score" />
+              <img src='../score.svg' alt='score' />
             </div>
             <div className={styles.Content}>
               <div className={styles.ColumnTitle}>Score</div>
@@ -86,18 +86,18 @@ export const Board = (props: BoardProps) => {
           </div>
           <div className={styles.Column}>
             <div className={styles.Icon}>
-              <img src="../level.svg" alt="level" />
+              <img src='../level.svg' alt='level' />
             </div>
             <div className={styles.Content}>
               <div className={styles.ColumnTitle}>Level</div>
               <div className={styles.ColumnValue}>
-                {player.levelsPlayed.length}
+                {player.levelsPlayed.length + game.levelsPlayed.length}
               </div>
             </div>
           </div>
           <div className={styles.Column}>
             <div className={styles.Icon}>
-              <img src="../timer.svg" alt="timer" />
+              <img src='../timer.svg' alt='timer' />
             </div>
             <div className={styles.Content}>
               <div className={styles.ColumnTitle}>Time</div>
@@ -148,13 +148,13 @@ function getPointsByComplexity(
   const notCorrect = chosens.filter((card) => card.isCorrect === false).length;
 
   switch (complexity) {
-    case "LOW":
+    case 'LOW':
       return correct;
 
-    case "MIDDLE":
+    case 'MIDDLE':
       return correct < notCorrect ? 0 : (correct - notCorrect) * 2;
 
-    case "HARD":
+    case 'HARD':
       return correct * 5;
   }
 }

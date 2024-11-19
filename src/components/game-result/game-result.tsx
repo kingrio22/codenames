@@ -72,6 +72,12 @@ export const GameResult = (props: GameResultProps) => {
                 value={name}
                 onBlur={() => validateNameInput(name)}
                 className={styles.TextInputCustom}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault();
+                    validateNameInput(name);
+                  }
+                }}
                 sx={{
                   '& .MuiOutlinedInput-root': {
                     color: '#ffffff',
