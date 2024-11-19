@@ -3,7 +3,6 @@ import { Complexity, GameMode } from "../game/game";
 export interface Level {
   id: number;
   hint: string;
-  complexity?: Complexity;
   correctWords: number;
   mode?: GameMode;
   cards: Card[];

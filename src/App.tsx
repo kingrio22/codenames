@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
+import "./fonts.css";
 import { Background } from "./container/background/background";
 import { Game } from "./components/game/game";
 

@@ -1,17 +1,17 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
-import styles from './game.module.scss';
-import { Board } from '../board/board';
-import { Level } from '../levels/levels.const';
-import { GameResult } from '../game-result/game-result';
-import { shuffle } from '../../utils/functions/array-shuffle';
-import { Highscore } from '../highscore/highscore';
-import { Player } from '../../api/create-player';
-import { updatePlayer } from '../../api/update-player';
-import { getLevel } from '../../api/get-random-level.api';
-import { LoadingSpinner } from '../loading-spinner/loading-spinner';
+import React, { Dispatch, SetStateAction, useState } from "react";
+import styles from "./game.module.scss";
+import { Board } from "../board/board";
+import { Level } from "../levels/levels.const";
+import { GameResult } from "../game-result/game-result";
+import { shuffle } from "../../utils/functions/array-shuffle";
+import { Highscore } from "../highscore/highscore";
+import { Player } from "../../api/create-player";
+import { updatePlayer } from "../../api/update-player";
+import { getLevel } from "../../api/get-random-level.api";
+import { LoadingSpinner } from "../loading-spinner/loading-spinner";
 
-export type GameMode = 'INTERHYP' | 'CHATGPT';
-export type Complexity = 'LOW' | 'MIDDLE' | 'HARD';
+export type GameMode = "INTERHYP" | "CHATGPT";
+export type Complexity = "LOW" | "MIDDLE" | "HARD";
 export interface GameProgress {
   mode: GameMode;
   complexity: Complexity;
@@ -38,9 +38,14 @@ export const Game = (props: GameProps) => {
       return;
     }
 
+    setLevel((prev) => {
+      if (prev) {
+        return { ...prev, cards: prev.cards.map((c) => ({ ...c, word: "" })) };
+      }
+    });
+
     const newLevel = await getLevel(
       game.mode,
-      game.complexity,
       player.id,
       [...game.levelsPlayed, level.id],
       setLoading
@@ -78,7 +83,7 @@ export const Game = (props: GameProps) => {
     setIsRunning(false);
   };
 
-  const [countdown, setCountdown] = useState<number>(60000000);
+  const [countdown] = useState<number>(300000);
 
   const [isRunning, setIsRunning] = useState<boolean>(false);
 
@@ -90,7 +95,7 @@ export const Game = (props: GameProps) => {
       <div className={styles.Content}>
         {loading && <LoadingSpinner />}
         <div className={styles.BoardWrapper}>
-          {level && isRunning && game && (
+          {level && isRunning && game && player && (
             <Board
               hint={level.hint}
               cards={level.cards}
@@ -101,6 +106,7 @@ export const Game = (props: GameProps) => {
               finishGame={finishGame}
               game={game}
               isRunning={isRunning}
+              player={player}
             />
           )}
 

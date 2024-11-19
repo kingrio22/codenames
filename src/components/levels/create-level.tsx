@@ -1,41 +1,37 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
-import styles from './create-level.module.scss';
-import { v1 } from 'uuid';
-import { Card, Level } from './levels.const';
-import { ComplexityInput } from '../inputs/complexity-input';
-import { Complexity, GameMode } from '../game/game';
-import { GameModeInput } from '../inputs/game-mode.input';
-import { CardInput } from '../inputs/card-input';
-import { createLevel } from '../../api/create-level';
-import { getRandomWords } from '../../api/get-random-words';
-import { shuffle } from '../../utils/functions/array-shuffle';
+import React, { Dispatch, SetStateAction, useState } from "react";
+import styles from "./create-level.module.scss";
+import { v1 } from "uuid";
+import { Card, Level } from "./levels.const";
+import { CardInput } from "../inputs/card-input";
+import { createLevel } from "../../api/create-level";
+import { getRandomWords } from "../../api/get-random-words";
+import { shuffle } from "../../utils/functions/array-shuffle";
 
 interface CreateLevelProps {
   showCreateLevelModal: Dispatch<SetStateAction<boolean | undefined>>;
   setLoading: Dispatch<SetStateAction<boolean>>;
 }
 
-export type CreateLevelDto = Omit<Level, 'id'>;
+export type CreateLevelDto = Omit<Level, "id">;
 
 export const CreateLevel = (props: CreateLevelProps) => {
   const { showCreateLevelModal, setLoading } = props;
 
   const [errorMessage, setErrorMessage] = useState<string | undefined>();
   const [newLevel, setNewLevel] = useState<CreateLevelDto>({
-    hint: '',
+    hint: "",
     cards: [],
-    complexity: 'LOW',
     correctWords: 0,
-    mode: 'CHATGPT',
+    mode: "CHATGPT",
   });
 
-  const [specification, setSpecification] = useState<string>('');
+  const [specification, setSpecification] = useState<string>("");
   const [suggestions, setSuggestions] = useState<string[] | undefined>();
 
   const [newCards, setNewCards] = useState<Card[]>(
     new Array(9)
       .fill({})
-      .map((_card) => ({ id: v1(), word: '', isCorrect: false }))
+      .map((_card) => ({ id: v1(), word: "", isCorrect: false }))
   );
 
   const setProps = (prop: keyof CreateLevelDto, value: string | number) => {
@@ -50,7 +46,7 @@ export const CreateLevel = (props: CreateLevelProps) => {
   const handleCreate = async () => {
     setErrorMessage(undefined);
     if (newCards.filter((c) => c.isCorrect === true).length < 1) {
-      setErrorMessage('At least one card has to be a correct one');
+      setErrorMessage("At least one card has to be a correct one");
       return;
     }
     if (
@@ -63,17 +59,17 @@ export const CreateLevel = (props: CreateLevelProps) => {
       return;
     }
     if (newCards.filter((c) => c.word.length < 1).length > 0) {
-      setErrorMessage('Fill all cards');
+      setErrorMessage("Fill all cards");
       return;
     }
     if (newLevel.hint.length < 1) {
-      setErrorMessage('Hint word is missing');
+      setErrorMessage("Hint word is missing");
       return;
     }
 
     const levelId = await createLevel({ ...newLevel, cards: newCards });
     if (!levelId) {
-      setErrorMessage('Sth went wrong');
+      setErrorMessage("Sth went wrong");
     } else {
       setErrorMessage(`Level created with ID: ${levelId}`);
       setTimeout(() => {
@@ -127,12 +123,12 @@ export const CreateLevel = (props: CreateLevelProps) => {
           </div>
           <div
             className={styles.SpecificationWrapper}
-            title='Use this to specify the generation with custom words'
+            title="Use this to specify the generation with custom words"
           >
-            <label htmlFor='specificationInput'>Specify word:</label>
+            <label htmlFor="specificationInput">Specify word:</label>
             <input
-              id={'specificationInput'}
-              type='text'
+              id={"specificationInput"}
+              type="text"
               value={specification}
               onChange={(e) => setSpecification(e.currentTarget.value)}
             />
@@ -152,32 +148,26 @@ export const CreateLevel = (props: CreateLevelProps) => {
         <div className={styles.CreateWrapper}>
           <div className={styles.BaseInfo}>
             <div className={styles.Hint}>
-              <label htmlFor='hint'>Hint: </label>
+              <label htmlFor="hint">Hint: </label>
               <input
-                type='text'
-                id='hint'
-                onChange={(e) => setProps('hint', e.currentTarget.value)}
-                value={newLevel['hint'] ?? ''}
+                type="text"
+                id="hint"
+                onChange={(e) => setProps("hint", e.currentTarget.value)}
+                value={newLevel["hint"] ?? ""}
               />
             </div>
             <div className={styles.CorrectWords}>
-              <label htmlFor='correct-words'>Correct words count: </label>
+              <label htmlFor="correct-words">Correct words count: </label>
               <input
-                type='number'
-                id='correct-words'
+                type="number"
+                id="correct-words"
                 onChange={(e) =>
                   setProps(
-                    'correctWords',
+                    "correctWords",
                     parseInt(e.currentTarget.value.toString())
                   )
                 }
-                value={newLevel['correctWords']}
-              />
-            </div>
-            <div className={styles.Complexity}>
-              <ComplexityInput
-                complexity={(newLevel['complexity'] as Complexity) ?? 'LOW'}
-                setComplexity={(value) => setProps('complexity', value)}
+                value={newLevel["correctWords"]}
               />
             </div>
           </div>
@@ -213,7 +203,7 @@ export const CreateLevel = (props: CreateLevelProps) => {
           <div className={styles.ButtonWrapper}>
             <button
               className={styles.Button}
-              type='button'
+              type="button"
               onClick={handleCreate}
             >
               Create
