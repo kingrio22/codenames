@@ -72,11 +72,41 @@ export const GameResult = (props: GameResultProps) => {
                 value={name}
                 onBlur={() => validateNameInput(name)}
                 className={styles.TextInputCustom}
+                sx={{
+                  '& .MuiOutlinedInput-root': {
+                    color: '#ffffff',
+                    fontFamily: 'Arial',
+                    fontWeight: 'bold',
+                    '& .MuiOutlinedInput-notchedOutline': {
+                      borderColor: '#ffffff',
+                      borderWidth: '1px',
+                    },
+                    '&.Mui-focused': {
+                      '& .MuiOutlinedInput-notchedOutline': {
+                        borderColor: '#ffffff',
+                        borderWidth: '2px',
+                      },
+                    },
+                    '&:hover:not(.Mui-focused)': {
+                      '& .MuiOutlinedInput-notchedOutline': {
+                        borderColor: '#ffffff',
+                      },
+                    },
+                  },
+                  '& .MuiInputLabel-outlined': {
+                    color: '#ffffff',
+                    fontWeight: 'bold',
+                    '&.Mui-focused': {
+                      color: '#ffffff',
+                      fontWeight: 'bold',
+                    },
+                  },
+                }}
               ></TextField>
 
-              {errorMessage && (
-                <div className={styles.NameError}>{errorMessage}</div>
-              )}
+              <div className={styles.NameError}>
+                {errorMessage ? errorMessage : ''}
+              </div>
             </div>
             <div
               className={styles.PlayerNameInput}

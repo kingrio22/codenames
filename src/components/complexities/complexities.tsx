@@ -15,7 +15,6 @@ export const LowComplexity = (props: ComplexityProps) => {
     '--color': color,
   };
   if (checked) {
-    stylings['zIndex'] = 5;
     stylings['border'] = `3px solid ${color}`;
   }
 
@@ -43,15 +42,12 @@ export const MiddleComplexity = (props: ComplexityProps) => {
     '--color': color,
   };
   if (checked) {
-    stylings['zIndex'] = 5;
     stylings['border'] = `3px solid ${color}`;
   }
 
   return (
     <div
-      className={[styles.Middle, styles.Box, styles[checked.toString()]].join(
-        ' '
-      )}
+      className={[styles.Box, styles[checked.toString()]].join(' ')}
       style={stylings}
       onClick={() => setComplexity('MIDDLE')}
     >
@@ -73,7 +69,6 @@ export const HardComplexity = (props: ComplexityProps) => {
     '--color': color,
   };
   if (checked) {
-    stylings['zIndex'] = 5;
     stylings['border'] = `3px solid ${color}`;
   }
   return (

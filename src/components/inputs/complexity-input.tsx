@@ -53,6 +53,7 @@ export const ComplexityInput = (props: ComplexityInputProps): JSX.Element => {
         style={{
           margin: 0,
           width: '25%',
+          transform: 'rotate(1deg) translateX(1%) translateY(-1%)',
         }}
       />
       <FormControlLabel

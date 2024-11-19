@@ -30,5 +30,13 @@
 }
 
 .TextInputCustom {
+  border-color: #fff !important;
+  color: #fff !important;
   width: 100%;
+}
+
+.ErrorMessage {
+  color: #dd2222;
+  font-size: 14px;
+  height: 14px;
 }

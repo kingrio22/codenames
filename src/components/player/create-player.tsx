@@ -59,17 +59,42 @@ export const NewPlayer = (props: NewPlayerProps) => {
           value={playerName}
           className={styles.TextInputCustom}
           onBlur={handleCreate}
+          error={!!error}
+          aria-errormessage={error}
+          onError={() => <span>{error}</span>}
+          sx={{
+            '& .MuiOutlinedInput-root': {
+              color: '#ffffff',
+              fontFamily: 'Arial',
+              fontWeight: 'bold',
+              '& .MuiOutlinedInput-notchedOutline': {
+                borderColor: '#ffffff',
+                borderWidth: '1px',
+              },
+              '&.Mui-focused': {
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#ffffff',
+                  borderWidth: '2px',
+                },
+              },
+              '&:hover:not(.Mui-focused)': {
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#ffffff',
+                },
+              },
+            },
+            '& .MuiInputLabel-outlined': {
+              color: '#ffffff',
+              fontWeight: 'bold',
+              '&.Mui-focused': {
+                color: '#ffffff',
+                fontWeight: 'bold',
+              },
+            },
+          }}
         ></TextField>
-
-        {/* <button
-          onClick={handleCreate}
-          className={styles.Button}
-          disabled={!!error}
-        >
-          Speichern
-        </button> */}
       </div>
-      {error && <div className={styles.ErrorMessage}> {error}</div>}
+      <div className={styles.ErrorMessage}> {error ? error : ''}</div>
     </div>
   );
 };
