@@ -64,29 +64,47 @@ export const Board = (props: BoardProps) => {
         setLevelFinished(false);
       }, KEEP_CARDS_VISIBLE + 600);
     }
-  }, [chosens, nextLevel, correctWordsCount]);
+  }, [chosens, nextLevel, complexity, correctWordsCount]);
 
   return (
     <div className={styles.GameWrapper}>
       <div className={styles.StatisticColumn}>
-        <div className={styles.HeaderSpacer}></div>
-        <div className={styles.ContentColumn}>
+        <div className={styles.Header}>
+          <img src='../stewart.png' alt='' />
+        </div>
+        <div className={styles.PlayerName}>Player Name</div>
+        <div className={styles.ColumnRow}>
           <div className={styles.Column}>
-            <div className={styles.ColumnTitle}>Score</div>
-            <div className={styles.ColumnValue}>{currentScore}</div>
+            <div className={styles.Icon}>
+              <img src='../score.svg' alt='score' />
+            </div>
+            <div className={styles.Content}>
+              <div className={styles.ColumnTitle}>Score</div>
+              <div className={styles.ColumnValue}>{currentScore}</div>
+            </div>
           </div>
           <div className={styles.Column}>
-            <div className={styles.ColumnTitle}>Level</div>
-            <div className={styles.ColumnValue}>{0}</div>
+            <div className={styles.Icon}>
+              <img src='../level.svg' alt='level' />
+            </div>
+            <div className={styles.Content}>
+              <div className={styles.ColumnTitle}>Level</div>
+              <div className={styles.ColumnValue}>{currentScore}</div>
+            </div>
           </div>
           <div className={styles.Column}>
-            <div className={styles.ColumnTitle}>Timer</div>
-            <div className={styles.ColumnValue}>
-              <CountDownTimer
-                finishGame={finishGame}
-                isRunning={isRunning}
-                game={game}
-              />
+            <div className={styles.Icon}>
+              <img src='../timer.svg' alt='timer' />
+            </div>
+            <div className={styles.Content}>
+              <div className={styles.ColumnTitle}>Time</div>
+              <div className={styles.ColumnValue}>
+                <CountDownTimer
+                  finishGame={finishGame}
+                  isRunning={isRunning}
+                  game={game}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -110,8 +128,7 @@ export const Board = (props: BoardProps) => {
         </div>
       </div>
       <div className={styles.FakeColumn}>
-        <div className={styles.HeaderSpacer}></div>
-        <div className={styles.ContentColumn}>
+        <div className={styles.Row}>
           <div className={styles.Column}></div>
           <div className={styles.Column}></div>
           <div className={styles.Column}></div>

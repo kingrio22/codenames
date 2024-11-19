@@ -1,8 +1,8 @@
-import React, { Dispatch, SetStateAction } from "react";
-import styles from "./card.module.scss";
+import React, { Dispatch, SetStateAction } from 'react';
+import styles from './card.module.scss';
 
-import ReactCardFlip from "react-card-flip";
-import { Card } from "../levels/levels.const";
+import ReactCardFlip from 'react-card-flip';
+import { Card } from '../levels/levels.const';
 
 interface CardProps {
   hideCardColor: boolean;
@@ -26,31 +26,29 @@ export const CardComponent = (props: CardProps) => {
     : [styles.Card, styles[isCorrect.toString()]];
 
   return (
-    <div className={styles.CardWrapper}>
-      <div
-        className={styles.Flipper}
-        onClick={() => {
-          if (levelFinished) {
-            return;
+    <div
+      className={styles.CardWrapper}
+      onClick={() => {
+        if (levelFinished) {
+          return;
+        }
+        setChosens((chosens) => {
+          if (isChosen) {
+            return chosens;
           }
-          setChosens((chosens) => {
-            if (isChosen) {
-              return chosens;
-            }
 
-            return [...chosens, card];
-          });
-        }}
-      >
-        <ReactCardFlip isFlipped={isChosen} flipDirection="horizontal">
-          <div className={styles.Card}>
-            <div className={styles.Title}>{word}</div>
-          </div>
-          <div className={cardStyles.join(" ")}>
-            <div className={styles.Title}>{word}</div>
-          </div>
-        </ReactCardFlip>
-      </div>
+          return [...chosens, card];
+        });
+      }}
+    >
+      <ReactCardFlip isFlipped={isChosen} flipDirection='horizontal'>
+        <div className={styles.Card}>
+          <div className={styles.Title}>{word}</div>
+        </div>
+        <div className={cardStyles.join(' ')}>
+          <div className={styles.Title}>{word}</div>
+        </div>
+      </ReactCardFlip>
     </div>
   );
 };

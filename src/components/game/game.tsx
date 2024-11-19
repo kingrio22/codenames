@@ -78,7 +78,7 @@ export const Game = (props: GameProps) => {
     setIsRunning(false);
   };
 
-  const [countdown, setCountdown] = useState<number>(60000);
+  const [countdown, setCountdown] = useState<number>(60000000);
 
   const [isRunning, setIsRunning] = useState<boolean>(false);
 
