@@ -4,20 +4,20 @@
 }
 
 .Card {
-  height: 11vh;
-  width: 11vw;
+  height: 9vh;
+  width: 9vw;
   display: flex;
   justify-content: center;
   align-items: center;
   vertical-align: middle;
-  font-size: 20px;
+  font-size: 0.75rem;
   background: rgba(255, 255, 255, 0.25);
   border-radius: 10px;
   box-shadow: 0 4px 30px rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(3.2px);
   -webkit-backdrop-filter: blur(3.2px);
   border: 1px solid rgba(255, 255, 255, 0.25);
-  color: #000;
+  color: #fff;
   cursor: pointer;
 
   &.true {
