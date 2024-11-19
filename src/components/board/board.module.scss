@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&family=Kode+Mono:wght@400..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-
 .GameWrapper {
   display: flex;
   flex-direction: row-reverse;
@@ -56,7 +54,7 @@
 }
 
 .HintRow {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   color: #ffdc7f;
   font-weight: 700;
   display: flex;
@@ -111,7 +109,7 @@
   backdrop-filter: blur(3.3px);
   -webkit-backdrop-filter: blur(3.3px);
   border: 1px solid rgba(255, 255, 255, 0.25);
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-style: normal;
 }
 .PlayerName {
