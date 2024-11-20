@@ -110,6 +110,5 @@ const Rectangle = (props: RectangleProps) => {
     '--yPosition': `${yPosition}px`,
   };
 
-  console.log('stylings: ', stylings);
   return <div className={styles.Rectangle} style={stylings}></div>;
 };

@@ -12,7 +12,6 @@ import { WelcomeAnimation } from '../welcome-animation/welcome-animation';
 interface GameResultProps {
   game: GameProgress | undefined;
   setIsRunning: Dispatch<SetStateAction<boolean>>;
-  setShowCreate: Dispatch<SetStateAction<boolean | undefined>>;
   setGame: Dispatch<SetStateAction<GameProgress | undefined>>;
   setLevel: Dispatch<SetStateAction<Level | undefined>>;
   player: Player | undefined;
@@ -28,7 +27,6 @@ export const GameResult = (props: GameResultProps) => {
     setIsRunning,
     setLevel,
     countdown,
-    setShowCreate,
     setPlayer,
     player,
     setLoading,
