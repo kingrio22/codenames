@@ -10,6 +10,15 @@ function App() {
   const [isMobile] = useMobile();
   const [isRunning, setIsRunning] = useState<boolean>(false);
 
+  const socket = new WebSocket('ws://api.mgraetz.de:4000');
+
+  socket.addEventListener('message', (event) => {
+    alert(`Received message: ${event.toString()}`);
+  });
+  socket.addEventListener('open', () => {
+    alert('Connected to the Chat!');
+  });
+
   if (isMobile) {
     return (
       <div>

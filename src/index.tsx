@@ -14,10 +14,6 @@ const router = createBrowserRouter([
     path: '/',
     element: <App />,
   },
-  {
-    path: '/pablo',
-    element: <img src='../pablo.png' alt='Pablo' />,
-  },
 ]);
 root.render(
   <React.StrictMode>

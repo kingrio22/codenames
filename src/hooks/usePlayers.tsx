@@ -1,6 +1,6 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { Player } from "../api/create-player";
-import { fetchAllPlayers } from "../api/get-all-players";
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { Player } from '../api/create-player';
+import { fetchAllPlayers } from '../api/get-all-players';
 
 export const usePlayers = (
   showError: Dispatch<SetStateAction<string | undefined>>,
@@ -26,6 +26,6 @@ async function getAllPlayers(
       setPlayers(players);
     }
   } catch (err) {
-    setError("Cant fetch players");
+    setError('Cant fetch players');
   }
 }

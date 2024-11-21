@@ -1,21 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './highscore.module.scss';
 import { usePlayers } from '../../hooks/usePlayers';
-import { GameProgress } from '../game/game';
+import html2canvas from 'html2canvas';
 
 interface HighscoreProps {
   isRunning: boolean;
 }
 
 export const Highscore = (props: HighscoreProps) => {
+  const highscoreRef = useRef();
   const { isRunning } = props;
   const [errorMessage, showError] = useState<string | undefined>();
   const [players] = usePlayers(showError, isRunning);
+
+  useEffect(() => {
+    captureHighscore(highscoreRef);
+  }, [highscoreRef]);
+
   return (
-    <div className={styles.HighscoreWrapper}>
+    <div className={styles.HighscoreWrapper} ref={highscoreRef.current}>
       <div className={styles.TitleWrapper}>
         <div className={styles.Cup}>
-          <img src='../cup.png' className={styles.CupImage} />
+          <img src='../cup.png' className={styles.CupImage} alt='cup' />
         </div>
         <div className={styles.Title}>Highscore</div>
       </div>
@@ -34,3 +40,31 @@ export const Highscore = (props: HighscoreProps) => {
     </div>
   );
 };
+function captureHighscore(
+  highscoreRef: React.MutableRefObject<HTMLDivElement | undefined>
+) {
+  if (!highscoreRef.current) {
+    console.log('is null');
+    return;
+  }
+  html2canvas(highscoreRef.current).then(function (canvas) {
+    uploadImage(canvas);
+  });
+}
+function uploadImage(data: any) {
+  console.log('upload');
+  let formData = new FormData(data);
+  fetch('https://api.mgraetz.de/files/upload', {
+    method: 'POST',
+    body: formData,
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.insertedId) {
+        alert('Plcae added successfully');
+      }
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+}

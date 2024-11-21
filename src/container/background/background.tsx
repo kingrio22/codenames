@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './background.module.scss';
 import { CSSProperties } from '@mui/material/styles/createMixins';
+import { workerData } from 'worker_threads';
 
 export const Background = () => (
   <div className={styles.Background}>
@@ -112,3 +113,6 @@ const Rectangle = (props: RectangleProps) => {
 
   return <div className={styles.Rectangle} style={stylings}></div>;
 };
+
+// Lege 9 Karten aus, davon sind 3-5 die richtigen „Agenten“. Gib dir selbst Hinweise, indem du ein Wort findest, das deine Agenten beschreibt.
+// Rate, welche Karten die Agenten sind. Ziel ist es, alle Agenten mit möglichst wenigen Hinweisen zu finden.
