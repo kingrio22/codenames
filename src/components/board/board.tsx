@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { CardComponent } from '../card/card';
 import styles from './board.module.scss';
 import { Complexity, GameProgress } from '../game/game';
 import { Card, Level } from '../levels/levels.const';
 import { CountDownTimer } from '../countdown/countdown';
 import { Player } from '../../api/create-player';
+import { CountdownApi } from 'react-countdown';
 
 interface BoardProps {
   cards: Level['cards'];
@@ -17,6 +18,7 @@ interface BoardProps {
   game: GameProgress;
   isRunning: boolean;
   player: Player;
+  setCountdownRef: Dispatch<SetStateAction<CountdownApi | null>>;
 }
 
 const KEEP_CARDS_VISIBLE = 1000;
@@ -33,6 +35,7 @@ export const Board = (props: BoardProps) => {
     isRunning,
     game,
     player,
+    setCountdownRef,
   } = props;
   const [chosens, setChosens] = useState<Card[]>([]);
 
@@ -106,6 +109,7 @@ export const Board = (props: BoardProps) => {
                   finishGame={finishGame}
                   isRunning={isRunning}
                   game={game}
+                  setCountdownRef={setCountdownRef}
                 />
               </div>
             </div>

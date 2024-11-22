@@ -9,6 +9,7 @@ import { Player } from '../../api/create-player';
 import { updatePlayer } from '../../api/update-player';
 import { getLevel } from '../../api/get-random-level.api';
 import { LoadingSpinner } from '../loading-spinner/loading-spinner';
+import { CountdownApi } from 'react-countdown';
 
 export type GameMode = 'INTERHYP' | 'CHATGPT';
 export type Complexity = 'LOW' | 'MIDDLE' | 'HARD';
@@ -33,6 +34,15 @@ export const Game = (props: GameProps) => {
 
   const [level, setLevel] = useState<Level | undefined>();
 
+  const [countdownRef, setCountdownRef] = useState<CountdownApi | null>(null);
+
+  const setPause = () => {
+    countdownRef && countdownRef.pause();
+  };
+  const setStart = () => {
+    countdownRef && countdownRef.start();
+  };
+
   const nextLevel = async (solved: number) => {
     if (!game || !player || !level) {
       return;
@@ -44,6 +54,7 @@ export const Game = (props: GameProps) => {
       }
     });
 
+    setPause();
     const newLevel = await getLevel(
       game.mode,
       player.id,
@@ -66,6 +77,7 @@ export const Game = (props: GameProps) => {
     if (newLevel) {
       const shuffledCards = shuffle(newLevel.cards);
       setLevel({ ...newLevel, cards: shuffledCards });
+      setStart();
     } else {
       setIsRunning(false);
     }
@@ -105,6 +117,7 @@ export const Game = (props: GameProps) => {
               game={game}
               isRunning={isRunning}
               player={player}
+              setCountdownRef={setCountdownRef}
             />
           )}
 
