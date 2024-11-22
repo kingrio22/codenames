@@ -1,18 +1,22 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import './index.css';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import * as React from "react";
+import * as ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import "./index.css";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <App />,
+  },
+  {
+    path: "/pokemon",
+    element: <Pokemon />,
   },
 ]);
 root.render(
