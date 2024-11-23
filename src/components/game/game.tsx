@@ -10,6 +10,7 @@ import { updatePlayer } from '../../api/update-player';
 import { getLevel } from '../../api/get-random-level.api';
 import { LoadingSpinner } from '../loading-spinner/loading-spinner';
 import { CountdownApi } from 'react-countdown';
+import { Result } from '../result/resutl';
 
 export type GameMode = 'INTERHYP' | 'CHATGPT';
 export type Complexity = 'LOW' | 'MIDDLE' | 'HARD';
@@ -31,6 +32,8 @@ export const Game = (props: GameProps) => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const [player, setPlayer] = useState<Player | undefined>();
+
+  const [showResult, setShowResult] = useState<boolean>(false);
 
   const [level, setLevel] = useState<Level | undefined>();
 
@@ -90,9 +93,17 @@ export const Game = (props: GameProps) => {
     const updatePromise = updatePlayer(game, player);
     setPlayer(undefined);
     setLevel(undefined);
-    setGame(undefined);
-    await updatePromise;
-    setIsRunning(false);
+    // upcoming
+    setShowResult(true);
+    //upcoming end
+    setTimeout(async () => {
+      setGame(undefined);
+      await updatePromise;
+      setIsRunning(false);
+      // upcoming
+      setShowResult(false);
+      //upcoming end
+    }, 5000);
   };
 
   const [countdown] = useState<number>(120000);
@@ -118,6 +129,13 @@ export const Game = (props: GameProps) => {
               isRunning={isRunning}
               player={player}
               setCountdownRef={setCountdownRef}
+            />
+          )}
+
+          {showResult && (
+            <Result
+              highscore={game?.highscore ?? 0}
+              levelsPlayed={game?.levelsPlayed.length ?? 0}
             />
           )}
 
