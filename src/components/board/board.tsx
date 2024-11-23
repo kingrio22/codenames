@@ -6,6 +6,7 @@ import { Card, Level } from '../levels/levels.const';
 import { CountDownTimer } from '../countdown/countdown';
 import { Player } from '../../api/create-player';
 import { CountdownApi } from 'react-countdown';
+import { StatisticsColumn } from '../statistics/statistics';
 
 interface BoardProps {
   cards: Level['cards'];
@@ -72,50 +73,14 @@ export const Board = (props: BoardProps) => {
 
   return (
     <div className={styles.GameWrapper}>
-      <div className={styles.StatisticColumn}>
-        <div className={styles.Header}>
-          <img src='../stewart.png' alt='' />
-        </div>
-        <div className={styles.PlayerName}>{player.name}</div>
-        <div className={styles.ColumnRow}>
-          <div className={styles.Column}>
-            <div className={styles.Icon}>
-              <img src='../score.svg' alt='score' />
-            </div>
-            <div className={styles.Content}>
-              <div className={styles.ColumnTitle}>Score</div>
-              <div className={styles.ColumnValue}>{currentScore}</div>
-            </div>
-          </div>
-          <div className={styles.Column}>
-            <div className={styles.Icon}>
-              <img src='../level.svg' alt='level' />
-            </div>
-            <div className={styles.Content}>
-              <div className={styles.ColumnTitle}>Level</div>
-              <div className={styles.ColumnValue}>
-                {player.levelsPlayed.length + game.levelsPlayed.length}
-              </div>
-            </div>
-          </div>
-          <div className={styles.Column}>
-            <div className={styles.Icon}>
-              <img src='../timer.svg' alt='timer' />
-            </div>
-            <div className={styles.Content}>
-              <div className={styles.ColumnTitle}>Time</div>
-              <div className={styles.ColumnValue}>
-                <CountDownTimer
-                  finishGame={finishGame}
-                  isRunning={isRunning}
-                  game={game}
-                  setCountdownRef={setCountdownRef}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <StatisticsColumn
+        game={game}
+        isRunning={isRunning}
+        player={player}
+        finishGame={finishGame}
+        currentScore={currentScore}
+        setCountdownRef={setCountdownRef}
+      />
       <div className={styles.BoardWrapper}>
         <div className={styles.HintRow}>
           {hint}

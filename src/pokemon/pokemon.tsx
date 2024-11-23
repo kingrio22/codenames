@@ -1,9 +1,12 @@
-import React from "react";
-import styles from "./pokemon.module.scss";
+import React from 'react';
 
-const Pokemon = () => {
+import { Background } from '../container/background/background';
+import { GameWrapper } from './comps/game-wrapper/game-wrapper';
+
+export const Pokemon = () => {
   return (
-    <div className={styles.GameWrapper}>
+    <div>
+      <GameWrapper />
       <Background />
     </div>
   );

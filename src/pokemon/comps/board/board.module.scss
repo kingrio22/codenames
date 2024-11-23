@@ -1,0 +1,72 @@
+.GameWrapperPokemon {
+  display: flex;
+  justify-content: center;
+  flex-direction: row-reverse;
+  vertical-align: middle;
+  align-items: center;
+}
+
+.ChoiceWrapper {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  align-items: center;
+  vertical-align: middle;
+  padding: 1rem;
+}
+.Card {
+  margin: 1rem;
+}
+.Choice {
+  width: 25vw;
+  height: 20vh;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+  box-shadow: 0 4px 30px rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(3.2px);
+  -webkit-backdrop-filter: blur(3.2px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  display: flex;
+  justify-content: center;
+  vertical-align: middle;
+  align-items: center;
+  cursor: pointer;
+
+  &.true {
+    background-color: green;
+  }
+  &.false {
+    background-color: red;
+  }
+}
+
+.Hint {
+  font-family: 'Unbounded', sans-serif;
+  color: #ffdc7f;
+  font-weight: 700;
+  display: flex;
+  padding: 0.5rem 1rem;
+  width: 30vw;
+  font-size: 2rem;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  box-shadow: 0 4px 30px rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  justify-content: start;
+  position: relative;
+  transform: translateX(-7%) translateY(10%) rotate(-1deg);
+  z-index: 10;
+}
+
+.Board {
+  width: 100%;
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  vertical-align: middle;
+}
