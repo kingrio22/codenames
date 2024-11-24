@@ -1,10 +1,16 @@
 .ResultWrapper {
   width: 100vw;
-  height: 100vh;
+  height: 80vh;
   display: flex;
   justify-content: center;
   vertical-align: middle;
   align-items: center;
+}
+
+.Title {
+  text-align: center;
+  font-size: 3rem;
+  color: #ffdc7f;
 }
 
 .Result {
@@ -17,14 +23,15 @@
   backdrop-filter: blur(3.2px);
   -webkit-backdrop-filter: blur(3.2px);
   border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 3rem;
 }
 
 .ColumnRow {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-between;
   height: 100%;
-  row-gap: 1rem;
+  padding: 2rem;
 }
 
 .Column {
@@ -41,4 +48,5 @@
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
   border: 1px solid rgba(255, 255, 255, 0.25);
+  margin: 1rem;
 }

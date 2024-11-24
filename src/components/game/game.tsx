@@ -91,22 +91,23 @@ export const Game = (props: GameProps) => {
       return;
     }
     const updatePromise = updatePlayer(game, player);
-    setPlayer(undefined);
+
     setLevel(undefined);
     // upcoming
+    await updatePromise;
     setShowResult(true);
     //upcoming end
     setTimeout(async () => {
-      setGame(undefined);
-      await updatePromise;
-      setIsRunning(false);
       // upcoming
       setShowResult(false);
       //upcoming end
+      setGame(undefined);
+      setPlayer(undefined);
+      setIsRunning(false);
     }, 5000);
   };
 
-  const [countdown] = useState<number>(120000);
+  const [countdown] = useState<number>(5000);
 
   return (
     <div className={styles.GameWrapper}>
@@ -132,11 +133,8 @@ export const Game = (props: GameProps) => {
             />
           )}
 
-          {showResult && (
-            <Result
-              highscore={game?.highscore ?? 0}
-              levelsPlayed={game?.levelsPlayed.length ?? 0}
-            />
+          {showResult && player && (
+            <Result highscore={game?.highscore ?? 0} playerId={player?.id} />
           )}
 
           {isRunning === false && (
