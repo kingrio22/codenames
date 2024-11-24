@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/static/css/main.a581f36c.css",
-    "main.js": "/static/js/main.a6369c42.js",
+    "main.css": "/static/css/main.1489e312.css",
+    "main.js": "/static/js/main.c172746b.js",
     "static/js/453.7615cdf1.chunk.js": "/static/js/453.7615cdf1.chunk.js",
     "static/media/Unbounded-VariableFont_wght.ttf": "/static/media/Unbounded-VariableFont_wght.0314441af1ebbb9eb2ee.ttf",
     "static/media/Jaro-Regular-VariableFont_opsz.ttf": "/static/media/Jaro-Regular-VariableFont_opsz.c9e68ba09c7d06b68df9.ttf",
     "static/media/KodeMono-VariableFont_wght.ttf": "/static/media/KodeMono-VariableFont_wght.9ae07349897c5fb8e035.ttf",
     "index.html": "/index.html",
-    "main.a581f36c.css.map": "/static/css/main.a581f36c.css.map",
-    "main.a6369c42.js.map": "/static/js/main.a6369c42.js.map",
+    "main.1489e312.css.map": "/static/css/main.1489e312.css.map",
+    "main.c172746b.js.map": "/static/js/main.c172746b.js.map",
     "453.7615cdf1.chunk.js.map": "/static/js/453.7615cdf1.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a581f36c.css",
-    "static/js/main.a6369c42.js"
+    "static/css/main.1489e312.css",
+    "static/js/main.c172746b.js"
   ]
 }

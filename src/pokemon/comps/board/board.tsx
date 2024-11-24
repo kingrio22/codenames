@@ -1,26 +1,29 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
-import styles from './board.module.scss';
-import ReactCardFlip from 'react-card-flip';
-import { LEVELS } from '../../consts/levels.const';
+import React, { Dispatch, SetStateAction, useState } from "react";
+import styles from "./board.module.scss";
+import ReactCardFlip from "react-card-flip";
+import { LEVELS } from "../../consts/levels.const";
 import {
   PokemonLevel,
   PokemonLevelType,
-} from '../../utils/pokemon-level.interface';
-import { shuffle } from '../../../utils/functions/array-shuffle';
-import { StatisticsColumn } from '../../../components/statistics/statistics';
-import { CountdownApi } from 'react-countdown';
+} from "../../utils/pokemon-level.interface";
+import { shuffle } from "../../../utils/functions/array-shuffle";
+import { StatisticsColumn } from "../../../components/statistics/statistics";
+import { CountdownApi } from "react-countdown";
 
 interface PokemonBoardProps {
   setIsRunning: Dispatch<SetStateAction<boolean>>;
+  startedAt: number;
 }
 
 export const Board = (props: PokemonBoardProps) => {
-  const { setIsRunning } = props;
+  const { setIsRunning, startedAt } = props;
   const [levels, setLevels] = useState<PokemonLevel[]>(LEVELS);
 
   const [currentLevel, setCurrentLevel] = useState<PokemonLevel>(
     shuffle(levels)[0]
   );
+
+  const [countdown] = useState<number>(120000);
 
   const [score, setScore] = useState<number>(0);
 
@@ -54,9 +57,12 @@ export const Board = (props: PokemonBoardProps) => {
         forUpdate.splice(index, 1);
         return forUpdate;
       });
-      setCurrentLevel(shuffle(levels)[0]);
+
       setStart();
-    }, 1500);
+    }, 900);
+    setTimeout(() => {
+      setCurrentLevel(shuffle(levels)[0]);
+    }, 1600);
   };
   const finishGame = () => {
     setIsRunning(false);
@@ -66,7 +72,7 @@ export const Board = (props: PokemonBoardProps) => {
       <StatisticsColumn
         isRunning={true}
         player={{
-          name: 'PokemonPlayer',
+          name: "PokemonPlayer",
           levelsPlayed,
           highscore: score,
           id: 289323,
@@ -75,10 +81,10 @@ export const Board = (props: PokemonBoardProps) => {
         setCountdownRef={setCountdownRef}
         game={{
           levelsPlayed,
-          mode: 'CHATGPT',
-          complexity: 'HARD',
+          mode: "CHATGPT",
+          complexity: "HARD",
           highscore: score,
-          startedAt: Date.now() + 120000,
+          startedAt: startedAt + 60000,
         }}
         finishGame={finishGame}
       />
@@ -90,7 +96,7 @@ export const Board = (props: PokemonBoardProps) => {
             <Choice
               nextPokemonLevel={nextPokemonLevel}
               currentType={currentLevel.type}
-              goalType='FRAMEWORK'
+              goalType="FRAMEWORK"
               setChosen={setChosen}
               chosen={chosen}
             />
@@ -99,7 +105,7 @@ export const Board = (props: PokemonBoardProps) => {
             <Choice
               nextPokemonLevel={nextPokemonLevel}
               currentType={currentLevel.type}
-              goalType='POKEMON'
+              goalType="POKEMON"
               setChosen={setChosen}
               chosen={chosen}
             />
@@ -124,7 +130,7 @@ export const Choice = (props: ChoiceProps) => {
 
   return (
     <ReactCardFlip
-      flipDirection='horizontal'
+      flipDirection="horizontal"
       isFlipped={chosen && chosen === goalType}
     >
       <div
@@ -139,7 +145,7 @@ export const Choice = (props: ChoiceProps) => {
       >
         <div className={styles.Title}>{goalType}</div>
       </div>
-      <div className={cardStyles.join(' ')}>
+      <div className={cardStyles.join(" ")}>
         <div className={styles.Title}>{goalType}</div>
       </div>
     </ReactCardFlip>
