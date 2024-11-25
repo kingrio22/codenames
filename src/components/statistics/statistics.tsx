@@ -1,12 +1,12 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import styles from './statistics.module.scss';
-import { Player } from '../../api/create-player';
 import { GameProgress } from '../game/game';
 import { CountDownTimer } from '../countdown/countdown';
 import { CountdownApi } from 'react-countdown';
 
 interface StatisticsProps {
-  player: Player;
+  playerName: string;
+  levelsPlayedCount: number;
   currentScore: number;
   game: GameProgress;
   finishGame: () => void;
@@ -15,14 +15,21 @@ interface StatisticsProps {
 }
 
 export const StatisticsColumn = (props: StatisticsProps) => {
-  const { game, player, currentScore, finishGame, isRunning, setCountdownRef } =
-    props;
+  const {
+    game,
+    playerName,
+    levelsPlayedCount,
+    currentScore,
+    finishGame,
+    isRunning,
+    setCountdownRef,
+  } = props;
   return (
     <div className={styles.StatisticColumn}>
       <div className={styles.Header}>
         <img src='../stewart.png' alt='' />
       </div>
-      <div className={styles.PlayerName}>{player.name}</div>
+      <div className={styles.PlayerName}>{playerName}</div>
       <div className={styles.ColumnRow}>
         <div className={styles.Column}>
           <div className={styles.Icon}>
@@ -39,9 +46,7 @@ export const StatisticsColumn = (props: StatisticsProps) => {
           </div>
           <div className={styles.Content}>
             <div className={styles.ColumnTitle}>Level</div>
-            <div className={styles.ColumnValue}>
-              {player.levelsPlayed.length + game.levelsPlayed.length}
-            </div>
+            <div className={styles.ColumnValue}>{levelsPlayedCount}</div>
           </div>
         </div>
         <div className={styles.Column}>

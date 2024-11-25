@@ -3,7 +3,6 @@ import { CardComponent } from '../card/card';
 import styles from './board.module.scss';
 import { Complexity, GameProgress } from '../game/game';
 import { Card, Level } from '../levels/levels.const';
-import { CountDownTimer } from '../countdown/countdown';
 import { Player } from '../../api/create-player';
 import { CountdownApi } from 'react-countdown';
 import { StatisticsColumn } from '../statistics/statistics';
@@ -76,10 +75,13 @@ export const Board = (props: BoardProps) => {
       <StatisticsColumn
         game={game}
         isRunning={isRunning}
-        player={player}
+        playerName={player.name}
         finishGame={finishGame}
         currentScore={currentScore}
         setCountdownRef={setCountdownRef}
+        levelsPlayedCount={
+          player.levelsPlayed.length + game.levelsPlayed.length
+        }
       />
       <div className={styles.BoardWrapper}>
         <div className={styles.HintRow}>

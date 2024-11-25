@@ -4,7 +4,11 @@
   height: 100vh;
   display: flex;
   justify-content: space-around;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   color: #fff;
+}
+
+.Highscore {
+  width: 20%;
 }

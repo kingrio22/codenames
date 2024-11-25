@@ -5,11 +5,12 @@ import { usePlayers } from '../../hooks/usePlayers';
 interface ResultProps {
   highscore: number;
   playerId: number;
+  type: 'POKEMON' | 'CODENAMES';
 }
 
 export const Result = (props: ResultProps) => {
-  const [players] = usePlayers(() => null, true);
-  const { highscore, playerId } = props;
+  const { highscore, playerId, type } = props;
+  const [players] = usePlayers(() => null, true, type);
   const rank = (players.findIndex((p) => p.id === playerId) ?? 0) + 1;
   return (
     <div className={styles.ResultWrapper}>

@@ -1,7 +1,7 @@
-import Countdown, { CountdownRenderProps, CountdownApi } from "react-countdown";
-import { GameProgress } from "../game/game";
-import styles from "./countdown.module.scss";
-import React, { Dispatch, SetStateAction } from "react";
+import Countdown, { CountdownRenderProps, CountdownApi } from 'react-countdown';
+import { GameProgress } from '../game/game';
+import styles from './countdown.module.scss';
+import React, { Dispatch, SetStateAction } from 'react';
 interface CProps {
   isRunning: boolean;
   game: GameProgress;
@@ -20,9 +20,20 @@ export const CountDownTimer = (props: CProps) => {
   const renderer = ({ minutes, seconds }: CountdownRenderProps) => {
     return (
       <span>
-        {fillup(minutes.toString())}:{fillup(seconds.toString())}
+        {fillup(minutes.toString())}:
+        {getSeconds(minutes === 0, seconds.toString())}
       </span>
     );
+  };
+
+  const getSeconds = (isLastMinute: boolean, seconds: string) => {
+    if (isLastMinute && seconds.length < 2) {
+      return <span className={styles.LastSeconds}>{fillup(seconds)}</span>;
+    }
+    if (seconds.length < 2) {
+      return fillup(seconds);
+    }
+    return seconds;
   };
 
   return (

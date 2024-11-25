@@ -4,23 +4,25 @@ import { fetchAllPlayers } from '../api/get-all-players';
 
 export const usePlayers = (
   showError: Dispatch<SetStateAction<string | undefined>>,
-  isRunning: boolean
+  isRunning: boolean,
+  type: GameType
 ) => {
   const [players, setPlayers] = useState<Player[]>([]);
 
   useEffect(() => {
-    getAllPlayers(setPlayers, showError);
+    getAllPlayers(type, setPlayers, showError);
   }, [showError, isRunning]);
 
   return [players];
 };
 
 async function getAllPlayers(
+  type: GameType,
   setPlayers: Dispatch<SetStateAction<Player[]>>,
   setError: Dispatch<SetStateAction<string | undefined>>
 ): Promise<void> {
   try {
-    const { data: players } = await fetchAllPlayers();
+    const { data: players } = await fetchAllPlayers(type);
 
     if (players) {
       setPlayers(players);
@@ -29,3 +31,5 @@ async function getAllPlayers(
     setError('Cant fetch players');
   }
 }
+
+export type GameType = 'CODENAMES' | 'POKEMON';

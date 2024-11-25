@@ -1,24 +1,33 @@
-import axios, { AxiosRequestConfig } from "axios";
-import { BASE_URL } from "../config/api.config";
-import { Player } from "./create-player";
-import { GameProgress } from "../components/game/game";
+import axios, { AxiosRequestConfig } from 'axios';
+import { BASE_URL } from '../config/api.config';
+import { Player } from './create-player';
+import { GameProgress } from '../components/game/game';
+import { GameType } from '../hooks/usePlayers';
 
 export async function updatePlayer(
   game: GameProgress,
-  player: Player
+  player: Player,
+  gameType: GameType
 ): Promise<void> {
-  const updatePlayerDto: Omit<Player, "id"> = {
-    highscore: game.highscore,
+  const { highscore, highscorePokemon } = getScoresByGameType(
+    game,
+    player,
+    gameType
+  );
+
+  const updatePlayerDto: Omit<Player, 'id'> = {
+    highscore,
     levelsPlayed: game.levelsPlayed,
     name: player.name,
+    highscorePokemon,
   };
 
   try {
     const options: AxiosRequestConfig = {
       url: `${BASE_URL}/player/${player.id}`,
-      method: "PUT",
+      method: 'PUT',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       data: updatePlayerDto,
     };
@@ -28,4 +37,22 @@ export async function updatePlayer(
     console.log(err);
     throw new Error();
   }
+}
+
+function getScoresByGameType(
+  game: GameProgress,
+  player: Player,
+  gameType: GameType
+): { highscore: number; highscorePokemon: number } {
+  if (gameType === 'CODENAMES') {
+    return {
+      highscore: game.highscore,
+      highscorePokemon: player.highscorePokemon,
+    };
+  }
+
+  return {
+    highscore: player.highscore,
+    highscorePokemon: game.highscorePokemon,
+  };
 }

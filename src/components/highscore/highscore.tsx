@@ -1,17 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './highscore.module.scss';
-import { usePlayers } from '../../hooks/usePlayers';
+import { GameType, usePlayers } from '../../hooks/usePlayers';
 import html2canvas from 'html2canvas';
+import { Player } from '../../api/create-player';
 
 interface HighscoreProps {
   isRunning: boolean;
+  gameType: GameType;
 }
 
 export const Highscore = (props: HighscoreProps) => {
   const highscoreRef = useRef();
-  const { isRunning } = props;
+  const { isRunning, gameType } = props;
   const [errorMessage, showError] = useState<string | undefined>();
-  const [players] = usePlayers(showError, isRunning);
+  const [players] = usePlayers(showError, isRunning, gameType);
 
   useEffect(() => {
     captureHighscore(highscoreRef);
@@ -31,7 +33,9 @@ export const Highscore = (props: HighscoreProps) => {
           <div className={styles.Player}>
             <div className={styles.Rank}>{index + 1}</div>
             <div className={styles.Name}>{player.name}</div>
-            <div className={styles.Score}>{player.highscore}</div>
+            <div className={styles.Score}>
+              {getHighscoreByGameType(gameType, player)}
+            </div>
           </div>
         ))
       ) : (
@@ -67,4 +71,10 @@ function uploadImage(data: any) {
     .catch((error) => {
       console.error('Error:', error);
     });
+}
+function getHighscoreByGameType(gameType: GameType, player: Player): number {
+  if (gameType === 'POKEMON') {
+    return player.highscorePokemon;
+  }
+  return player.highscore;
 }
