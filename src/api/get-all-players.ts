@@ -8,7 +8,7 @@ export async function fetchAllPlayers(
 ): Promise<AxiosResponse<Player[]>> {
   try {
     const options: AxiosRequestConfig = {
-      url: `${BASE_URL}/player/all/:${gameType}`,
+      url: `${BASE_URL}/player/all/${gameType}`,
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
