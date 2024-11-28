@@ -156,7 +156,7 @@ export const Game = (props: GameProps) => {
           )}
         </div>
         <div className={styles.SideBar}>
-          <Highscore isRunning={isRunning} gameType='CODENAMES' />
+          <Highscore gameType='CODENAMES' />
         </div>
       </div>
     </div>

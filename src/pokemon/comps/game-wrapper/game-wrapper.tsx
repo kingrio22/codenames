@@ -23,7 +23,7 @@ export const GameWrapper = () => {
         )}
       </div>
       <div className={styles.Highscore}>
-        <Highscore isRunning={isRunning} gameType={'POKEMON'} />
+        <Highscore gameType={'POKEMON'} />
       </div>
     </div>
   );

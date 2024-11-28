@@ -4,14 +4,13 @@ import { fetchAllPlayers } from '../api/get-all-players';
 
 export const usePlayers = (
   showError: Dispatch<SetStateAction<string | undefined>>,
-  isRunning: boolean,
   type: GameType
 ) => {
   const [players, setPlayers] = useState<Player[]>([]);
 
   useEffect(() => {
     getAllPlayers(type, setPlayers, showError);
-  }, [showError, isRunning]);
+  }, [showError, type]);
 
   return [players];
 };

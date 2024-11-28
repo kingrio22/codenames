@@ -10,7 +10,7 @@ interface ResultProps {
 
 export const Result = (props: ResultProps) => {
   const { highscore, playerId, type } = props;
-  const [players] = usePlayers(() => null, true, type);
+  const [players] = usePlayers(() => null, type);
   const rank = (players.findIndex((p) => p.id === playerId) ?? 0) + 1;
   return (
     <div className={styles.ResultWrapper}>

@@ -24,7 +24,7 @@ function App() {
       <div>
         <Background />
         <div style={{ padding: '2rem' }}>
-          <Highscore isRunning={isRunning} gameType={'CODENAMES'} />
+          <Highscore gameType={'CODENAMES'} />
         </div>
       </div>
     );

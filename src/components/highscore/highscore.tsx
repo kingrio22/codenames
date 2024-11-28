@@ -5,15 +5,14 @@ import html2canvas from 'html2canvas';
 import { Player } from '../../api/create-player';
 
 interface HighscoreProps {
-  isRunning: boolean;
   gameType: GameType;
 }
 
 export const Highscore = (props: HighscoreProps) => {
   const highscoreRef = useRef();
-  const { isRunning, gameType } = props;
+  const { gameType } = props;
   const [errorMessage, showError] = useState<string | undefined>();
-  const [players] = usePlayers(showError, isRunning, gameType);
+  const [players] = usePlayers(showError, gameType);
 
   useEffect(() => {
     captureHighscore(highscoreRef);
