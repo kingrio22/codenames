@@ -86,7 +86,7 @@ export const Board = (props: PokemonBoardProps) => {
           mode: 'CHATGPT',
           complexity: 'HARD',
           highscore: 0,
-          startedAt: startedAt + 6000,
+          startedAt: startedAt + 60000,
           highscorePokemon: score,
         }}
         finishGame={finishGame}
