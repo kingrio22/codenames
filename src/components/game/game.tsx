@@ -12,10 +12,8 @@ import { LoadingSpinner } from "../loading-spinner/loading-spinner";
 import { CountdownApi } from "react-countdown";
 import { Result } from "../result/resutl";
 
-export type GameMode = "INTERHYP" | "CHATGPT";
 export type Complexity = "LOW" | "MIDDLE" | "HARD";
 export interface GameProgress {
-  mode: GameMode;
   complexity: Complexity;
   highscore: number;
   levelsPlayed: number[];
@@ -60,7 +58,6 @@ export const Game = (props: GameProps) => {
 
     setPause();
     const newLevel = await getLevel(
-      game.mode,
       player.id,
       [...game.levelsPlayed, level.id],
       setLoading
@@ -140,7 +137,6 @@ export const Game = (props: GameProps) => {
 
           {isRunning === false && (
             <GameResult
-              game={game}
               setGame={setGame}
               setIsRunning={setIsRunning}
               setLevel={setLevel}

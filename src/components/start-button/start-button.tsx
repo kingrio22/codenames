@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./start-button.module.scss";
 import { Dispatch, SetStateAction } from "react";
-import { Complexity, GameMode, GameProgress } from "../game/game";
+import { Complexity, GameProgress } from "../game/game";
 import { Level } from "../levels/levels.const";
 import { Player } from "../../api/create-player";
 import { getLevel } from "../../api/get-random-level.api";
@@ -11,7 +11,6 @@ interface StartButtonProps {
   setLoading: Dispatch<SetStateAction<boolean>>;
   setGame: Dispatch<SetStateAction<GameProgress | undefined>>;
   setLevel: Dispatch<SetStateAction<Level | undefined>>;
-  mode: GameMode;
   complexity: Complexity | undefined;
   countdown: number;
   player: Player | undefined;
@@ -22,7 +21,6 @@ export const StartButton = (props: StartButtonProps) => {
     setGame,
     countdown,
     setLevel,
-    mode,
     complexity,
     player,
     setLoading,
@@ -36,7 +34,7 @@ export const StartButton = (props: StartButtonProps) => {
         }
         setIsRunning(true);
         fetchInitialLevel(
-          () => getLevel(mode, player.id, [], setLoading),
+          () => getLevel(player.id, [], setLoading),
           (level) => setLevel(level)
         );
         setGame({
@@ -44,7 +42,6 @@ export const StartButton = (props: StartButtonProps) => {
           levelsPlayed: [],
           startedAt: Date.now() + countdown,
           complexity,
-          mode,
           highscorePokemon: 0,
         });
       }}

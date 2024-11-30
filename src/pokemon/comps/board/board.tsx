@@ -75,7 +75,6 @@ export const Board = (props: PokemonBoardProps) => {
         setCountdownRef={setCountdownRef}
         game={{
           levelsPlayed,
-          mode: "CHATGPT",
           complexity: "HARD",
           highscore: 0,
           startedAt: startedAt + 60000,

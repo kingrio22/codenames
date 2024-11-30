@@ -1,10 +1,8 @@
-import { Complexity, GameMode } from "../game/game";
-
 export interface Level {
   id: number;
   hint: string;
   correctWords: number;
-  mode?: GameMode;
+  mode: "CHATGPT";
   cards: Card[];
 }
 
