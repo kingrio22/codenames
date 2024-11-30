@@ -1,19 +1,19 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
-import styles from './game.module.scss';
-import { Board } from '../board/board';
-import { Level } from '../levels/levels.const';
-import { GameResult } from '../game-result/game-result';
-import { shuffle } from '../../utils/functions/array-shuffle';
-import { Highscore } from '../highscore/highscore';
-import { Player } from '../../api/create-player';
-import { updatePlayer } from '../../api/update-player';
-import { getLevel } from '../../api/get-random-level.api';
-import { LoadingSpinner } from '../loading-spinner/loading-spinner';
-import { CountdownApi } from 'react-countdown';
-import { Result } from '../result/resutl';
+import React, { Dispatch, SetStateAction, useState } from "react";
+import styles from "./game.module.scss";
+import { Board } from "../board/board";
+import { Level } from "../levels/levels.const";
+import { GameResult } from "../game-result/game-result";
+import { shuffle } from "../../utils/functions/array-shuffle";
+import { Highscore } from "../highscore/highscore";
+import { Player } from "../../api/create-player";
+import { updatePlayer } from "../../api/update-player";
+import { getLevel } from "../../api/get-random-level.api";
+import { LoadingSpinner } from "../loading-spinner/loading-spinner";
+import { CountdownApi } from "react-countdown";
+import { Result } from "../result/resutl";
 
-export type GameMode = 'INTERHYP' | 'CHATGPT';
-export type Complexity = 'LOW' | 'MIDDLE' | 'HARD';
+export type GameMode = "INTERHYP" | "CHATGPT";
+export type Complexity = "LOW" | "MIDDLE" | "HARD";
 export interface GameProgress {
   mode: GameMode;
   complexity: Complexity;
@@ -54,7 +54,7 @@ export const Game = (props: GameProps) => {
 
     setLevel((prev) => {
       if (prev) {
-        return { ...prev, cards: prev.cards.map((c) => ({ ...c, word: '' })) };
+        return { ...prev, cards: prev.cards.map((c) => ({ ...c, word: "" })) };
       }
     });
 
@@ -91,24 +91,19 @@ export const Game = (props: GameProps) => {
     if (!player || !game) {
       return;
     }
-    const updatePromise = updatePlayer(game, player, 'CODENAMES');
-
+    await updatePlayer(game, player, "CODENAMES");
     setLevel(undefined);
-    // upcoming
-    await updatePromise;
     setShowResult(true);
-    //upcoming end
-    setTimeout(async () => {
-      // upcoming
-      setShowResult(false);
-      //upcoming end
-      setGame(undefined);
-      setPlayer(undefined);
-      setIsRunning(false);
-    }, 5000);
   };
 
-  const [countdown] = useState<number>(120000);
+  const onHideResult = () => {
+    setShowResult(false);
+    setGame(undefined);
+    setPlayer(undefined);
+    setIsRunning(false);
+  };
+
+  const [countdown] = useState<number>(1200);
 
   return (
     <div className={styles.GameWrapper}>
@@ -138,7 +133,8 @@ export const Game = (props: GameProps) => {
             <Result
               highscore={game?.highscore ?? 0}
               playerId={player?.id}
-              type='CODENAMES'
+              type="CODENAMES"
+              onHideResult={onHideResult}
             />
           )}
 
@@ -156,7 +152,7 @@ export const Game = (props: GameProps) => {
           )}
         </div>
         <div className={styles.SideBar}>
-          <Highscore gameType='CODENAMES' />
+          <Highscore gameType="CODENAMES" />
         </div>
       </div>
     </div>

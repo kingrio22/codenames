@@ -24,6 +24,7 @@
   -webkit-backdrop-filter: blur(3.2px);
   border: 1px solid rgba(255, 255, 255, 0.25);
   padding: 3rem;
+  color: #fff;
 }
 
 .ColumnRow {
@@ -36,12 +37,12 @@
 
 .Column {
   display: flex;
+  flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
   vertical-align: middle;
-  flex-direction: row;
-  height: 9vh;
-  width: 9vw;
+  height: 12vh;
+  width: 12vw;
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.15);
   box-shadow: 0 4px 30px rgba(255, 255, 255, 0.15);
@@ -49,4 +50,28 @@
   -webkit-backdrop-filter: blur(3px);
   border: 1px solid rgba(255, 255, 255, 0.25);
   margin: 1rem;
+}
+.ColumnTitle {
+  font-size: 26px;
+}
+.ColumnValue {
+  font-size: 32px;
+}
+.ButtonWrapper {
+  text-align: center;
+}
+.FinishButton {
+  margin: 2rem 0rem;
+  padding: 1rem 4rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 5px;
+  cursor: pointer;
+  color: #fff;
+  font-size: 28px;
+  font-family: Jaro;
 }

@@ -1,7 +1,6 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
-import styles from './game.module.scss';
-import { Board } from '../board/board';
-import { Result } from '../../../components/result/resutl';
+import React, { Dispatch, SetStateAction, useState } from "react";
+import { Board } from "../board/board";
+import { Result } from "../../../components/result/resutl";
 
 interface GameProps {
   setIsRunning: Dispatch<SetStateAction<boolean>>;
@@ -11,10 +10,23 @@ interface GameProps {
 }
 
 export const Game = (props: GameProps) => {
-  const { score } = props;
+  const { score, setIsRunning, setScore } = props;
   const [showResult, setShowResult] = useState<boolean>(false);
+
+  const onHideResult = () => {
+    setIsRunning(false);
+    setShowResult(false);
+    setScore(0);
+  };
   if (showResult) {
-    return <Result type='POKEMON' highscore={score} playerId={0} />;
+    return (
+      <Result
+        type="POKEMON"
+        highscore={score}
+        playerId={0}
+        onHideResult={onHideResult}
+      />
+    );
   }
 
   return <Board {...props} setShowResult={setShowResult} />;

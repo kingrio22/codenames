@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
-import styles from './highscore.module.scss';
-import { GameType, usePlayers } from '../../hooks/usePlayers';
-import html2canvas from 'html2canvas';
-import { Player } from '../../api/create-player';
+import React, { useEffect, useRef } from "react";
+import styles from "./highscore.module.scss";
+import { GameType, usePlayers } from "../../hooks/usePlayers";
+import html2canvas from "html2canvas";
+import { Player } from "../../api/create-player";
 
 interface HighscoreProps {
   gameType: GameType;
@@ -11,8 +11,8 @@ interface HighscoreProps {
 export const Highscore = (props: HighscoreProps) => {
   const highscoreRef = useRef();
   const { gameType } = props;
-  const [errorMessage, showError] = useState<string | undefined>();
-  const [players] = usePlayers(showError, gameType);
+
+  const [players] = usePlayers(gameType);
 
   useEffect(() => {
     captureHighscore(highscoreRef);
@@ -22,7 +22,7 @@ export const Highscore = (props: HighscoreProps) => {
     <div className={styles.HighscoreWrapper} ref={highscoreRef.current}>
       <div className={styles.TitleWrapper}>
         <div className={styles.Cup}>
-          <img src='../cup.png' className={styles.CupImage} alt='cup' />
+          <img src="../cup.png" className={styles.CupImage} alt="cup" />
         </div>
         <div className={styles.Title}>Highscore</div>
       </div>
@@ -47,7 +47,7 @@ function captureHighscore(
   highscoreRef: React.MutableRefObject<HTMLDivElement | undefined>
 ) {
   if (!highscoreRef.current) {
-    console.log('is null');
+    console.log("is null");
     return;
   }
   html2canvas(highscoreRef.current).then(function (canvas) {
@@ -55,24 +55,24 @@ function captureHighscore(
   });
 }
 function uploadImage(data: any) {
-  console.log('upload');
+  console.log("upload");
   let formData = new FormData(data);
-  fetch('https://api.mgraetz.de/files/upload', {
-    method: 'POST',
+  fetch("https://api.mgraetz.de/files/upload", {
+    method: "POST",
     body: formData,
   })
     .then((res) => res.json())
     .then((data) => {
       if (data.insertedId) {
-        alert('Plcae added successfully');
+        alert("Plcae added successfully");
       }
     })
     .catch((error) => {
-      console.error('Error:', error);
+      console.error("Error:", error);
     });
 }
 function getHighscoreByGameType(gameType: GameType, player: Player): number {
-  if (gameType === 'POKEMON') {
+  if (gameType === "POKEMON") {
     return player.highscorePokemon;
   }
   return player.highscore;
