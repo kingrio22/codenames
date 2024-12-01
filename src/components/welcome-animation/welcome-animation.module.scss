@@ -18,18 +18,18 @@
   background: rgba(255, 255, 255, 0);
   border-radius: 10px;
   transition: transform 0.3s ease;
-  width: 600px;
+  width: 45vw;
 }
 
 .headline {
   color: #2c3e50;
-  font-size: 44px;
+  font-size: 2.75vw;
   font-weight: 300;
   white-space: nowrap;
   overflow: hidden;
   position: relative;
-  height: 4.5rem;
-  width: 600px;
+  height: 4.5vw;
+  width: 45vw;
 }
 
 .message {
@@ -43,11 +43,10 @@
   font-weight: 700;
   overflow: hidden;
   position: absolute;
-  border-radius: 10px;
   animation: open 3s ease;
   box-sizing: border-box;
   animation-iteration-count: 1;
-  height: 4.5rem;
+  height: 4.5vw;
   transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
@@ -56,12 +55,12 @@
   position: absolute;
   width: 100%;
   opacity: 0;
-  height: 4.5rem;
+  height: 4.5vw;
 }
 
 .message .word1 {
   animation: word-animation 3s ease-in-out;
-  height: 4.5rem;
+  height: 4.5vw;
 }
 @keyframes word-animation {
   0%,

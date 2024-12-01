@@ -1,0 +1,30 @@
+@media(max-width: 700px) {
+    .Logo {
+        margin: 10px;
+        height: 50px;
+        width: 50px;
+    }
+}
+
+@media(min-width: 701px) {
+    .Logo {
+        margin: 10px;
+        height: 75px;
+        width: 75px;
+    }
+}
+
+.Logo {
+    box-sizing: border-box;
+    border-radius: 5px;
+    align-items: center;
+    vertical-align: middle;
+    display: flex;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 1);
+    opacity: 0.85;
+}
+
+.Logo img {
+    max-width: 75%;
+}

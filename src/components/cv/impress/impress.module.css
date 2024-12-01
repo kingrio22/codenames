@@ -1,0 +1,25 @@
+    @media(min-height: 751px) and (min-width: 751px) {
+        .Impress {
+            position: absolute;
+        }
+    }
+    
+    @media(max-width: 750px) {
+        .Impress {
+            position: relative;
+        }
+    }
+    
+    .Impress {
+        text-align: center;
+        color: #eeeeee;
+        font-size: 10px;
+        width: 100%;
+        bottom: 0;
+        left: 0;
+    }
+    
+    a {
+        text-decoration: none;
+        color: #eeeeee;
+    }

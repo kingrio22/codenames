@@ -12,10 +12,10 @@
   flex-direction: row;
   align-items: center;
   vertical-align: middle;
-  padding: 1rem;
+  padding: 1vw;
 }
 .Card {
-  margin: 1rem;
+  margin: 1vw;
 }
 .Choice {
   width: 25vw;
@@ -42,13 +42,13 @@
 }
 
 .Hint {
-  font-family: 'Unbounded', sans-serif;
+  font-family: "Unbounded", sans-serif;
   color: #ffdc7f;
   font-weight: 700;
   display: flex;
-  padding: 0.5rem 1rem;
+  padding: 0.5vw 1vw;
   width: 30vw;
-  font-size: 2rem;
+  font-size: 2vw;
   background: rgba(255, 255, 255, 0.15);
   border-radius: 10px;
   box-shadow: 0 4px 30px rgba(255, 255, 255, 0.15);

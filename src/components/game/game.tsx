@@ -100,7 +100,7 @@ export const Game = (props: GameProps) => {
     setIsRunning(false);
   };
 
-  const [countdown] = useState<number>(1200);
+  const [countdown] = useState<number>(120000);
 
   return (
     <div className={styles.GameWrapper}>

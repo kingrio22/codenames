@@ -13,8 +13,8 @@
     flex-direction: column;
     justify-content: start;
     color: #ddd;
-    width: 36%;
-    height: 50vh;
+    width: 40%;
+    height: 55vh;
     background: rgba(255, 255, 255, 0.15);
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(255, 255, 255, 0.1);
@@ -23,7 +23,7 @@
     border: 1px solid rgba(255, 255, 255, 0.25);
   }
   .ModalWrapper {
-    padding: 2.25rem;
+    padding: 2.25vw;
     position: relative;
   }
   .Button {
@@ -33,21 +33,21 @@
 }
 
 .Welcome {
-  margin-bottom: 2rem;
-  font-size: 44px;
+  margin-bottom: 2vw;
+  font-size: 3vw;
   text-align: center;
 }
 
 .ChooseComplexity {
-  font-size: 32px;
+  font-size: 2vw;
   text-align: center;
-  margin: 2rem 0rem 2rem 0rem;
+  margin: 2vw 0vw 2vw 0vw;
 }
 .GameOver {
   text-align: center;
-  font-size: 40px;
+  font-size: 2.5vw;
   font-weight: bold;
-  margin-bottom: 1rem;
+  margin-bottom: 1vw;
 }
 .Complexity {
   width: 100%;
@@ -65,7 +65,7 @@
   display: flex;
   flex-direction: column;
   vertical-align: middle;
-  padding: 2rem;
+  padding: 1.5vw;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(255, 255, 255, 0.1);
@@ -75,28 +75,27 @@
   border-radius: 16px;
 }
 .InputTitle {
-  font-size: 30px;
-  margin-bottom: 1rem;
+  font-size: 1.5vw;
+  margin-bottom: 1vw;
 }
 
 .ButtonRow {
   position: absolute;
-  top: 2rem;
-  right: 2rem;
+  top: 2vw;
+  right: 2vw;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 
   button {
-    margin: 0rem 1rem;
-    padding: 0.5rem 2rem;
+    margin: 0vw 1vw;
+    padding: 0.5vw 2vw;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(1px);
     -webkit-backdrop-filter: blur(1px);
     border: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: 5px;
     color: #222;
     cursor: pointer;
     &:hover {
@@ -106,7 +105,7 @@
 }
 
 .NameError {
-  margin-top: 0.5rem;
+  margin-top: 0.5vw;
   color: #dd2222;
-  font-size: 14px;
+  font-size: 1vw;
 }

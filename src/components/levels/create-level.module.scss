@@ -1,96 +1,96 @@
-.CreateWrapper {
-  width: 70%;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-}
+// .CreateWrapper {
+//   width: 70%;
+//   display: flex;
+//   justify-content: center;
+//   flex-direction: column;
+// }
 
-.BaseInfo {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  vertical-align: middle;
-  align-items: center;
-}
-.Hint {
-  font-size: 18px;
-}
-.CardsCluster {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-  position: relative;
-}
-.CardTitle {
-  width: 100%;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-  font-size: 18px;
-  font-weight: bold;
-  text-align: center;
-}
-.CardHint {
-  text-align: center;
-  margin-bottom: 1rem;
-}
-.Title {
-  width: 100%;
-  text-align: center;
-  margin-bottom: 2rem;
-  font-size: 28px;
-  font-weight: bold;
-}
-.ButtonWrapper {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  text-align: center;
-  display: flex;
-  justify-content: space-around;
-}
-.Button {
-  padding: 1rem 3rem;
-  background-color: rgba(0, 0, 0);
-  border: 0px solid rgba(0, 0, 0, 0);
-  color: #fff;
-  font-size: 22px;
-  border-radius: 5px;
-  cursor: pointer;
-  text-align: center;
-}
+// .BaseInfo {
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: space-around;
+//   vertical-align: middle;
+//   align-items: center;
+// }
+// .Hint {
+//   font-size: 18px;
+// }
+// .CardsCluster {
+//   display: grid;
+//   grid-template-columns: repeat(3, 1fr);
+//   grid-template-rows: repeat(3, 1fr);
+//   position: relative;
+// }
+// .CardTitle {
+//   width: 100%;
+//   margin-top: 2vw;
+//   margin-bottom: 1vw;
+//   font-size: 18px;
+//   font-weight: bold;
+//   text-align: center;
+// }
+// .CardHint {
+//   text-align: center;
+//   margin-bottom: 1vw;
+// }
+// .Title {
+//   width: 100%;
+//   text-align: center;
+//   margin-bottom: 2vw;
+//   font-size: 28px;
+//   font-weight: bold;
+// }
+// .ButtonWrapper {
+//   margin-top: 2vw;
+//   margin-bottom: 2vw;
+//   text-align: center;
+//   display: flex;
+//   justify-content: space-around;
+// }
+// .Button {
+//   padding: 1vw 3vw;
+//   background-color: rgba(0, 0, 0);
+//   border: 0px solid rgba(0, 0, 0, 0);
+//   color: #fff;
+//   font-size: 22px;
+//   border-radius: 5px;
+//   cursor: pointer;
+//   text-align: center;
+// }
 
-.ErrorMessage {
-  text-align: center;
-  color: #ff2222;
-  font-weight: bold;
-}
+// .ErrorMessage {
+//   text-align: center;
+//   color: #ff2222;
+//   font-weight: bold;
+// }
 
-.ShuffleWrapper {
-  margin-bottom: 2rem;
-  display: flex;
-  justify-content: space-between;
-  .Button {
-    font-size: 12px;
-    width: 40%;
-    padding: 0.5rem 1rem;
-  }
-}
+// .ShuffleWrapper {
+//   margin-bottom: 2vw;
+//   display: flex;
+//   justify-content: space-between;
+//   .Button {
+//     font-size: 12px;
+//     width: 40%;
+//     padding: 0.5vw 1vw;
+//   }
+// }
 
-.SubTitle {
-  font-size: 20px;
-  font-weight: bold;
-}
+// .SubTitle {
+//   font-size: 20px;
+//   font-weight: bold;
+// }
 
-.ModalWrapper {
-  display: flex;
-  flex-direction: row;
-}
+// .ModalWrapper {
+//   display: flex;
+//   flex-direction: row;
+// }
 
-.WordsTable {
-  width: 20%;
-  padding: 1rem;
-}
+// .WordsTable {
+//   width: 20%;
+//   padding: 1vw;
+// }
 
-.WordsList {
-  max-height: 40vh;
-  overflow: scroll;
-}
+// .WordsList {
+//   max-height: 40vh;
+//   overflow: scroll;
+// }

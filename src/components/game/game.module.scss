@@ -15,7 +15,7 @@
   justify-content: center;
   align-items: center;
   vertical-align: middle;
-  font-size: 36px;
+  font-size: 2vw;
   .BoardPart {
     display: flex;
     justify-content: center;
@@ -30,9 +30,9 @@
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
-    font-size: 122px;
+    font-size: 9vw;
     font-weight: 700;
-    line-height: 232.96px;
+    line-height: 25vh;
     letter-spacing: -0.08em;
     text-align: left;
     text-underline-position: from-font;
@@ -79,43 +79,27 @@
   height: 80vh;
 }
 
-.Countdown {
-  color: red;
-  font-size: 48px;
-}
-
-.NewGameButtonWrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: baseline;
-}
-
-.NewGameButton {
-  width: 7.5rem;
-  height: 7.5rem;
-}
-
-.CreateWrapper {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  vertical-align: middle;
-  background-color: rgba(0, 0, 0, 0.25);
-  .CreateModal {
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    color: black;
-    background-color: #ccc;
-    width: 60vw;
-  }
-  .Button {
-    width: 100%;
-    text-align: center;
-  }
-}
+// .CreateWrapper {
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   width: 100vw;
+//   height: 100vh;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   vertical-align: middle;
+//   background-color: rgba(0, 0, 0, 0.25);
+//   .CreateModal {
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: start;
+//     color: black;
+//     background-color: #ccc;
+//     width: 60vw;
+//   }
+//   .Button {
+//     width: 100%;
+//     text-align: center;
+//   }
+// }

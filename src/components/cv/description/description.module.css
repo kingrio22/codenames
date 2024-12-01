@@ -1,0 +1,30 @@
+@media(max-width: 1299px) {
+    .Headline {
+        font-size: 16px
+    }
+}
+
+@media(min-width: 1300px) {
+    .Headline {
+        font-size: 24px;
+    }
+}
+
+.DescriptionWrapper {
+    position: relative;
+    height: 100%;
+    display: flex;
+    padding: 25px;
+    box-sizing: border-box;
+    justify-content: space-around;
+    vertical-align: middle;
+    align-items: center;
+    z-index: 1;
+    width: 100%;
+}
+
+.Headline {
+    position: absolute;
+    top: 25px;
+    color: #eeeeee;
+}

@@ -1,6 +1,6 @@
-import React from 'react';
-import styles from './card-input.module.scss';
-import { Card } from '../levels/levels.const';
+import React from "react";
+import styles from "./card-input.module.scss";
+import { Card } from "../levels/levels.const";
 
 interface CardInputProps {
   card: Card;
@@ -8,7 +8,7 @@ interface CardInputProps {
 }
 export const CardInput = (props: CardInputProps): JSX.Element => {
   const {
-    card: { word = '', isCorrect = false },
+    card: { word = "", isCorrect = false },
     card,
     setValue,
   } = props;
@@ -16,18 +16,18 @@ export const CardInput = (props: CardInputProps): JSX.Element => {
   return (
     <div className={styles.CardInput}>
       <input
-        type={'text'}
+        type={"text"}
         value={word}
         onChange={(e) => setValue({ ...card, word: e.currentTarget.value })}
-        placeholder='word'
+        placeholder="word"
       />
-      <label htmlFor='isCorrect-input' style={{ marginLeft: '0.5rem' }}>
+      <label htmlFor="isCorrect-input" style={{ marginLeft: "0.5vw" }}>
         correct?
       </label>
       <input
-        type={'checkbox'}
+        type={"checkbox"}
         checked={isCorrect}
-        id='isCorrect-input'
+        id="isCorrect-input"
         onChange={(e) =>
           setValue({ ...card, isCorrect: e.currentTarget.checked })
         }

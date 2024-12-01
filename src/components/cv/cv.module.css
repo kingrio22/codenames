@@ -1,0 +1,95 @@
+@media(max-width: 700px) {
+    .TopArea {
+        display: contents;
+    }
+    .BottomArea {
+        width: 80%;
+        flex-flow: wrap;
+        margin-bottom: 25px;
+    }
+    .NavigationBar {
+        display: wrap;
+        margin-top: 100px;
+        margin-bottom: 30px;
+        height: 20px;
+        width: 80%;
+        font-size: 12px;
+    }
+    .TopBox {
+        width: 80%;
+        margin-top: 50px;
+        height: 300px;
+    }
+    .Cv {
+        height: 100%;
+        flex-flow: wrap;
+    }
+}
+
+@media(min-width: 701px) {
+    .Cv {
+        height: 100%;
+        flex-flow: column;
+    }
+    .TopArea {
+        display: flex;
+        max-height: 60%;
+        width: 100%;
+        padding: 20px 50px;
+    }
+    .NavigationBar {
+        display: flex;
+        height: 80px;
+        padding: 20px 50px;
+        font-size: 18px;
+    }
+    .BottomArea {
+        display: flex;
+        padding: 20px 50px;
+        min-height: 275px;
+        margin-bottom: 50px;
+    }
+    .TopBox {
+        width: 45%;
+        height: 80%;
+        min-height: 300px;
+    }
+}
+
+.Cv {
+    height: 100%;
+    min-height: 720px;
+    max-width: 1440px;
+    display: flex;
+    margin: auto;
+    justify-content: center;
+}
+
+.TopArea {
+    justify-content: space-between;
+    align-items: center;
+    vertical-align: middle;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.NavigationBar {
+    box-sizing: border-box;
+    justify-content: space-between;
+}
+
+.BottomArea {
+    z-index: 1;
+    box-sizing: border-box;
+    justify-content: space-between;
+}
+
+.TopBox {
+    background: rgba(0, 0, 0, 0.2);
+    box-shadow: 4px 8px 32px 0 rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 1px solid rgba(200, 200, 200, 0.08);
+    border-color: rgba(100, 100, 100, 0.1);
+    border-radius: 5px;
+}

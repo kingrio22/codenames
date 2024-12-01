@@ -9,7 +9,7 @@
 
 .Title {
   text-align: center;
-  font-size: 3rem;
+  font-size: 3vw;
   color: #ffdc7f;
 }
 
@@ -23,7 +23,7 @@
   backdrop-filter: blur(3.2px);
   -webkit-backdrop-filter: blur(3.2px);
   border: 1px solid rgba(255, 255, 255, 0.25);
-  padding: 3rem;
+  padding: 3vw;
   color: #fff;
 }
 
@@ -32,7 +32,7 @@
   flex-direction: row;
   justify-content: space-between;
   height: 100%;
-  padding: 2rem;
+  padding: 2vw;
 }
 
 .Column {
@@ -49,20 +49,20 @@
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
   border: 1px solid rgba(255, 255, 255, 0.25);
-  margin: 1rem;
+  margin: 1vw;
 }
 .ColumnTitle {
-  font-size: 26px;
+  font-size: 1.75vw;
 }
 .ColumnValue {
-  font-size: 32px;
+  font-size: 2vw;
 }
 .ButtonWrapper {
   text-align: center;
 }
 .FinishButton {
-  margin: 2rem 0rem;
-  padding: 1rem 4rem;
+  margin: 2vw 0vw;
+  padding: 1vw 4vw;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(255, 255, 255, 0.1);
@@ -72,6 +72,6 @@
   border-radius: 5px;
   cursor: pointer;
   color: #fff;
-  font-size: 28px;
+  font-size: 2vw;
   font-family: Jaro;
 }

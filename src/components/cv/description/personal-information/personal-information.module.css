@@ -1,0 +1,43 @@
+@media(max-width: 1299px) {
+    .Name {
+        font-size: 12px;
+    }
+    .Birthdate {
+        font-size: 10px;
+    }
+    .Box {
+        font-size: 0.75em;
+    }
+}
+
+@media(min-width: 1300px) {
+    .Name {
+        font-size: 1em;
+    }
+    .Birthdate {
+        font-size: 12px;
+    }
+    .Box {
+        font-size: 1em;
+    }
+}
+
+.Wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 80%;
+    width: 40%;
+    color: #eeeeee;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.Box {
+    height: 33%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
+    align-items: flex-start;
+    flex-direction: column;
+}
