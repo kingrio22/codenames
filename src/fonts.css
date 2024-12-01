@@ -1,14 +1,18 @@
 @font-face {
   font-family: Jaro;
-  src: url('../public/fonts/Jaro-Regular-VariableFont_opsz.ttf')
-    format('truetype');
+  src: url("../public/fonts/Jaro-Regular-VariableFont_opsz.ttf")
+    format("truetype");
 }
 @font-face {
   font-family: Kode Mono;
-  src: url('../public/fonts/KodeMono-VariableFont_wght.ttf') format('truetype');
+  src: url("../public/fonts/KodeMono-VariableFont_wght.ttf") format("truetype");
 }
 
 @font-face {
   font-family: Unbounded;
-  src: url('../public/fonts/Unbounded-VariableFont_wght.ttf') format('truetype');
+  src: url("../public/fonts/Unbounded-VariableFont_wght.ttf") format("truetype");
+}
+@font-face {
+  font-family: PTSans-Regular;
+  src: url("../public/fonts/PTSans-Regular.ttf") format("truetype");
 }

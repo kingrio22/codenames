@@ -1,36 +1,54 @@
-@media(max-width: 1299px) {
-    .VacancyWrapper {
-        font-size: 10px;
-    }
+@media (max-width: 1299px) {
+  .VacancyWrapper {
+    font-size: 10px;
+  }
 }
 
-@media(min-width: 1300px) {
-    .VacancyWrapper {
-        font-size: 12px;
-    }
+@media (min-width: 1300px) {
+  .VacancyWrapper {
+    font-size: 12px;
+  }
 }
 
-@media(max-width: 700px) {
-    .VacancyWrapper:not(:first-of-type) {
-        margin: 25px 0px;
-    }
+@media (max-width: 700px) {
+  .VacancyWrapper:not(:first-of-type) {
+    margin: 25px 0px;
+  }
 }
 
-@media(min-width: 701px) {
-    .VacancyWrapper {
-        width: 30%;
-    }
+@media (min-width: 701px) {
+  .VacancyWrapper {
+  }
 }
-
+.Vacancy {
+  padding: 0.5rem;
+  height: 100%;
+}
 .VacancyWrapper {
-    box-sizing: border-box;
-    padding: 10px;
-    background: rgba(0, 0, 0, 0.2);
-    box-shadow: 4px 8px 32px 0 rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    border: 1px solid rgba(200, 200, 200, 0.08);
-    border-color: rgba(100, 100, 100, 0.1);
-    border-radius: 5px;
-    color: #eeeeee;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  vertical-align: middle;
+  height: 100%;
+  padding: 2rem;
+  background: rgba(155, 100, 155, 0.05);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 10px;
+  color: #eeeeee;
+  height: 15rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.DescriptionWrapper {
+  margin-top: 2rem;
+}
+
+.Row {
+  margin-top: 0.5rem;
 }

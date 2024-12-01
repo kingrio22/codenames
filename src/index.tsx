@@ -6,6 +6,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Pokemon } from "./pokemon/pokemon";
+import { CvWrapper } from "./components/cv-wrapper/cv-wrapper";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
