@@ -1,18 +1,32 @@
 {
   "files": {
-    "main.css": "/static/css/main.dd482df1.css",
-    "main.js": "/static/js/main.90f92938.js",
+    "main.css": "/static/css/main.7b6111d7.css",
+    "main.js": "/static/js/main.2d1fc43d.js",
     "static/js/453.7615cdf1.chunk.js": "/static/js/453.7615cdf1.chunk.js",
+    "static/media/face.png": "/static/media/face.3fe8f2c7a5b42d4f96f1.png",
     "static/media/Unbounded-VariableFont_wght.ttf": "/static/media/Unbounded-VariableFont_wght.0314441af1ebbb9eb2ee.ttf",
+    "static/media/PTSans-Regular.ttf": "/static/media/PTSans-Regular.77e92507394e2309d837.ttf",
     "static/media/Jaro-Regular-VariableFont_opsz.ttf": "/static/media/Jaro-Regular-VariableFont_opsz.c9e68ba09c7d06b68df9.ttf",
     "static/media/KodeMono-VariableFont_wght.ttf": "/static/media/KodeMono-VariableFont_wght.9ae07349897c5fb8e035.ttf",
+    "static/media/nestjs-logo-1.png": "/static/media/nestjs-logo-1.4a378a3a505742b49a1a.png",
+    "static/media/postgresql.svg": "/static/media/postgresql.70b8ad542b0c0b034804efe8b630fe0f.svg",
+    "static/media/mongodb.svg": "/static/media/mongodb.0fe432d3a97b04b31e0956007e333f62.svg",
+    "static/media/nodejs.svg": "/static/media/nodejs.ce9d132919889be95e8deb094105e880.svg",
+    "static/media/github.svg": "/static/media/github.ee1ca9bc101999c763de6d1737ed686f.svg",
+    "static/media/javascript.svg": "/static/media/javascript.a83bda35f2b6ae2302781de9ee0e2452.svg",
+    "static/media/docker.svg": "/static/media/docker.0adae9851c6a74af08289a4c41898ffd.svg",
+    "static/media/typescript.svg": "/static/media/typescript.506e4beade19489f3d76fb3d9e9a63ae.svg",
     "index.html": "/index.html",
-    "main.dd482df1.css.map": "/static/css/main.dd482df1.css.map",
-    "main.90f92938.js.map": "/static/js/main.90f92938.js.map",
+    "static/media/angularjs.svg": "/static/media/angularjs.ed8180f9681d52dcfaf829bd8015ebec.svg",
+    "static/media/html.svg": "/static/media/html.6e7b1b463015c056aeb9a624c8dc2876.svg",
+    "static/media/css.svg": "/static/media/css.84e425077fc2d43f98cabb0d566ed8b1.svg",
+    "static/media/react.svg": "/static/media/react.96c3b5235a44e624159cdd43aaf89abc.svg",
+    "main.7b6111d7.css.map": "/static/css/main.7b6111d7.css.map",
+    "main.2d1fc43d.js.map": "/static/js/main.2d1fc43d.js.map",
     "453.7615cdf1.chunk.js.map": "/static/js/453.7615cdf1.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.dd482df1.css",
-    "static/js/main.90f92938.js"
+    "static/css/main.7b6111d7.css",
+    "static/js/main.2d1fc43d.js"
   ]
 }
