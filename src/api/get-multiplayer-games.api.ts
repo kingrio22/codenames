@@ -8,7 +8,7 @@ export interface MultiplayerGame {
   players: {
     id: number;
     name: string;
-  };
+  }[];
   rounds: Round[];
 }
 

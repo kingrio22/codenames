@@ -11,7 +11,7 @@ import { getLevel } from '../../api/get-random-level.api';
 import { LoadingSpinner } from '../loading-spinner/loading-spinner';
 import { CountdownApi } from 'react-countdown';
 import { Result } from '../result/resutl';
-import { MultiplayerGame } from '../multiplayer-game/multiplayer-game';
+import { MultiplayerGameComponent } from '../multiplayer-game/multiplayer-game';
 
 export type Complexity = 'LOW' | 'MIDDLE' | 'HARD';
 export interface GameProgress {
@@ -113,7 +113,7 @@ export const Game = (props: GameProps) => {
         {loading && <LoadingSpinner />}
 
         <div className={styles.MultiplayerGames}>
-          <MultiplayerGame player={player} />
+          <MultiplayerGameComponent player={player} />
         </div>
 
         <div className={styles.BoardWrapper}>
