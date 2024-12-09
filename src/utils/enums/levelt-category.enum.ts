@@ -1,0 +1,9 @@
+export enum LevelCategory {
+  COMPUTER_SCIENCE = 'COMPUTER_SCIENCE',
+  POLITIC = 'POLITIC',
+  SPORT = 'SPORT',
+  SCIENCE = 'SCIENCE',
+  NATURE = 'NATURE',
+  FINANCE = 'FINANCE',
+  MUSIC = 'MUSIC',
+}

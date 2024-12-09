@@ -1,26 +1,27 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import { Round } from '../utils/dtos/round.dto';
 import { BASE_URL } from '../config/api.config';
 
-export interface Player {
-  levelsPlayed: number[];
-  highscore: number;
-  highscorePokemon: number;
-  name: string;
+export interface MultiplayerGame {
   id: number;
-  multiplayerGames: any[];
+  hasToPlay: number;
+  players: {
+    id: number;
+    name: string;
+  };
+  rounds: Round[];
 }
 
-export async function createPlayer(
-  name: string
-): Promise<AxiosResponse<Player>> {
+export async function fetchGamesByPlayerId(
+  id: number
+): Promise<AxiosResponse<MultiplayerGame[]>> {
   try {
     const options: AxiosRequestConfig = {
-      url: `${BASE_URL}/player`,
-      method: 'POST',
+      url: `${BASE_URL}/multiplayer-game/player/${id}`,
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
-      data: { name },
     };
 
     return await axios.request(options);

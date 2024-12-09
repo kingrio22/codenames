@@ -1,4 +1,4 @@
-.HighscoreWrapper {
+.MultiplayerGameContainer {
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -15,6 +15,7 @@
   box-sizing: border-box;
   padding: 1vw 0vw;
 }
+
 .TitleWrapper {
   position: relative;
   text-align: center;
@@ -29,13 +30,7 @@
   left: 5%;
 }
 
-.Cup {
-  position: absolute;
-  top: -80%;
-  left: 5%;
-}
-
-.Player {
+.MultiplayerGameRow {
   color: #fff;
   background: rgba(255, 255, 255, 0.2);
   border-radius: 5px;
@@ -51,19 +46,4 @@
   margin-top: 0.25vw;
   font-size: 1.25vw;
   width: 80%;
-}
-
-.Rank {
-  width: 10%;
-}
-.Name {
-  width: 70%;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  padding-right: 5%;
-}
-.Score {
-  width: 15%;
-  align-self: flex-end;
 }

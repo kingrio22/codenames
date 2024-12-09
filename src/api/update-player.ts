@@ -20,6 +20,7 @@ export async function updatePlayer(
     levelsPlayed: game.levelsPlayed,
     name: player.name,
     highscorePokemon,
+    multiplayerGames: player.multiplayerGames,
   };
 
   try {
