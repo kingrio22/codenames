@@ -19,6 +19,7 @@
   border-radius: 50%;
   box-sizing: border-box;
   animation: rotation 1s linear infinite;
+  z-index: 2;
 }
 
 @keyframes rotation {

@@ -1,0 +1,27 @@
+.ChooseIconWrapper {
+  width: 80%;
+  max-width: 80%;
+  border: 1px;
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  overflow-x: scroll;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 1vw 3vw;
+  box-sizing: content-box;
+}
+
+.IconWrapper {
+  margin: 0 1rem;
+  img {
+    width: 5vw;
+  }
+}

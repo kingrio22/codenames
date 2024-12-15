@@ -13,6 +13,7 @@ import { CountdownApi } from 'react-countdown';
 import { Result } from '../result/resutl';
 import { MultiplayerGameComponent } from '../multiplayer-game/wrapper/multiplayer-game';
 import { CreateGameModal } from '../multiplayer-game/create-game-modal/create-game-modal';
+import { StatisticsColumn } from '../statistics/statistics';
 
 export type Complexity = 'LOW' | 'MIDDLE' | 'HARD';
 export interface GameProgress {
@@ -117,10 +118,12 @@ export const Game = (props: GameProps) => {
         {loading && <LoadingSpinner />}
 
         <div className={styles.MultiplayerGames}>
-          <MultiplayerGameComponent
-            player={player}
-            setShowCreateGameModal={setShowCreateGameModal}
-          />
+          {isRunning === false && (
+            <MultiplayerGameComponent
+              player={player}
+              setShowCreateGameModal={setShowCreateGameModal}
+            />
+          )}
         </div>
 
         <div className={styles.BoardWrapper}>
@@ -140,15 +143,6 @@ export const Game = (props: GameProps) => {
             />
           )}
 
-          {showResult && player && (
-            <Result
-              highscore={game?.highscore ?? 0}
-              playerId={player?.id}
-              type='CODENAMES'
-              onHideResult={onHideResult}
-            />
-          )}
-
           {isRunning === false && (
             <StartGameWrapper
               setGame={setGame}
@@ -161,10 +155,33 @@ export const Game = (props: GameProps) => {
             />
           )}
         </div>
+
+        {player && isRunning === false && !showResult && (
+          <div className={styles.PlayerStatisticsWrapper}>
+            <StatisticsColumn
+              game={undefined}
+              isRunning={isRunning}
+              playerName={player.name}
+              finishGame={finishGame}
+              currentScore={0}
+              setCountdownRef={setCountdownRef}
+              levelsPlayedCount={player.levelsPlayed.length}
+            />
+          </div>
+        )}
+
         <div className={styles.SideBar}>
-          <Highscore gameType='CODENAMES' />
+          {isRunning === false && <Highscore gameType='CODENAMES' />}
         </div>
       </div>
+      {showResult && player && (
+        <Result
+          highscore={game?.highscore ?? 0}
+          playerId={player?.id}
+          type='CODENAMES'
+          onHideResult={onHideResult}
+        />
+      )}
       {showCreateGameModal && (
         <CreateGameModal setShowCreateGameModal={setShowCreateGameModal} />
       )}

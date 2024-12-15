@@ -1,43 +1,19 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect } from 'react';
 import styles from './create-player.module.scss';
-import { validatePlayer } from '../../api/validate-player';
-import { Player, createPlayer } from '../../api/create-player';
 import { TextField } from '@mui/material';
 
 export const ALREADY_EXISTS = 'ALREADY_EXISTS';
 export const NAME_OK = 'NAME_OK';
 
 interface NewPlayerProps {
-  setPlayer: Dispatch<SetStateAction<Player | undefined>>;
+  showError: Dispatch<SetStateAction<string | undefined>>;
+  setPlayerName: Dispatch<SetStateAction<string | undefined>>;
+  playerName: string | undefined;
+  error: string | undefined;
 }
 
 export const NewPlayer = (props: NewPlayerProps) => {
-  const { setPlayer } = props;
-  const [playerName, setPlayerName] = useState<string | undefined>();
-  const [error, showError] = useState<string | undefined>();
-
-  const handleCreate = async () => {
-    try {
-      if (!playerName) {
-        setPlayer(undefined);
-        return;
-      }
-      const { data } = await validatePlayer(playerName);
-      if (data.result === 'ALREADY_EXISTS') {
-        setPlayer(undefined);
-        showError('Name schon vergeben');
-        return;
-      }
-      const { status, data: newPlayer } = await createPlayer(playerName);
-      if (status === 201) {
-        setPlayer(newPlayer);
-        showError(undefined);
-      }
-    } catch (err) {
-      setPlayer(undefined);
-      showError('Etwas ist schief gelaufen');
-    }
-  };
+  const { showError, setPlayerName, playerName, error } = props;
 
   useEffect(() => {
     if (!playerName) {
@@ -48,7 +24,7 @@ export const NewPlayer = (props: NewPlayerProps) => {
       return;
     }
     showError(undefined);
-  }, [playerName]);
+  }, [playerName, showError]);
 
   return (
     <div className={styles.NewPlayerWrapper}>
@@ -58,16 +34,9 @@ export const NewPlayer = (props: NewPlayerProps) => {
           onChange={(e) => setPlayerName(e.currentTarget.value)}
           value={playerName}
           className={styles.TextInputCustom}
-          onBlur={handleCreate}
           error={!!error}
           aria-errormessage={error}
           onError={() => <span>{error}</span>}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') {
-              e.preventDefault();
-              handleCreate();
-            }
-          }}
           sx={{
             '& .MuiOutlinedInput-root': {
               color: '#ffffff',

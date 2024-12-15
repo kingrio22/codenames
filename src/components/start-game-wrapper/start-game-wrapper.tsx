@@ -5,10 +5,12 @@ import { StartButton } from '../start-button/start-button';
 import { Level } from '../levels/levels.const';
 import { TextField } from '@mui/material';
 import { ComplexityInput } from '../inputs/complexity-input';
-import { Player } from '../../api/create-player';
+import { Player, createPlayer } from '../../api/create-player';
 import { NewPlayer } from '../player/create-player';
 import { WelcomeAnimation } from '../welcome-animation/welcome-animation';
 import { validateNameInput } from './functions/validate-player-name';
+import { validatePlayer } from '../../api/validate-player';
+import { ChoosePlayerIcon } from '../choose-player-icon/choose-player-icon';
 interface GameResultProps {
   setIsRunning: Dispatch<SetStateAction<boolean>>;
   setGame: Dispatch<SetStateAction<GameProgress | undefined>>;
@@ -25,19 +27,34 @@ export const StartGameWrapper = (props: GameResultProps) => {
   const [complexity, setComplexity] = useState<Complexity>();
   const [showCreatePlayer, setShowCreatePlayer] = useState<boolean>(false);
 
+  const title = showCreatePlayer ? 'Create Player' : 'Start a new Game';
+
   return (
     <div className={styles.GameResult}>
       <div className={styles.Modal}>
         <div className={styles.ModalWrapper}>
-          <div className={styles.GameOver}>Start a new Game</div>
+          <div className={styles.GameOver}>{title}</div>
+          {!player && !showCreatePlayer && (
+            <SelectExistingPlayer setPlayer={setPlayer} />
+          )}
 
-          {!player && <SelectExistingPlayer setPlayer={setPlayer} />}
+          {!showCreatePlayer && (
+            <SinglePlayerGame
+              complexity={complexity}
+              setComplexity={setComplexity}
+              {...props}
+            />
+          )}
+          {!showCreatePlayer && (
+            <button
+              className={styles.CreatePlayerButton}
+              onClick={() => setShowCreatePlayer(true)}
+            >
+              Create Player
+            </button>
+          )}
 
-          <SinglePlayerGame
-            complexity={complexity}
-            setComplexity={setComplexity}
-            {...props}
-          />
+          {showCreatePlayer && <CreatePlayer setPlayer={setPlayer} />}
         </div>
 
         <WelcomeAnimation player={player} />
@@ -64,6 +81,7 @@ export const SinglePlayerGame = (props: SinglePlayerGameProps) => {
 
   return (
     <>
+      <div className={styles.GameOver}>Start a new Game</div>
       <div className={styles.Complexity}>
         <ComplexityInput
           setComplexity={(value) => setComplexity(value as Complexity)}
@@ -81,16 +99,44 @@ interface CreatePlayerProps {
   setPlayer: Dispatch<SetStateAction<Player | undefined>>;
 }
 export const CreatePlayer = (props: CreatePlayerProps) => {
+  const [error, showError] = useState<string | undefined>();
+  const [playerName, setPlayerName] = useState<string | undefined>();
+  const [playerIcon, setPlayerIcon] = useState<string | undefined>();
   const { setPlayer } = props;
+  const handleCreate = async () => {
+    try {
+      if (!playerName) {
+        setPlayer(undefined);
+        return;
+      }
+      const { data } = await validatePlayer(playerName);
+      if (data.result === 'ALREADY_EXISTS') {
+        setPlayer(undefined);
+        showError('Name schon vergeben');
+        return;
+      }
+      const { status, data: newPlayer } = await createPlayer(playerName);
+      if (status === 201) {
+        setPlayer(newPlayer);
+        showError(undefined);
+      }
+    } catch (err) {
+      setPlayer(undefined);
+      showError('Etwas ist schief gelaufen');
+    }
+  };
   return (
-    <div
-      className={styles.PlayerNameInput}
-      style={{
-        transform: 'rotate(3deg) translateX(-3%) translateY(-5%)',
-      }}
-    >
-      <div className={styles.InputTitle}>Create new player</div>
-      <NewPlayer setPlayer={setPlayer} />
+    <div className={styles.InputsWrapper}>
+      <div className={styles.NewPlayerInput}>
+        <div className={styles.InputTitle}>Select Name</div>
+        <NewPlayer
+          setPlayerName={setPlayerName}
+          showError={showError}
+          playerName={playerName}
+          error={error}
+        />
+      </div>
+      <ChoosePlayerIcon setPlayerIcon={setPlayerIcon} />
     </div>
   );
 };

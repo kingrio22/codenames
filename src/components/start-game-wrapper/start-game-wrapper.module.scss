@@ -22,16 +22,45 @@
     -webkit-backdrop-filter: blur(3.2px);
     border: 1px solid rgba(255, 255, 255, 0.25);
   }
+
   .ModalWrapper {
     padding: 2.25vw;
     position: relative;
+
+    .CreatePlayerButton {
+      margin: 0vw 1vw;
+      padding: 0.5vw 1vw;
+      background: #ffdc7f;
+      border: 3px solid;
+      border-color: rgba(0, 0, 0, 0);
+      border-radius: 15px;
+      color: #fff;
+      font-weight: bold;
+      font-size: 2rem;
+      font-family: Jaro;
+      position: absolute;
+      top: 0;
+      right: 0;
+      transform: rotate(5deg) translateX(5vw) translateY(-2vw);
+      cursor: pointer;
+      &:hover {
+        border-color: rgba(255, 255, 255, 1);
+        border: 3px solid;
+      }
+    }
   }
   .Button {
     width: 100%;
     text-align: center;
   }
 }
-
+.InputsWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+}
 .Welcome {
   margin-bottom: 2vw;
   font-size: 3vw;
@@ -60,12 +89,14 @@
   flex-direction: row;
   justify-content: center;
 }
-
-.PlayerNameInput {
+.NewPlayerInput {
   display: flex;
-  flex-direction: column;
-  vertical-align: middle;
-  padding: 1.5vw;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1vw 3vw;
+  width: 80%;
+  padding: 1vw 3vw;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(255, 255, 255, 0.1);
@@ -73,6 +104,23 @@
   -webkit-backdrop-filter: blur(1px);
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 16px;
+  margin: 2vw 0;
+}
+.PlayerNameInput {
+  display: flex;
+  vertical-align: middle;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1vw 3vw;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 16px;
+  margin: 2vw 0;
 }
 .InputTitle {
   font-size: 1.5vw;

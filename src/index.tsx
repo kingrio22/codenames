@@ -1,28 +1,24 @@
-import React from "react";
-import * as ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import "./index.css";
-import "./index.css";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
-import { Pokemon } from "./pokemon/pokemon";
-import { CvWrapper } from "./components/cv-wrapper/cv-wrapper";
+import React from 'react';
+import * as ReactDOM from 'react-dom/client';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import './index.css';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+import { Pokemon } from './pokemon/pokemon';
+import { CvWrapper } from './components/cv-wrapper/cv-wrapper';
 
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
+  document.getElementById('root') as HTMLElement
 );
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <App />,
   },
   {
-    path: "/pokemon",
+    path: '/pokemon',
     element: <Pokemon />,
-  },
-  {
-    path: "/cv",
-    element: <CvWrapper />,
   },
 ]);
 root.render(
