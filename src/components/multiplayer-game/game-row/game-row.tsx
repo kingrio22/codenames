@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './game-row.module.scss';
+import styles from '../wrapper/multiplayer-game.module.scss';
 import { MultiplayerGame } from '../../../api/get-multiplayer-games.api';
 import HourglassTopIcon from '@mui/icons-material/HourglassTop';
 

@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction, useState } from 'react';
 import styles from './game.module.scss';
 import { Board } from '../board/board';
 import { Level } from '../levels/levels.const';
-import { GameResult } from '../game-result/game-result';
+import { StartGameWrapper } from '../start-game-wrapper/start-game-wrapper';
 import { shuffle } from '../../utils/functions/array-shuffle';
 import { Highscore } from '../highscore/highscore';
 import { Player } from '../../api/create-player';
@@ -150,7 +150,7 @@ export const Game = (props: GameProps) => {
           )}
 
           {isRunning === false && (
-            <GameResult
+            <StartGameWrapper
               setGame={setGame}
               setIsRunning={setIsRunning}
               setLevel={setLevel}

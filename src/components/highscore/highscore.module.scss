@@ -14,28 +14,34 @@
   border: 1px solid rgba(255, 255, 255, 0.5);
   box-sizing: border-box;
   padding: 1vw 0vw;
+
+  &:hover {
+    .TitleWrapper {
+      font-size: 2.5vw;
+    }
+    .PlayerRow {
+      font-size: 1.5vw;
+      padding: 0.7vw;
+      margin-top: 0.7vw;
+    }
+  }
 }
 .TitleWrapper {
   position: relative;
   text-align: center;
-  font-size: 2.5vw;
+  font-size: 1.5vw;
   color: #ffdc7f;
   width: 100%;
   margin-bottom: 1vw;
-}
-.Cup {
-  position: absolute;
-  top: -80%;
-  left: 5%;
+  transition: all 0.4s ease-in-out;
 }
 
 .Cup {
   position: absolute;
-  top: -80%;
-  left: 5%;
+  top: -5vh;
 }
 
-.Player {
+.PlayerRow {
   color: #fff;
   background: rgba(255, 255, 255, 0.2);
   border-radius: 5px;
@@ -43,14 +49,15 @@
   backdrop-filter: blur(3.2px);
   -webkit-backdrop-filter: blur(3.2px);
   border: 1px solid rgba(255, 255, 255, 0.5);
-  padding: 0.75vw;
+  padding: 0.5vw;
   display: flex;
   flex-direction: row;
   align-items: center;
   vertical-align: middle;
   margin-top: 0.25vw;
-  font-size: 1.25vw;
+  font-size: 1vw;
   width: 80%;
+  transition: all 0.4s ease-in-out;
 }
 
 .Rank {
