@@ -11,7 +11,8 @@ import { getLevel } from '../../api/get-random-level.api';
 import { LoadingSpinner } from '../loading-spinner/loading-spinner';
 import { CountdownApi } from 'react-countdown';
 import { Result } from '../result/resutl';
-import { MultiplayerGameComponent } from '../multiplayer-game/multiplayer-game';
+import { MultiplayerGameComponent } from '../multiplayer-game/wrapper/multiplayer-game';
+import { CreateGameModal } from '../multiplayer-game/create-game-modal/create-game-modal';
 
 export type Complexity = 'LOW' | 'MIDDLE' | 'HARD';
 export interface GameProgress {
@@ -38,6 +39,9 @@ export const Game = (props: GameProps) => {
   const [level, setLevel] = useState<Level | undefined>();
 
   const [countdownRef, setCountdownRef] = useState<CountdownApi | null>(null);
+
+  const [showCreateGameModal, setShowCreateGameModal] =
+    useState<boolean>(false);
 
   const setPause = () => {
     countdownRef && countdownRef.pause();
@@ -113,7 +117,10 @@ export const Game = (props: GameProps) => {
         {loading && <LoadingSpinner />}
 
         <div className={styles.MultiplayerGames}>
-          <MultiplayerGameComponent player={player} />
+          <MultiplayerGameComponent
+            player={player}
+            setShowCreateGameModal={setShowCreateGameModal}
+          />
         </div>
 
         <div className={styles.BoardWrapper}>
@@ -158,6 +165,9 @@ export const Game = (props: GameProps) => {
           <Highscore gameType='CODENAMES' />
         </div>
       </div>
+      {showCreateGameModal && (
+        <CreateGameModal setShowCreateGameModal={setShowCreateGameModal} />
+      )}
     </div>
   );
 };

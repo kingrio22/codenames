@@ -1,0 +1,36 @@
+.CreateModalWrapper {
+  top: 0;
+  left: 0;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+}
+.CreateModal {
+  position: relative;
+  width: 40%;
+  height: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(3.2px);
+  -webkit-backdrop-filter: blur(3.2px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.CloseModal {
+  position: absolute;
+  cursor: pointer;
+  right: 1rem;
+  font-size: 5rem;
+  transform: rotate(45deg);
+  color: #ffdc7f;
+  font-weight: bold;
+  font-family: 'Courier New', Courier, monospace;
+  &:hover {
+    transform: scale(1.2) rotate(45deg);
+  }
+}

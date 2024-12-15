@@ -79,6 +79,8 @@
   height: 80vh;
 }
 .MultiplayerGames {
+  position: relative;
+  z-index: 1;
   transform: translateY(-10vh);
   width: 30%;
   color: #dddddd;
