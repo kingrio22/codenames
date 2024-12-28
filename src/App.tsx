@@ -7,28 +7,28 @@ import { useMobile } from "./hooks/useMobile";
 import { Highscore } from "./components/highscore/highscore";
 
 function App() {
-  const [isMobile] = useMobile();
+  // const [isMobile] = useMobile();
   const [isRunning, setIsRunning] = useState<boolean>(false);
 
-  const socket = new WebSocket("wss://api.mgraetz.de:4000");
+  // const socket = new WebSocket("wss://api.mgraetz.de:4000");
 
-  socket.addEventListener("message", (event) => {
-    alert(`Received message: ${event.toString()}`);
-  });
-  socket.addEventListener("open", () => {
-    alert("Connected to the Chat!");
-  });
+  // socket.addEventListener("message", (event) => {
+  //   alert(`Received message: ${event.toString()}`);
+  // });
+  // socket.addEventListener("open", () => {
+  //   alert("Connected to the Chat!");
+  // });
 
-  if (isMobile) {
-    return (
-      <div>
-        <Background />
-        <div style={{ padding: "2vw" }}>
-          <Highscore gameType={"CODENAMES"} />
-        </div>
-      </div>
-    );
-  }
+  // if (isMobile) {
+  //   return (
+  //     <div>
+  //       <Background />
+  //       <div style={{ padding: "2vw" }}>
+  //         <Highscore gameType={"CODENAMES"} />
+  //       </div>
+  //     </div>
+  //   );
+  // }
   return (
     <div>
       <Background />
